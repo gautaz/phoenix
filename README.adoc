@@ -1,0 +1,26 @@
+= NixOS installation media
+
+The build of the ISO image is https://nixos.wiki/wiki/Flakes[Flake based].
+You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for this to work.
+
+In order to build the ISO image, issue `./build` in a Linux shell.
+
+In order to test it, issue `./test` in a Linux shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed)
+
+== Roadmap
+
+* [x] Initial extensible ISO image
+* [ ] Tooling to prepare the local storage
+* [ ] Tooling to install NixOS
+
+== Inspiration and prior art
+
+Many thanks to https://github.com/wiltaylor[Wil Taylor] for his https://www.youtube.com/playlist?list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-[marvellous introduction to the Nix world]. +
+His https://github.com/wiltaylor/nix-iso[nix-iso] project is a wonderful starting point.
+
+I also digged into the following articles:
+
+* https://nixos.wiki/wiki/Creating_a_NixOS_live_CD[NixOS Wiki's _Creating a NixOS live CD_]
+* https://nix.dev/tutorials/building-bootable-iso-image[nix.dev's _Building a bootable ISO image_]
+* https://hoverbear.org/blog/nix-flake-live-media/[Ana Hobden's _Custom live media with Nix flakes_]
+* https://nixos.mayflower.consulting/blog/2018/09/11/custom-images/[Mayflower's _Building Customised NixOS Images_]
