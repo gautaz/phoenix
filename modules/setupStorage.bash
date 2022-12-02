@@ -15,7 +15,7 @@ fi
 
 BLKDEV="$1"
 
-if ! BLKENV="$(lsblk --bytes --pairs --paths "$BLKDEV" | grep -F "$BLKDEV")"; then
+if ! BLKENV="$(lsblk --bytes --pairs --paths "$BLKDEV" | grep -F "\"$BLKDEV\"")"; then
 	echo ""
 	usage "$0"
 	exit 11
