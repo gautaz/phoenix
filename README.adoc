@@ -1,17 +1,70 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 = NixOS installation media
 
-The build of the ISO image is https://nixos.wiki/wiki/Flakes[Flake based].
+The build of the installation media image is https://nixos.wiki/wiki/Flakes[Flake based].
 You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for this to work.
 
-In order to build the ISO image, issue `./build` in a Linux shell.
+CAUTION: Unless stated otherwise, all the commands containing relative paths (like `./`) assume that the current working directory is the project path.
 
-In order to test it, issue `./test` in a Linux shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed)
+In order to build the installation media image, issue `./build` in a command shell.
+The resulting ISO image will be available in `./result/iso`.
+Use the standard NixOS installation media creation procedures to obtain a physical installation media.
+
+== Install procedure
+
+Boot the target host on the installation media.
+Once the boot sequence is complete and the command prompt is available, enter the following commands:
+
+[,sh]
+----
+sudo setupStorage /dev/vda
+sudo nixos-generate-config --root /mnt
+sudo nixos-install
+sudo systemctl start reboot.target
+----
+
+== The `setupStorage` command
+
+The goal of the `setupStorage` command is to ensure the following layout on a block device:
+
+. `boot` as the FAT32 partition used by EFI
+. `system` as the LUKS encrypted device that contains a https://btrfs.wiki.kernel.org[Btrfs] filesystem separated in subvolumes:
+** `root` as the root filesystem
+** `home` as the users home directories
+** `nix` as the operating system Nix store
+** `swap` as the space holding the swapfile
+
+The only argument required by the command is the block device on which to install the filesystem layout.
+After a few verifications, `setupStorage` will ask additional questions (confirmations, passwords...) before engaging particular steps.
+
+== Testing
+
+In order to test the installation media image, issue `./test` in a command shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed).
+The test VM uses https://www.tianocore.org/[TianoCore UEFI implementation] as the installation media is primarily targeted at systems supporting UEFI.
+
+Once the QEMU virtual machine has started, it will boot:
+
+* either on the installation media if no successful install occurred previously
+* or on a previously successfully installed NixOS system (to discard it simply issue `rm ./disk.qcow2` in a command shell)
+
+If the installation media has started, issue the commands from the <<Installation process>> section *on the virtual machine console*.
+
+WARNING: Do *NOT* use these commands on your current host shell, as they may mess up your host operating system if it is NixOS based.
 
 == Roadmap
 
-* [x] Initial extensible ISO image
-* [ ] Tooling to prepare the local storage
-* [ ] Tooling to install NixOS
+* [x] Initial extensible ISO image (implemented by the initial revision)
+* [x] Tooling to prepare the local storage (implemented by setupStorage)
+* [x] Tooling to install NixOS (nothing to do, standard NixOS install simply works)
+* [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define
+* [ ] Ensure hibernate is possible
 
 == Inspiration and prior art
 
