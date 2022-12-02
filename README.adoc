@@ -35,7 +35,7 @@ sudo systemctl start reboot.target
 The goal of the `setupStorage` command is to ensure the following layout on a block device:
 
 . `boot` as the FAT32 partition used by EFI
-. `system` as the LUKS encrypted device that contains a https://btrfs.wiki.kernel.org[Btrfs] filesystem separated in subvolumes:
+. `system` as the https://gitlab.com/cryptsetup/cryptsetup[LUKS] encrypted device that contains a https://btrfs.wiki.kernel.org[Btrfs] filesystem separated in subvolumes:
 ** `root` as the root filesystem
 ** `home` as the users home directories
 ** `nix` as the operating system Nix store
@@ -63,8 +63,10 @@ WARNING: Do *NOT* use these commands on your current host shell, as they may mes
 * [x] Initial extensible ISO image (implemented by the initial revision)
 * [x] Tooling to prepare the local storage (implemented by setupStorage)
 * [x] Tooling to install NixOS (nothing to do, standard NixOS install simply works)
-* [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define
+* [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define; +
+  `nixos-install` has a `--flake` option
 * [ ] Ensure hibernate is possible
+* [ ] Optionally replace LUKS password by a https://fidoalliance.org/fido2/[FIDO2] compatible dongle
 
 == Inspiration and prior art
 
