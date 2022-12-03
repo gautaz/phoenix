@@ -28,10 +28,11 @@ if [ "$NAME" != "$BLKDEV" ]; then
 	exit 20
 fi
 
-# NixOS minimal disk requirement is currently 8 GB
-DEVICE_MIN_SIZE_GB=8
-if [ "$SIZE" -lt "$((DEVICE_MIN_SIZE_GB*1024*1024*1024))" ]; then
-	echo "Not enough space on $BLKDEV (at least $DEVICE_MIN_SIZE_GB GB are needed)."
+# NixOS minimal disk requirement is currently 8 GiB
+# (actually 8GB but as 8 Gib > 8 GB, it also fits the bill)
+DEVICE_MIN_SIZE_GiB=8
+if [ "$SIZE" -lt "$((DEVICE_MIN_SIZE_GiB*1024*1024*1024))" ]; then
+	echo "Not enough space on $BLKDEV (at least $DEVICE_MIN_SIZE_GiB GiB are needed)."
 	exit 11
 fi
 
@@ -39,12 +40,12 @@ fi
 parted "$BLKDEV" -- mklabel gpt
 
 # Create the EFI boot partition
-parted "$BLKDEV" -- mkpart ESP fat32 1MB 512MB
+parted "$BLKDEV" -- mkpart ESP fat32 1MiB 512MiB
 parted "$BLKDEV" -- set 1 esp on
 mkfs.fat -F 32 -n boot "${BLKDEV}1"
 
 # Create the encrypted system partition and open it (hence verify the password)
-parted "$BLKDEV" -- mkpart primary 512MB 100%
+parted "$BLKDEV" -- mkpart primary 512MiB 100%
 cryptsetup --batch-mode --label=system luksFormat "${BLKDEV}2"
 cryptsetup luksOpen /dev/disk/by-label/system system
 
