@@ -67,6 +67,8 @@ The second password asked must be *the same* as the first one as it is used by L
 
 Asking the same password twice offers the additional guarantee that no password misspell occurred.
 
+NOTE: In case of a password mismatch, simply issue the `setupStorage` command again to start over.
+
 == The `generateConfiguration` command
 
 Usually having https://datatracker.ietf.org/doc/html/rfc4122[UUIDs] in the `hardware-configuration.nix` file is not an issue until this file is kept in a git repository for reuse.
