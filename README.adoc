@@ -12,11 +12,18 @@ The installation media only targets https://uefi.org/[UEFI] compatible `x86_64-l
 The build of the installation media image is https://nixos.wiki/wiki/Flakes[Flake based].
 You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for this to work.
 
-CAUTION: Unless stated otherwise, all the commands containing relative paths (like `./`) assume that the current working directory is the project path.
+All development environment constraints should be guaranteed by the provided `nix-shell` environment.
+Issue `nix-shell` or `nix-shell --pure` on the command line to start this environment. +
+This shell will be called the *NIM shell* thereafter (_NIM_ stands for _NixOS installation media_).
 
-In order to build the installation media image, issue `./build` in a command shell.
+CAUTION: Unless stated otherwise, all relative paths (in particular starting with `./`) assume that the current working directory is the project path.
+
+== Building the image
+
+In order to build the installation media image, issue `nimBuild` in the NIM shell. +
 The resulting ISO image will be available in `./result/iso`.
-Use the standard NixOS installation media creation procedures to obtain a physical installation media.
+
+NOTE: Use the https://nixos.org/manual/nixos/stable/#sec-obtaining[standard NixOS installation media creation procedures] to obtain a physical installation media.
 
 == Install procedure
 
@@ -61,7 +68,7 @@ Once the target is successfully deployed, the `hardware-configuration.nix` file 
 
 == Testing
 
-In order to test the installation media image, issue `./test` in a command shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed).
+In order to test the installation media image, issue `nimTest` in the NIM shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed).
 The test VM uses https://www.tianocore.org/[TianoCore UEFI implementation] as the installation media is primarily targeted at systems supporting UEFI.
 
 Once the QEMU virtual machine has started, it will boot:
@@ -82,7 +89,7 @@ WARNING: Do *NOT* use these commands on your current host shell, as they may mes
 * [ ] Tooling to mount test filesystems on the host
 * [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define; +
   `nixos-install` has a `--flake` option
-* [ ] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
+* [x] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
 * [ ] Ensure hibernate is possible
 * [ ] Optionally replace LUKS password by a https://fidoalliance.org/fido2/[FIDO2] compatible dongle
 
