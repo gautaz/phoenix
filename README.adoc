@@ -14,9 +14,9 @@ You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for
 
 All development environment constraints should be guaranteed by the provided `nix-shell` environment.
 Issue `nix-shell` or `nix-shell --pure` on the command line to start this environment. +
-This shell will be called the *NIM shell* thereafter (_NIM_ stands for _NixOS installation media_).
+This shell will be called the *NIM shell* thereafter (_NIM_ stands for _Nixos Installation Media_).
 
-CAUTION: Unless stated otherwise, all relative paths (in particular starting with `./`) assume that the current working directory is the project path.
+NOTE: Unless stated otherwise, all relative paths (in particular starting with `./`) assume that the current working directory is the project path.
 
 == Building the image
 
@@ -52,7 +52,20 @@ The goal of the `setupStorage` command is to ensure the following layout on a bl
 ** `swap` as the space holding the swapfile
 
 The only argument required by the command is the block device on which to install the filesystems layout.
-After a few verifications, `setupStorage` will ask additional questions (confirmations, passwords...) before engaging particular steps.
+After a few verifications, `setupStorage` will ask the following questions:
+
+[source]
+----
+Enter passphrase for <path of system device>:
+Enter passphrase for /dev/disk/by-label/system:
+----
+
+NOTE: `<path of system device>` is a partition on the device provided as an argument to `setupStorage`.
+
+The first password asked is the one used by LUKS to encrypt the `system` device. +
+The second password asked must be *the same* as the first one as it is used by LUKS to open the `system` device (`/dev/disk/by-label/system` is in fact a symbolic link to `<path of system device>`).
+
+Asking the same password twice offers the additional guarantee that no password misspell occurred.
 
 == The `generateConfiguration` command
 
