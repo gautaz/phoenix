@@ -64,7 +64,7 @@ WARNING: Do *NOT* use these commands on your current host shell, as they may mes
 * [x] Tooling to prepare the local storage (implemented by setupStorage)
 * [x] Tooling to install NixOS (nothing to do, standard NixOS install simply works)
 * [ ] Tooling to make `hardware-configuration.nix` more generic
-* [ ] Tooling to mount test filesystems locally
+* [ ] Tooling to mount test filesystems on the host
 * [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define; +
   `nixos-install` has a `--flake` option
 * [ ] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
