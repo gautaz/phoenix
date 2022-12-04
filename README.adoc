@@ -27,7 +27,7 @@ Once the boot sequence is complete and the command prompt is available, enter th
 sudo setupStorage /dev/vda
 sudo nixos-generate-config --root /mnt
 sudo nixos-install
-sudo systemctl start reboot.target
+sudo reboot
 ----
 
 == The `setupStorage` command
