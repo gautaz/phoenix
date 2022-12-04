@@ -2,6 +2,6 @@
 {
   imports = [
     ./iso.nix
-    ./storage.nix
+    ./storage
   ];
 }

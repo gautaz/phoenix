@@ -6,6 +6,10 @@ usage() {
 	echo "WARNING: The process will entirely discard any data present on the device"
 }
 
+waitfor() {
+	while [ ! -e "$1" ]; do sleep 0.5; done
+}
+
 if [ $# -lt 1 ]; then
 	echo "Missing block device argument."
 	echo ""
@@ -15,23 +19,21 @@ fi
 
 BLKDEV="$1"
 
-if ! BLKENV="$(lsblk --bytes --pairs --paths "$BLKDEV" | grep -F "\"$BLKDEV\"")"; then
+if ! BLKDEV_SIZE="$(lsblk --bytes --json --paths "$BLKDEV" | jq ".blockdevices[] | select(.name == \"$BLKDEV\") | .size")"; then
 	echo ""
 	usage "$0"
 	exit 11
 fi
 
-eval "$BLKENV"
-
-if [ "$NAME" != "$BLKDEV" ]; then
-	echo "Targetting the wrong device ($NAME instead of $BLKDEV)."
-	exit 20
+if [ -z "$BLKDEV_SIZE" ]; then
+	echo "Unable to retrieve $BLKDEV size"
+	exit 11
 fi
 
 # NixOS minimal disk requirement is currently 8 GiB
 # (actually 8GB but as 8 Gib > 8 GB, it also fits the bill)
 DEVICE_MIN_SIZE_GiB=8
-if [ "$SIZE" -lt "$((DEVICE_MIN_SIZE_GiB*1024*1024*1024))" ]; then
+if [ "$BLKDEV_SIZE" -lt "$((DEVICE_MIN_SIZE_GiB*1024*1024*1024))" ]; then
 	echo "Not enough space on $BLKDEV (at least $DEVICE_MIN_SIZE_GiB GiB are needed)."
 	exit 11
 fi
@@ -47,7 +49,8 @@ mkfs.fat -F 32 -n boot "${BLKDEV}1"
 # Create the encrypted system partition and open it (hence verify the password)
 parted "$BLKDEV" -- mkpart primary 512MiB 100%
 cryptsetup --batch-mode --label=system luksFormat "${BLKDEV}2"
-cryptsetup luksOpen /dev/disk/by-label/system system
+waitfor /dev/disk/by-label/system
+cryptsetup open /dev/disk/by-label/system system
 
 # Create the Btrfs layout
 mkfs.btrfs /dev/mapper/system
@@ -56,17 +59,8 @@ btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/nix
 btrfs subvolume create /mnt/swap
-umount /mnt
 
-# Mount the target filesystems layout
-mount -o compress=zstd,subvol=root /dev/mapper/system /mnt
-mkdir /mnt/{boot,home,nix,swap}
-mount /dev/disk/by-label/boot /mnt/boot
-mount -o compress=zstd,subvol=home /dev/mapper/system /mnt/home
-mount -o compress=zstd,noatime,subvol=nix /dev/mapper/system /mnt/nix
-mount -o subvol=swap /dev/mapper/system /mnt/swap
-
-# Create the swap file and enable swap
+# Create the swap file
 SWAPFILE=/mnt/swap/swapfile
 truncate -s 0 "$SWAPFILE"
 chattr +C "$SWAPFILE"
@@ -76,4 +70,9 @@ btrfs property set "$SWAPFILE" compression none
 dd if=/dev/zero of="$SWAPFILE" bs=1K count="$(awk '/MemTotal/{print $2}' /proc/meminfo)"
 chmod 0600 "$SWAPFILE"
 mkswap "$SWAPFILE"
+
+
+# Mount the target filesystems layout
+umount /mnt
+mountStorage
 swapon "$SWAPFILE"
