@@ -5,6 +5,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:toc:
 
 = https://nixos.org/[NixOS] installation media
 
@@ -95,13 +96,31 @@ If the installation media has started, issue the commands from the <<Installatio
 
 WARNING: Do *NOT* use these commands on your current host shell, as they may mess up your host operating system if it is NixOS based.
 
+== Mounting the test VM filesystems
+
+In order to mount the test VM filesystems on the development host, issue the following command in a NIM shell:
+
+[,sh]
+----
+sudo nimMount <mountpoint>
+----
+
+Where `<mountpoint>` must be a previously created directory.
+
+In order to later unmount the test VM filesystems, issue the following command in a NIM shell:
+
+[,sh]
+----
+sudo nimUmount <mountpoint>
+----
+
 == Roadmap
 
 * [x] Initial extensible ISO image (implemented by the initial revision)
 * [x] Tooling to prepare the local storage (implemented by setupStorage)
 * [x] Tooling to install NixOS (nothing to do, standard NixOS install simply works)
 * [x] Tooling to make `hardware-configuration.nix` more generic
-* [ ] Tooling to mount test filesystems on the host
+* [x] Tooling to mount test filesystems on the host
 * [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define; +
   `nixos-install` has a `--flake` option
 * [x] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
