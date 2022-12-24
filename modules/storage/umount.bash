@@ -1,3 +1,4 @@
-swapoff /mnt/swap/swapfile || true
+swapoff /dev/mapper/vg-swap || true
 umount --recursive /mnt
-cryptsetup close system
+vgchange -a n vg
+cryptsetup close pv

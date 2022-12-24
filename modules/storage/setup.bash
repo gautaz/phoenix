@@ -48,31 +48,29 @@ mkfs.fat -F 32 -n boot "${BLKDEV}1"
 
 # Create the encrypted system partition and open it (hence verify the password)
 parted "$BLKDEV" -- mkpart primary 512MiB 100%
-cryptsetup --batch-mode --label=system luksFormat "${BLKDEV}2"
-waitfor /dev/disk/by-label/system
-cryptsetup open /dev/disk/by-label/system system
+cryptsetup --batch-mode --label=pv luksFormat "${BLKDEV}2"
+waitfor /dev/disk/by-label/pv
+cryptsetup open /dev/disk/by-label/pv pv
+
+# Create the LVM layout
+pvcreate /dev/mapper/pv
+vgcreate vg /dev/mapper/pv
+vgchange -a y vg
+MEMTOTAL="$(awk '/MemTotal/{print $2}' /proc/meminfo)"
+lvcreate -L"$((MEMTOTAL/2+MEMTOTAL))"k -nswap vg
+lvcreate -l100%FREE -nsystem vg
+
+# Create the swap
+mkswap /dev/mapper/vg-swap
+swapon /dev/mapper/vg-swap
 
 # Create the Btrfs layout
-mkfs.btrfs /dev/mapper/system
-mount /dev/mapper/system /mnt
+mkfs.btrfs /dev/mapper/vg-system
+mount /dev/mapper/vg-system /mnt
 btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/nix
-btrfs subvolume create /mnt/swap
-
-# Create the swap file
-SWAPFILE=/mnt/swap/swapfile
-truncate -s 0 "$SWAPFILE"
-chattr +C "$SWAPFILE"
-btrfs property set "$SWAPFILE" compression none
-# /proc/meminfo kB is in fact kibibytes
-# https://lore.kernel.org/lkml/CAHp75Vf__Cb2=TDQRF4R5q8bfAQev2-smcdEMWz32MvYjGnT0Q@mail.gmail.com/
-dd if=/dev/zero of="$SWAPFILE" bs=1K count="$(awk '/MemTotal/{print $2}' /proc/meminfo)"
-chmod 0600 "$SWAPFILE"
-mkswap "$SWAPFILE"
-
 
 # Mount the target filesystems layout
 umount /mnt
 mountStorage
-swapon "$SWAPFILE"

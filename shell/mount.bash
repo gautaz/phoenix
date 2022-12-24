@@ -5,16 +5,17 @@ nim_mount() {
 	modprobe nbd max_part=8
 	qemu-nbd --connect=/dev/nbd0 ./disk.qcow2
 	cryptsetup open /dev/nbd0p2 nim_test_luks
-	mount -o compress=zstd,subvol=root /dev/mapper/nim_test_luks "$mountpoint"
+	vgchange -a y vg
+	mount -o compress=zstd,subvol=root /dev/mapper/vg-system "$mountpoint"
 	mount /dev/nbd0p1 "$mountpoint/boot"
-	mount -o compress=zstd,subvol=home /dev/mapper/nim_test_luks "$mountpoint/home"
-	mount -o compress=zstd,noatime,subvol=nix /dev/mapper/nim_test_luks "$mountpoint/nix"
-	mount -o subvol=swap /dev/mapper/nim_test_luks "$mountpoint/swap"
+	mount -o compress=zstd,subvol=home /dev/mapper/vg-system "$mountpoint/home"
+	mount -o compress=zstd,noatime,subvol=nix /dev/mapper/vg-system "$mountpoint/nix"
 }
 
 nim_umount() {
 	local mountpoint="$1"
 	umount --recursive "$mountpoint"
+	vgchange -a n vg
 	cryptsetup close nim_test_luks
 	qemu-nbd --disconnect /dev/nbd0
 	sleep 0.1
