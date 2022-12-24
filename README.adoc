@@ -92,7 +92,7 @@ Once the QEMU virtual machine has started, it will boot:
 * either on the installation media if no successful install occurred previously
 * or on a previously successfully installed NixOS system (to discard it simply issue `rm ./disk.qcow2` in a command shell)
 
-If the installation media has started, issue the commands from the <<Installation process>> section *on the virtual machine console*.
+If the installation media has started, issue the commands from the <<Install procedure>> section *on the virtual machine console*.
 
 WARNING: Do *NOT* use these commands on your current host shell, as they may mess up your host operating system if it is NixOS based.
 
