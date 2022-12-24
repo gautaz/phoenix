@@ -35,11 +35,18 @@ Once the boot sequence is complete and the command prompt is available, enter th
 
 [,sh]
 ----
-sudo setupStorage /dev/vda
+sudo setupStorage <block device>
 sudo generateConfiguration
 sudo nixos-install
 sudo reboot
 ----
+
+[NOTE]
+====
+`<block device>` is the device file pointing to the storage where to install the new NixOS operating system.
+
+It should be `/dev/vda` when testing the installation media image with `nimTest` (see <<Testing>>).
+====
 
 == The `setupStorage` command
 
