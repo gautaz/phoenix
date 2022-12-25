@@ -35,7 +35,12 @@ NOTE: Use the https://nixos.org/manual/nixos/stable/#sec-obtaining[standard NixO
 
 == Install procedure
 
-NOTE: The following install procedure is targeted at new hosts with no existing NixOS configuration to apply.
+Two install procedures are available depending on whether a NixOS configuration flake is available or not for the platform:
+
+* the new host install procedure is for unconfigured platforms with no existing NixOS configuration to apply
+* the flake install procedure is for platforms registered in a reachable flake configuration
+
+=== New host install
 
 Boot the target on the installation media.
 Once the boot sequence is complete and the command prompt is available, enter the following commands *on the target*:
@@ -54,6 +59,20 @@ sudo reboot
 
 It should be `/dev/vda` when testing the installation media image with `nimTest` (see <<Testing>>).
 ====
+
+=== Flake install
+
+Follow the same procedure as in <<New host install>> but with the following commands *on the target*:
+
+[,sh]
+----
+sudo setupStorage <block device>
+sudo nixos-install --flake <flake URI>#<hostname>
+sudo reboot
+----
+
+NOTE: For <<Testing,testing>> purposes, you can use the following flake configuration: +
+`github:gautaz/nixos-configuration#testbox`
 
 == The `setupStorage` command
 
@@ -147,8 +166,7 @@ sudo nimUmount <mountpoint>
 * [x] Tooling to install NixOS (nothing to do, standard NixOS install simply works)
 * [x] Tooling to make `hardware-configuration.nix` more generic
 * [x] Tooling to mount test filesystems on the host
-* [ ] Tooling to install the NixOS configuration from a flake on a Git server with requirements to define; +
-  `nixos-install` has a `--flake` option
+* [x] Tooling to install the NixOS configuration from a flake on a Git server (done with `nixos-install --flake`)
 * [x] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
 * [x] Ensure hibernate is possible
 * [ ] Override `nixos-generate-config` with `generateConfig` (and also make it available for installed flake configurations)
