@@ -110,10 +110,10 @@ NOTE: `generateConfiguration` will also ensure that LUKS opens `/dev/disk/by-lab
 
 == Testing
 
-In order to test the installation media image, issue `nimTest` in the NIM shell (https://www.qemu.org/[QEMU] with https://www.linux-kvm.org/page/Main_Page[KVM] is needed).
+In order to test the installation media image, issue `nimTest` to start a test virtual machine from the NIM shell.
 The test VM uses https://www.tianocore.org/[TianoCore UEFI implementation] as the installation media is primarily targeted at systems supporting UEFI.
 
-Once the QEMU virtual machine has started, it will boot:
+Once the test VM has started, it will boot:
 
 * either on the installation media if no successful install occurred previously
 * or on a previously successfully installed NixOS system (to discard it simply issue `rm ./disk.qcow2` in a command shell)
