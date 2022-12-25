@@ -151,6 +151,7 @@ sudo nimUmount <mountpoint>
   `nixos-install` has a `--flake` option
 * [x] Add a `shell.nix` file to ensure project's requirements with `nix-shell`
 * [x] Ensure hibernate is possible
+* [ ] Override `nixos-generate-config` with `generateConfig` (and also make it available for installed flake configurations)
 * [ ] Optionally replace LUKS password by a https://fidoalliance.org/fido2/[FIDO2] compatible dongle
 
 == Inspiration and prior art
