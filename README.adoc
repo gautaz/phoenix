@@ -5,13 +5,20 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
-:toc:
+:toc: left
 
 = https://nixos.org/[NixOS] installation media
 
-The installation media only targets https://uefi.org/[UEFI] compatible `x86_64-linux` hosts for now.
+For now, the installation media only targets my main use case which is deploying workstations:
+
+* https://uefi.org/[UEFI] compatible `x86_64-linux` hosts
+* one physical storage device
+
+[CAUTION]
+====
 The build of the installation media image is https://nixos.wiki/wiki/Flakes[Flake based].
 You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for this to work.
+====
 
 All development environment constraints should be guaranteed by the provided `nix-shell` environment.
 Issue `nix-shell` or `nix-shell --pure` on the command line to start this environment. +
@@ -60,7 +67,16 @@ The goal of the `setupStorage` command is to ensure the following layout on a bl
 *** `home` as the users home directories
 *** `nix` as the operating system's https://nixos.wiki/wiki/Nix_package_manager#Nix_store[Nix store]
 
-The only argument required by the command is the block device on which to install the filesystems layout.
+[NOTE]
+====
+The main reasons for this layout are:
+
+* most x86_64 workstations systems now supports UEFI
+* btrfs ensures subvolumes isolation while avoiding the hassle to allocate space per subvolumes (which is not a top priority on a workstation)
+* LVM was needed because I was unable to get hibernation working with swap on btrfs
+====
+
+The only argument required by the command is the block device on which to install the storage layout.
 After a few verifications, `setupStorage` will ask the following questions:
 
 [source]
