@@ -3,15 +3,15 @@ with pkgs;
 with builtins;
 let
   setupStorage = writeShellApplication {
-    name = "setupStorage";
+    name = "setup-storage";
     text = readFile ./setup.bash;
   };
   mountStorage = writeShellApplication {
-    name = "mountStorage";
+    name = "mount-storage";
     text = readFile ./mount.bash;
   };
   umountStorage = writeShellApplication {
-    name = "umountStorage";
+    name = "umount-storage";
     text = readFile ./umount.bash;
   };
 in {

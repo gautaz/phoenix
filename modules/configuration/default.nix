@@ -3,7 +3,7 @@ with pkgs;
 with builtins;
 let
   generateConfiguration = writeShellApplication {
-    name = "generateConfiguration";
+    name = "generate-configuration";
     text = readFile ./generate.bash;
   };
 in {
@@ -11,4 +11,3 @@ in {
     generateConfiguration
   ];
 }
-

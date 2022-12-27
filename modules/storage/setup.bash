@@ -73,4 +73,4 @@ btrfs subvolume create /mnt/nix
 
 # Mount the target filesystems layout
 umount /mnt
-mountStorage
+mount-storage

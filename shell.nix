@@ -3,19 +3,19 @@ with pkgs;
 with builtins;
 let
   nimBuild = writeShellApplication {
-    name = "nimBuild";
+    name = "nim-build";
     text = readFile ./shell/build.bash;
   };
   nimMount = writeShellApplication {
-    name = "nimMount";
+    name = "nim-mount";
     text = readFile ./shell/mount.bash;
   };
   nimTest = writeShellApplication {
-    name = "nimTest";
+    name = "nim-test";
     text = readFile ./shell/test.bash;
   };
   nimUmount = writeShellApplication {
-    name = "nimUmount";
+    name = "nim-umount";
     text = readFile ./shell/mount.bash;
   };
 in pkgs.mkShell {

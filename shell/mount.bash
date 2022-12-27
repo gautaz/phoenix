@@ -33,10 +33,10 @@ if [ $# -lt 1 ]; then
 fi
 
 case "$(basename "$0")" in
-	nimMount)
+	nim-mount)
 		nim_mount "$@"
 		;;
-	nimUmount)
+	nim-umount)
 		nim_umount "$@"
 		;;
 	*)
