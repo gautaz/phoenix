@@ -32,6 +32,7 @@ in pkgs.mkShell {
     nimTest
     nimUmount
     nix
+    OVMF
     qemu
     umount
   ];
