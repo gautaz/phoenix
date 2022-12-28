@@ -16,7 +16,7 @@ let
   };
 in {
   environment.systemPackages = [
-    jq
+    jq # needed by setupStorage
     mountStorage
     setupStorage
     umountStorage
