@@ -72,7 +72,7 @@ sudo reboot
 ----
 
 NOTE: For <<Testing,testing>> purposes, you can use the following flake configuration: +
-`github:gautaz/nixos-configuration#testbox`
+`github:gautaz/phoenix#testbox`
 
 == The `setup-storage` command
 

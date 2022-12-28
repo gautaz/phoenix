@@ -1,0 +1,35 @@
+= PhoeNix
+
+image::phoenix.png[Phoenix,200,200,float="right"]
+
+I occasionally need to reinstall my workspace and this process needs to be repeatable.
+Using https://nixos.org/[Nix] is the most repeatable way I have found so far.
+
+This repository is organized over three main topics:
+
+* obtaining an install media which fits my needs
+* having all my hosts configurations under version control
+* having my user environment under version control
+
+== Install media
+
+The installation media is designed to install NixOS on standard x86_64 laptops.
+
+The whole process has xref:install-media.adoc[its own specific documentation].
+
+== Hosts configurations
+
+Hosts configurations are flake based and can be installed with both `nixos-install --flake` (install media) and `nixos-rebuild switch --flake`.
+
+The available hosts are:
+
+* `testbox`: mainly used to test the installation media
+* https://en.wikipedia.org/wiki/Motoko_Kusanagi[`kusanagi`]: to test my custom environment in a virtual machine
+
+== User environment
+
+I rely on https://github.com/nix-community/home-manager[Home Manager] to deploy my user environment.
+
+As `home-manager` also supports a `--flake` option to install flake based user environments, this repository's flake provides:
+
+TODO: Add user environment to flake.
