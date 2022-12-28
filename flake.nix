@@ -11,9 +11,7 @@
     installMedia = lib.nixosSystem {
       inherit system;
       modules = [
-        {
-          imports = [ ./modules ];
-        }
+        { imports = [ ./install-media ]; }
         "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       ];
     };
