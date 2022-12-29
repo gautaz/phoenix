@@ -1,5 +1,6 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
+    ../_/flake-support.nix
     ../_/hw/qemu.nix
     ../_/storage.nix
   ];
@@ -10,8 +11,6 @@
   };
 
   networking.hostName = "kusanagi";
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.xserver = {
     enable = true;
