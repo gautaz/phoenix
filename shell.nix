@@ -1,7 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{pkgs ? import <nixpkgs> {}}:
 with pkgs;
-with builtins;
-let
+with builtins; let
   nimBuild = writeShellApplication {
     name = "nim-build";
     text = readFile ./shell/build.bash;
@@ -18,37 +17,34 @@ let
     name = "nim-umount";
     text = readFile ./shell/mount.bash;
   };
-  nixFmt = writeShellApplication {
-    name = "nix-fmt";
-    text = readFile ./shell/fmt.bash;
-  };
   nixLintFmt = writeShellApplication {
     name = "nix-lint-fmt";
     text = readFile ./shell/lintfmt.bash;
   };
 in
-pkgs.mkShell {
-  name = "NIM-shell";
-  packages = [
-    cryptsetup
-    git
-    git-lfs
-    less
-    kmod
-    mount
-    nimBuild
-    nimMount
-    nimTest
-    nimUmount
-    nix
-    nixfmt
-    nixFmt
-    nixLintFmt
-    nixpkgs-fmt
-    OVMF
-    qemu
-    statix
-    umount
-  ];
-  shellHook = "alias sudo=/run/wrappers/bin/sudo";
-}
+  pkgs.mkShell {
+    name = "NIM-shell";
+    packages = [
+      alejandra
+      cryptsetup
+      git
+      git-lfs
+      less
+      kmod
+      mount
+      nimBuild
+      nimMount
+      nimTest
+      nimUmount
+      nix
+      nixLintFmt
+      OVMF
+      qemu
+      statix
+      umount
+    ];
+    shellHook = ''
+      alias sudo=/run/wrappers/bin/sudo
+      nix-lint-fmt install
+    '';
+  }

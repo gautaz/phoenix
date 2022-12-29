@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs;
-with builtins;
-let
+with builtins; let
   setupStorage = writeShellApplication {
     name = "setup-storage";
     text = readFile ./setup.bash;
@@ -14,8 +13,7 @@ let
     name = "umount-storage";
     text = readFile ./umount.bash;
   };
-in
-{
+in {
   environment.systemPackages = [
     jq # needed by setupStorage
     mountStorage

@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  imports = [ ../_/flake-support.nix ../_/hw/qemu.nix ../_/storage.nix ];
+{pkgs, ...}: {
+  imports = [../_/flake-support.nix ../_/hw/qemu.nix ../_/storage.nix];
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -20,10 +20,10 @@
   time.timeZone = "Europe/Paris";
 
   users.users.del = {
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     initialPassword = "password";
     isNormalUser = true;
-    packages = with pkgs; [ home-manager ];
+    packages = with pkgs; [home-manager];
   };
 
   system.stateVersion = "22.11";

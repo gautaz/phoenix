@@ -1,5 +1,9 @@
-{ config, pkgs, ... }: {
-  imports = [ ../_/hw/qemu.nix ../_/storage.nix ];
+{
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [../_/hw/qemu.nix ../_/storage.nix];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

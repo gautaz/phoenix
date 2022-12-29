@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs;
-with builtins;
-let
+with builtins; let
   mountStorage = writeShellApplication {
     name = "mount-host";
     text = readFile ./mount.bash;
   };
-in
-{ environment.systemPackages = [ mountStorage ]; }
+in {environment.systemPackages = [mountStorage];}

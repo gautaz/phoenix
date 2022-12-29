@@ -1,12 +1,18 @@
 # This module should comply with the storage layout set up by:
 # https://github.com/gautaz/nixos-install-media
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
   boot.initrd.luks.devices.pv.device = "/dev/disk/by-label/pv";
 
   fileSystems."/" = {
     device = "/dev/mapper/vg-system";
     fsType = "btrfs";
-    options = [ "subvol=root" ];
+    options = ["subvol=root"];
   };
 
   fileSystems."/boot" = {
@@ -17,14 +23,14 @@
   fileSystems."/home" = {
     device = "/dev/mapper/vg-system";
     fsType = "btrfs";
-    options = [ "subvol=home" ];
+    options = ["subvol=home"];
   };
 
   fileSystems."/nix" = {
     device = "/dev/mapper/vg-system";
     fsType = "btrfs";
-    options = [ "subvol=nix" ];
+    options = ["subvol=nix"];
   };
 
-  swapDevices = [{ device = "/dev/mapper/vg-swap"; }];
+  swapDevices = [{device = "/dev/mapper/vg-swap";}];
 }

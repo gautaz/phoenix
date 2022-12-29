@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs;
-with builtins;
-let
+with builtins; let
   generateConfiguration = writeShellApplication {
     name = "generate-configuration";
     text = readFile ./generate.bash;
   };
-in
-{ environment.systemPackages = [ generateConfiguration ]; }
+in {environment.systemPackages = [generateConfiguration];}
