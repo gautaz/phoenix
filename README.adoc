@@ -28,7 +28,8 @@ The available hosts are:
 
 == User environment
 
-I rely on https://github.com/nix-community/home-manager[Home Manager] to deploy my user environment.
+I rely on the https://nix-community.github.io/home-manager/index.html#sec-install-standalone[standalone installation] of https://github.com/nix-community/home-manager[Home Manager] to deploy my user environment.
+The reason why I do not use Home Manager as a NixOS module is because I want to be able to use it even when I cannot choose NixOS as my operating system.
 
 As `home-manager` also supports a `--flake` option to install flake based user environments, this repository's flake provides:
 
