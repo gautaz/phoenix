@@ -7,8 +7,8 @@
   };
   outputs = { self, nixpkgs, home-manager }:
   let
-    homeManagerConfiguration = home-manager.lib.homeManagerConfiguration;
-    nixosSystem = nixpkgs.lib.nixosSystem;
+    inherit (home-manager.lib) homeManagerConfiguration;
+    inherit (nixpkgs.lib) nixosSystem;
     pkgs = import nixpkgs {
       inherit system;
     };

@@ -34,6 +34,7 @@ in pkgs.mkShell {
     nix
     OVMF
     qemu
+    statix
     umount
   ];
   shellHook = "alias sudo=/run/wrappers/bin/sudo";
