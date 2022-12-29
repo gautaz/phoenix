@@ -26,5 +26,5 @@
     options = [ "subvol=nix" ];
   };
 
-  swapDevices = [ { device = "/dev/mapper/vg-swap"; } ];
+  swapDevices = [{ device = "/dev/mapper/vg-swap"; }];
 }

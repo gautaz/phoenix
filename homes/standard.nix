@@ -1,18 +1,13 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   home = {
     username = "del";
     homeDirectory = "/home/del";
 
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
 
     stateVersion = "22.05";
 
-    packages = with pkgs; [
-      screen
-    ];
+    packages = with pkgs; [ screen ];
 
     file.".screenrc".text = ''
       hardstatus alwayslastline
@@ -57,9 +52,7 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      plugins = with pkgs.vimPlugins; [
-        vim-polyglot
-      ];
+      plugins = with pkgs.vimPlugins; [ vim-polyglot ];
     };
 
     readline = {

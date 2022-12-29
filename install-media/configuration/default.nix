@@ -6,8 +6,5 @@ let
     name = "generate-configuration";
     text = readFile ./generate.bash;
   };
-in {
-  environment.systemPackages = [
-    generateConfiguration
-  ];
-}
+in
+{ environment.systemPackages = [ generateConfiguration ]; }

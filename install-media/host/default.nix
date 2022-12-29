@@ -6,8 +6,5 @@ let
     name = "mount-host";
     text = readFile ./mount.bash;
   };
-in {
-  environment.systemPackages = [
-    mountStorage
-  ];
-}
+in
+{ environment.systemPackages = [ mountStorage ]; }

@@ -14,7 +14,8 @@ let
     name = "umount-storage";
     text = readFile ./umount.bash;
   };
-in {
+in
+{
   environment.systemPackages = [
     jq # needed by setupStorage
     mountStorage

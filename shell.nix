@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 with pkgs;
 with builtins;
 let
@@ -18,7 +18,16 @@ let
     name = "nim-umount";
     text = readFile ./shell/mount.bash;
   };
-in pkgs.mkShell {
+  nixFmt = writeShellApplication {
+    name = "nix-fmt";
+    text = readFile ./shell/fmt.bash;
+  };
+  nixLintFmt = writeShellApplication {
+    name = "nix-lint-fmt";
+    text = readFile ./shell/lintfmt.bash;
+  };
+in
+pkgs.mkShell {
   name = "NIM-shell";
   packages = [
     cryptsetup
@@ -32,6 +41,10 @@ in pkgs.mkShell {
     nimTest
     nimUmount
     nix
+    nixfmt
+    nixFmt
+    nixLintFmt
+    nixpkgs-fmt
     OVMF
     qemu
     statix
