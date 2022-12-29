@@ -2,28 +2,42 @@
   description = "Everything to restart from scratch: install media, OS, user environment";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, home-manager }:
   let
+    homeManagerConfiguration = home-manager.lib.homeManagerConfiguration;
+    nixosSystem = nixpkgs.lib.nixosSystem;
+    pkgs = import nixpkgs {
+      inherit system;
+    };
     system = "x86_64-linux";
-    lib = nixpkgs.lib;
   in {
-    installMedia = lib.nixosSystem {
+    installMedia = nixosSystem {
       inherit system;
       modules = [
         { imports = [ ./install-media ]; }
         "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       ];
     };
+    homeConfigurations = {
+      standard = homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./homes/standard.nix
+        ];
+      };
+    };
     nixosConfigurations = {
-      testbox = lib.nixosSystem {
+      testbox = nixosSystem {
         inherit system;
         modules = [
           ./hosts/testbox/configuration.nix
         ];
       };
 
-      kusanagi = lib.nixosSystem {
+      kusanagi = nixosSystem {
         inherit system;
         modules = [
           ./hosts/kusanagi/configuration.nix
