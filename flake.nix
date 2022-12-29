@@ -15,18 +15,18 @@
     pkgs = import nixpkgs {inherit system;};
     system = "x86_64-linux";
   in {
+    homeConfigurations = {
+      standard = homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./homes/standard.nix];
+      };
+    };
     installMedia = nixosSystem {
       inherit system;
       modules = [
         {imports = [./install-media];}
         "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       ];
-    };
-    homeConfigurations = {
-      standard = homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./homes/standard.nix];
-      };
     };
     nixosConfigurations = {
       testbox = nixosSystem {
