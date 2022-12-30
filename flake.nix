@@ -16,9 +16,9 @@
     system = "x86_64-linux";
   in {
     homeConfigurations = {
-      standard = homeManagerConfiguration {
+      del = homeManagerConfiguration {
         inherit pkgs;
-        modules = [./homes/standard.nix];
+        modules = [./homes/del/configuration.nix];
       };
     };
     installMedia = nixosSystem {
