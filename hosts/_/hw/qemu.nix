@@ -5,7 +5,7 @@
   modulesPath,
   ...
 }: {
-  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
+  imports = [(modulesPath + "/profiles/qemu-guest.nix") ../../../modules/qemu-mount-host];
   boot.initrd.availableKernelModules = ["ata_piix" "virtio_pci" "floppy" "sr_mod" "virtio_blk"];
   boot.initrd.kernelModules = ["dm-snapshot"];
   boot.kernelModules = [];
