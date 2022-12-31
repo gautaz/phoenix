@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 
-nim_mount() {
+phx_mount() {
 	local mountpoint="$1"
 	modprobe nbd max_part=8
 	qemu-nbd --connect=/dev/nbd0 ./disk.qcow2
-	cryptsetup open /dev/nbd0p2 nim_test_luks
+	cryptsetup open /dev/nbd0p2 phx_test_luks
 	vgchange -a y vg
 	mount -o compress=zstd,subvol=root /dev/mapper/vg-system "$mountpoint"
 	mount /dev/nbd0p1 "$mountpoint/boot"
@@ -12,11 +12,11 @@ nim_mount() {
 	mount -o compress=zstd,noatime,subvol=nix /dev/mapper/vg-system "$mountpoint/nix"
 }
 
-nim_umount() {
+phx_umount() {
 	local mountpoint="$1"
 	umount --recursive "$mountpoint"
 	vgchange -a n vg
-	cryptsetup close nim_test_luks
+	cryptsetup close phx_test_luks
 	qemu-nbd --disconnect /dev/nbd0
 	sleep 0.1
 	rmmod nbd
@@ -33,15 +33,15 @@ if [ $# -lt 1 ]; then
 fi
 
 case "$(basename "$0")" in
-	nim-mount)
-		nim_mount "$@"
+	phx-mount)
+		phx_mount "$@"
 		;;
-	nim-umount)
-		nim_umount "$@"
+	phx-umount)
+		phx_umount "$@"
 		;;
 	*)
 		echo "Unknown command: $0"
-		echo "Known commands are nimMount and nimUmount."
+		echo "Known commands are phx-mount and phx-umount."
 		exit 10;
 		;;
 esac

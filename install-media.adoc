@@ -22,13 +22,13 @@ You will need to https://nixos.wiki/wiki/Flakes#Enable_flakes[enable flakes] for
 
 All development environment constraints should be guaranteed by the provided `nix-shell` environment.
 Issue `nix-shell` or `nix-shell --pure` on the command line to start this environment. +
-This shell will be called the *NIM shell* thereafter (_NIM_ stands for _Nixos Installation Media_).
+This shell will be called the *phoenix shell* thereafter.
 
 NOTE: Unless stated otherwise, all relative paths (in particular starting with `./`) assume that the current working directory is the project path.
 
 == Building the image
 
-In order to build the installation media image, issue `nim-build` in the NIM shell. +
+In order to build the installation media image, issue `phx-build` in the phoenix shell. +
 The resulting ISO image will be available in `./result/iso`.
 
 NOTE: Use the https://nixos.org/manual/nixos/stable/#sec-obtaining[standard NixOS installation media creation procedures] to obtain a physical installation media.
@@ -57,7 +57,7 @@ sudo reboot
 ====
 `<block device>` is the device file pointing to the storage where to install the new NixOS operating system.
 
-It should be `/dev/vda` when testing the installation media image with `nim-test` (see <<Testing>>).
+It should be `/dev/vda` when testing the installation media image with `phx-test` (see <<Testing>>).
 ====
 
 === Flake install
@@ -129,7 +129,7 @@ NOTE: `generate-configuration` will also ensure that LUKS opens `/dev/disk/by-la
 
 == Testing
 
-In order to test the installation media image, issue `nim-test` to start a test virtual machine from the NIM shell.
+In order to test the installation media image, issue `phx-test` to start a test virtual machine from the phoenix shell.
 The test VM uses https://www.tianocore.org/[TianoCore UEFI implementation] as the installation media is primarily targeted at systems supporting UEFI.
 
 Once the test VM has started, it will boot:
@@ -143,20 +143,20 @@ WARNING: Do *NOT* use these commands on your current host shell, as they may mes
 
 == Mounting the test VM filesystems
 
-In order to mount the test VM filesystems on the development host, issue the following command in a NIM shell:
+In order to mount the test VM filesystems on the development host, issue the following command in a phoenix shell:
 
 [,sh]
 ----
-sudo nim-mount <mountpoint>
+sudo phx-mount <mountpoint>
 ----
 
 Where `<mountpoint>` must be a previously created directory.
 
-In order to later unmount the test VM filesystems, issue the following command in a NIM shell:
+In order to later unmount the test VM filesystems, issue the following command in a phoenix shell:
 
 [,sh]
 ----
-sudo nim-umount <mountpoint>
+sudo phx-umount <mountpoint>
 ----
 
 == Roadmap

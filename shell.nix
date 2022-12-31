@@ -1,29 +1,29 @@
 {pkgs ? import <nixpkgs> {}}:
 with pkgs;
 with builtins; let
-  nimBuild = writeShellApplication {
-    name = "nim-build";
+  phoenixBuild = writeShellApplication {
+    name = "phx-build";
     text = readFile ./shell/build.bash;
   };
-  nimMount = writeShellApplication {
-    name = "nim-mount";
+  phoenixLintFmt = writeShellApplication {
+    name = "phx-lint-fmt";
+    text = readFile ./shell/lintfmt.bash;
+  };
+  phoenixMount = writeShellApplication {
+    name = "phx-mount";
     text = readFile ./shell/mount.bash;
   };
-  nimTest = writeShellApplication {
-    name = "nim-test";
+  phoenixTest = writeShellApplication {
+    name = "phx-test";
     text = readFile ./shell/test.bash;
   };
-  nimUmount = writeShellApplication {
-    name = "nim-umount";
+  phoenixUmount = writeShellApplication {
+    name = "phx-umount";
     text = readFile ./shell/mount.bash;
-  };
-  phoenixLintFmt = writeShellApplication {
-    name = "phoenix-lint-fmt";
-    text = readFile ./shell/lintfmt.bash;
   };
 in
   pkgs.mkShell {
-    name = "NIM-shell";
+    name = "phoenix";
     packages = [
       alejandra
       cryptsetup
@@ -34,19 +34,19 @@ in
       less
       kmod
       mount
-      nimBuild
-      nimMount
-      nimTest
-      nimUmount
       nix
       OVMF
+      phoenixBuild
       phoenixLintFmt
+      phoenixMount
+      phoenixTest
+      phoenixUmount
       qemu
       statix
       umount
     ];
     shellHook = ''
       alias sudo=/run/wrappers/bin/sudo
-      phoenix-lint-fmt install
+      phx-lint-fmt install
     '';
   }
