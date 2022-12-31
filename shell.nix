@@ -17,8 +17,8 @@ with builtins; let
     name = "nim-umount";
     text = readFile ./shell/mount.bash;
   };
-  nixLintFmt = writeShellApplication {
-    name = "nix-lint-fmt";
+  phoenixLintFmt = writeShellApplication {
+    name = "phoenix-lint-fmt";
     text = readFile ./shell/lintfmt.bash;
   };
 in
@@ -29,6 +29,8 @@ in
       cryptsetup
       git
       git-lfs
+      haskellPackages.hindent
+      haskellPackages.hlint
       less
       kmod
       mount
@@ -37,14 +39,14 @@ in
       nimTest
       nimUmount
       nix
-      nixLintFmt
       OVMF
+      phoenixLintFmt
       qemu
       statix
       umount
     ];
     shellHook = ''
       alias sudo=/run/wrappers/bin/sudo
-      nix-lint-fmt install
+      phoenix-lint-fmt install
     '';
   }

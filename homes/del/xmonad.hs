@@ -1,5 +1,3 @@
 import XMonad
-main = xmonad $ def {
-  modMask = mod4Mask,
-  terminal = "alacritty"
-}
+
+main = xmonad $ def {modMask = mod4Mask, terminal = "alacritty"}
