@@ -17,7 +17,17 @@
   };
 
   programs = {
+    alacritty.enable = true;
     home-manager.enable = true;
     starship.enable = true;
+  };
+
+  xsession = {
+    enable = true;
+
+    windowManager.xmonad = {
+      enable = true;
+      config = ./xmonad.hs;
+    };
   };
 }
