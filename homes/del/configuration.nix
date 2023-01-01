@@ -19,6 +19,12 @@
   programs = {
     alacritty.enable = true;
     home-manager.enable = true;
+
+    rofi = {
+      enable = true;
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+    };
+
     starship.enable = true;
   };
 
@@ -27,6 +33,7 @@
 
     windowManager.xmonad = {
       enable = true;
+      enableContribAndExtras = true;
       config = ./xmonad.hs;
     };
   };
