@@ -16,6 +16,7 @@
   programs = {
     alacritty.enable = true;
     home-manager.enable = true;
+    qutebrowser.enable = true;
     starship.enable = true;
   };
 }
