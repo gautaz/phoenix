@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  imports = [./bash.nix ./neovim.nix ./readline.nix ./rofi.nix ./screen.nix ./xsession.nix];
+  imports = [./bash.nix ./neovim.nix ./readline.nix ./rofi.nix ./screen.nix ./xmobar.nix ./xsession.nix];
 
   home = {
     username = "del";
