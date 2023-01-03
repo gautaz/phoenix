@@ -10,7 +10,7 @@
     homeDirectory = "/home/del";
     sessionVariables = {EDITOR = "vim";};
     stateVersion = "22.05";
-    packages = with pkgs; [screen];
+    packages = with pkgs; [libnotify screen];
   };
 
   programs = {
@@ -18,5 +18,9 @@
     home-manager.enable = true;
     qutebrowser.enable = true;
     starship.enable = true;
+  };
+
+  services = {
+    dunst.enable = true;
   };
 }
