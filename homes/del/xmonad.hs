@@ -12,4 +12,5 @@ myConfig =
   def {modMask = mod4Mask, terminal = "alacritty"} `additionalKeysP`
   [ ( "M-p"
     , spawn "rofi -show combi -modes combi -combi-modes 'window,drun,run'")
+  , ("M-<Escape>", spawn "xsecurelock")
   ]
