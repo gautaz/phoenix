@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  imports = [./bash.nix ./neovim.nix ./readline.nix ./rofi.nix ./screen.nix ./screen-locker.nix ./xmobar.nix ./xsession.nix];
+  imports = [./alacritty.nix ./bash.nix ./neovim.nix ./readline.nix ./rofi.nix ./screen.nix ./screen-locker.nix ./xmobar.nix ./xsession.nix];
 
   home = {
     username = "del";
@@ -14,7 +14,6 @@
   };
 
   programs = {
-    alacritty.enable = true;
     home-manager.enable = true;
     qutebrowser.enable = true;
     starship.enable = true;
