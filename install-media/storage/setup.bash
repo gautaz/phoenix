@@ -10,6 +10,10 @@ waitfor() {
 	while [ ! -e "$1" ]; do sleep 0.5; done
 }
 
+devinfo() {
+	lsblk --bytes --json --paths "$1" | jq ".blockdevices[] | select(.name == \"$1\")"
+}
+
 if [ $# -lt 1 ]; then
 	echo "Missing block device argument."
 	echo ""
@@ -19,7 +23,7 @@ fi
 
 BLKDEV="$1"
 
-if ! BLKDEV_SIZE="$(lsblk --bytes --json --paths "$BLKDEV" | jq ".blockdevices[] | select(.name == \"$BLKDEV\") | .size")"; then
+if ! BLKDEV_SIZE="$(devinfo "$BLKDEV" | jq ".size")"; then
 	echo ""
 	usage "$0"
 	exit 11
@@ -44,11 +48,13 @@ parted "$BLKDEV" -- mklabel gpt
 # Create the EFI boot partition
 parted "$BLKDEV" -- mkpart ESP fat32 1MiB 512MiB
 parted "$BLKDEV" -- set 1 esp on
-mkfs.fat -F 32 -n boot "${BLKDEV}1"
+BLKDEVP1="$(devinfo "$BLKDEV" | jq --raw-output ".children[0].name")"
+mkfs.fat -F 32 -n boot "${BLKDEVP1}"
 
 # Create the encrypted system partition and open it (hence verify the password)
 parted "$BLKDEV" -- mkpart primary 512MiB 100%
-cryptsetup --batch-mode --label=pv luksFormat "${BLKDEV}2"
+BLKDEVP2="$(devinfo "$BLKDEV" | jq --raw-output ".children[1].name")"
+cryptsetup --batch-mode --label=pv luksFormat "${BLKDEVP2}"
 waitfor /dev/disk/by-label/pv
 cryptsetup open /dev/disk/by-label/pv pv
 
