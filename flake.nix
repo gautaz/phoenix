@@ -21,6 +21,7 @@
         modules = [./homes/del/configuration.nix];
       };
     };
+
     installMedia = nixosSystem {
       inherit system;
       modules = [
@@ -28,15 +29,21 @@
         "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       ];
     };
+
     nixosConfigurations = {
-      testbox = nixosSystem {
+      hepao = nixosSystem {
         inherit system;
-        modules = [./hosts/testbox/configuration.nix];
+        modules = [./hosts/hepao/configuration.nix];
       };
 
       kusanagi = nixosSystem {
         inherit system;
         modules = [./hosts/kusanagi/configuration.nix];
+      };
+
+      testbox = nixosSystem {
+        inherit system;
+        modules = [./hosts/testbox/configuration.nix];
       };
     };
   };
