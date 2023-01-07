@@ -48,12 +48,12 @@ parted "$BLKDEV" -- mklabel gpt
 # Create the EFI boot partition
 parted "$BLKDEV" -- mkpart ESP fat32 1MiB 512MiB
 parted "$BLKDEV" -- set 1 esp on
-BLKDEVP1="$(devinfo "$BLKDEV" | jq --raw-output ".children[0].name")"
+BLKDEVP1="$(devinfo "$BLKDEV" | jq --raw-output ".children|=sort_by(.name)|.children[0].name")"
 mkfs.fat -F 32 -n boot "${BLKDEVP1}"
 
 # Create the encrypted system partition and open it (hence verify the password)
 parted "$BLKDEV" -- mkpart primary 512MiB 100%
-BLKDEVP2="$(devinfo "$BLKDEV" | jq --raw-output ".children[1].name")"
+BLKDEVP2="$(devinfo "$BLKDEV" | jq --raw-output ".children|=sort_by(.name)|.children[1].name")"
 cryptsetup --batch-mode --label=pv luksFormat "${BLKDEVP2}"
 waitfor /dev/disk/by-label/pv
 cryptsetup open /dev/disk/by-label/pv pv

@@ -33,17 +33,17 @@
     nixosConfigurations = {
       hepao = nixosSystem {
         inherit system;
-        modules = [./hosts/hepao/configuration.nix];
+        modules = [./hosts/hepao.nix];
       };
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [./hosts/kusanagi/configuration.nix];
+        modules = [./hosts/kusanagi.nix];
       };
 
       testbox = nixosSystem {
         inherit system;
-        modules = [./hosts/testbox/configuration.nix];
+        modules = [./hosts/testbox.nix];
       };
     };
   };

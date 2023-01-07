@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [../_/flake-support.nix ../_/hw/qemu.nix ../_/storage.nix];
+  imports = [_/flake-support.nix _/hw/qemu.nix _/storage.nix];
 
   boot.loader = {
     systemd-boot.enable = true;
