@@ -7,6 +7,7 @@
   };
 
   networking.hostName = "hepao";
+  networking.networkmanager.enable = true;
 
   services.xserver = {
     enable = true;
