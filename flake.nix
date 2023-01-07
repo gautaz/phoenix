@@ -1,17 +1,20 @@
 {
   description = "Everything to restart from scratch: install media, OS, user environment";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
   };
   outputs = {
     self,
     nixpkgs,
+    nixos-hardware,
     home-manager,
   }: let
     inherit (home-manager.lib) homeManagerConfiguration;
     inherit (nixpkgs.lib) nixosSystem;
+    hardware = nixos-hardware.nixosModules;
     pkgs = import nixpkgs {inherit system;};
     system = "x86_64-linux";
   in {
@@ -33,7 +36,7 @@
     nixosConfigurations = {
       hepao = nixosSystem {
         inherit system;
-        modules = [./hosts/hepao.nix];
+        modules = [./hosts/hepao.nix hardware.framework-12th-gen-intel];
       };
 
       kusanagi = nixosSystem {
