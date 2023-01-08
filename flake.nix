@@ -15,6 +15,7 @@
     inherit (home-manager.lib) homeManagerConfiguration;
     inherit (nixpkgs.lib) nixosSystem;
     hardware = nixos-hardware.nixosModules;
+    hosts = import ./hosts;
     pkgs = import nixpkgs {inherit system;};
     system = "x86_64-linux";
   in {
@@ -36,17 +37,17 @@
     nixosConfigurations = {
       hepao = nixosSystem {
         inherit system;
-        modules = [./hosts/hepao.nix hardware.framework-12th-gen-intel];
+        modules = [hardware.framework-12th-gen-intel hosts.hepao];
       };
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [./hosts/kusanagi.nix];
+        modules = [hosts.kusanagi];
       };
 
       testbox = nixosSystem {
         inherit system;
-        modules = [./hosts/testbox.nix];
+        modules = [hosts.testbox];
       };
     };
   };
