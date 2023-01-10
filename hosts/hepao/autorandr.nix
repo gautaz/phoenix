@@ -5,67 +5,69 @@ _: let
     eDP-1 = "00ffffffffffff0009e55f0900000000171d0104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a00fb";
   };
 in {
-  defaultTarget = "mobile";
-  enable = true;
-  profiles = {
-    homeDock = {
-      config = {
-        DP-1.enable = false;
-        DP-2.enable = false;
-        DP-3.enable = false;
-        DP-4.enable = false;
-        DP-4-1 = {
-          crtc = 1;
-          enable = true;
-          mode = "1920x1080";
-          position = "0x0";
-          primary = false;
-          rate = "60.00";
-          rotate = "right";
+  services.autorandr = {
+    defaultTarget = "mobile";
+    enable = true;
+    profiles = {
+      homeDock = {
+        config = {
+          DP-1.enable = false;
+          DP-2.enable = false;
+          DP-3.enable = false;
+          DP-4.enable = false;
+          DP-4-1 = {
+            crtc = 1;
+            enable = true;
+            mode = "1920x1080";
+            position = "0x0";
+            primary = false;
+            rate = "60.00";
+            rotate = "right";
+          };
+          DP-4-2 = {
+            crtc = 2;
+            enable = true;
+            mode = "1920x1080";
+            position = "1080x264";
+            primary = true;
+            rate = "60.00";
+          };
+          eDP-1 = {
+            crtc = 0;
+            enable = true;
+            mode = "1680x1050";
+            position = "3000x264";
+            primary = false;
+            rate = "59.95";
+          };
         };
-        DP-4-2 = {
-          crtc = 2;
-          enable = true;
-          mode = "1920x1080";
-          position = "1080x264";
-          primary = true;
-          rate = "60.00";
-        };
-        eDP-1 = {
-          crtc = 0;
-          enable = true;
-          mode = "1680x1050";
-          position = "3000x264";
-          primary = false;
-          rate = "59.95";
+        fingerprint = {
+          inherit (displayFingerprint) DP-4-1;
+          inherit (displayFingerprint) DP-4-2;
+          inherit (displayFingerprint) eDP-1;
         };
       };
-      fingerprint = {
-        inherit (displayFingerprint) DP-4-1;
-        inherit (displayFingerprint) DP-4-2;
-        inherit (displayFingerprint) eDP-1;
-      };
-    };
 
-    mobile = {
-      config = {
-        DP-1.enable = false;
-        DP-2.enable = false;
-        DP-3.enable = false;
-        DP-4.enable = false;
-        DP-4-1.enable = false;
-        DP-4-2.enable = false;
-        eDP-1 = {
-          crtc = 0;
-          enable = true;
-          mode = "2256x1504";
-          position = "0x0";
-          primary = true;
-          rate = "60.00";
+      mobile = {
+        config = {
+          DP-1.enable = false;
+          DP-2.enable = false;
+          DP-3.enable = false;
+          DP-4.enable = false;
+          DP-4-1.enable = false;
+          DP-4-2.enable = false;
+          eDP-1 = {
+            crtc = 0;
+            enable = true;
+            mode = "2256x1504";
+            position = "0x0";
+            primary = true;
+            rate = "60.00";
+          };
         };
-      };
-      fingerprint = {
-        inherit (displayFingerprint) eDP-1;
+        fingerprint = {
+          inherit (displayFingerprint) eDP-1;
+        };
       };
     };
   };

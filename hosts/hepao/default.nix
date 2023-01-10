@@ -1,7 +1,5 @@
-{pkgs, ...}: let
-  autorandr = import ./autorandr.nix {};
-in {
-  imports = [../_/flake-support.nix ../_/hw/framework.nix ../_/storage.nix];
+{pkgs, ...}: {
+  imports = [../_/flake-support.nix ../_/hw/framework.nix ../_/storage.nix ./autorandr.nix];
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -12,7 +10,6 @@ in {
   networking.networkmanager.enable = true;
 
   services = {
-    inherit autorandr;
     xserver = {
       enable = true;
       displayManager = {
