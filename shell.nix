@@ -17,6 +17,10 @@ with builtins; let
     name = "phx-test";
     text = readFile ./shell/test.bash;
   };
+  phoenixTestBuild = writeShellApplication {
+    name = "phx-test-build";
+    text = readFile ./shell/test-build.bash;
+  };
   phoenixUmount = writeShellApplication {
     name = "phx-umount";
     text = readFile ./shell/mount.bash;
@@ -25,21 +29,25 @@ in
   pkgs.mkShell {
     name = "phoenix";
     packages = [
+      OVMF
       alejandra
+      cacert
       cryptsetup
       git
       git-lfs
       haskellPackages.hindent
       haskellPackages.hlint
-      less
+      home-manager
       kmod
+      less
       mount
       nix
-      OVMF
+      nixos-rebuild
       phoenixBuild
       phoenixLintFmt
       phoenixMount
       phoenixTest
+      phoenixTestBuild
       phoenixUmount
       qemu
       statix
