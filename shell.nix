@@ -30,6 +30,7 @@ in
     name = "phoenix";
     packages = [
       OVMF
+      age
       alejandra
       cacert
       cryptsetup
@@ -50,6 +51,8 @@ in
       phoenixTestBuild
       phoenixUmount
       qemu
+      sops
+      ssh-to-age
       statix
       umount
     ];

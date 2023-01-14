@@ -5,12 +5,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    sops-nix.url = "github:Mic92/sops-nix/master";
   };
   outputs = {
     self,
     nixpkgs,
     nixos-hardware,
     home-manager,
+    sops-nix,
   }: let
     inherit (home-manager.lib) homeManagerConfiguration;
     inherit (nixpkgs.lib) nixosSystem;
@@ -37,12 +39,12 @@
     nixosConfigurations = {
       hepao = nixosSystem {
         inherit system;
-        modules = [hardware.framework-12th-gen-intel hosts.hepao];
+        modules = [hardware.framework-12th-gen-intel hosts.hepao sops-nix.nixosModules.sops];
       };
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [hosts.kusanagi];
+        modules = [hosts.kusanagi sops-nix.nixosModules.sops];
       };
 
       testbox = nixosSystem {

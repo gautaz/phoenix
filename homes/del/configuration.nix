@@ -3,7 +3,18 @@
   pkgs,
   ...
 }: {
-  imports = [./alacritty.nix ./bash.nix ./neovim.nix ./readline.nix ./rofi.nix ./screen.nix ./screen-locker.nix ./xmobar.nix ./xsession.nix];
+  imports = [
+    ./alacritty.nix
+    ./bash.nix
+    ./neovim.nix
+    ./readline.nix
+    ./rofi.nix
+    ./screen-locker.nix
+    ./screen.nix
+    ./ssh.nix
+    ./xmobar.nix
+    ./xsession.nix
+  ];
 
   home = {
     username = "del";
