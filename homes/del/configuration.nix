@@ -19,7 +19,6 @@
   home = {
     username = "del";
     homeDirectory = "/home/del";
-    sessionVariables = {EDITOR = "vim";};
     stateVersion = "22.05";
     packages = with pkgs; [libnotify screen xsecurelock];
   };
