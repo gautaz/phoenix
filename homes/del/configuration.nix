@@ -19,7 +19,7 @@
   home = {
     username = "del";
     homeDirectory = "/home/del";
-    stateVersion = "22.05";
+    stateVersion = "22.11";
     packages = with pkgs; [
       libnotify # provides notify-send to test dunst
       screen # configured by screen.nix
