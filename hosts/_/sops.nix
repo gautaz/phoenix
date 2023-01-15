@@ -13,7 +13,7 @@ in {
       "git/profiles/employer" = delSecret;
       "gpg/keys/15C501426314ED1962D8F43E67B9B2E632E667FC.key" = delSecret;
       "gpg/keys/D31D2622AAE7EB10A24E751DF63450A6B26CAAC9.key" = delSecret;
-      "ssh/config/work" = delSecret;
+      "ssh/config/employer" = delSecret;
     };
   };
 }
