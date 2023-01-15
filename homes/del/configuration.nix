@@ -23,6 +23,7 @@
     packages = with pkgs; [
       libnotify # provides notify-send to test dunst
       screen # configured by screen.nix
+      xclip # needed by neovim to access X11 clipboard
       xsecurelock # needed by screen-locker.nix
     ];
   };
