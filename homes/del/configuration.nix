@@ -6,6 +6,7 @@
   imports = [
     ./alacritty.nix
     ./bash.nix
+    ./gpg.nix
     ./neovim.nix
     ./readline.nix
     ./rofi.nix
@@ -17,6 +18,7 @@
   ];
 
   home = {
+    file.".gnupg/private-keys-v1.d".source = config.lib.file.mkOutOfStoreSymlink "/run/secrets/gpg/keys";
     username = "del";
     homeDirectory = "/home/del";
     stateVersion = "22.11";
