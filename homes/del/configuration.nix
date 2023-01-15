@@ -8,6 +8,7 @@ in {
   imports = [
     ./alacritty.nix
     ./bash.nix
+    ./git.nix
     ./gpg.nix
     ./neovim.nix
     ./readline.nix
