@@ -20,7 +20,11 @@
     username = "del";
     homeDirectory = "/home/del";
     stateVersion = "22.05";
-    packages = with pkgs; [libnotify screen xsecurelock];
+    packages = with pkgs; [
+      libnotify # provides notify-send to test dunst
+      screen # configured by screen.nix
+      xsecurelock # needed by screen-locker.nix
+    ];
   };
 
   programs = {
