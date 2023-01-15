@@ -25,12 +25,11 @@ The available hosts are:
 
 * `testbox`: mainly used to test the installation media
 * https://en.wikipedia.org/wiki/Motoko_Kusanagi[`kusanagi`]: to test my custom environment in a virtual machine
+* https://fr.wikipedia.org/wiki/Le_Moine_fou[`hepao`]: my https://frame.work/[framework] laptop
 
 == User environment
 
 I rely on the https://nix-community.github.io/home-manager/index.html#sec-install-standalone[standalone installation] of https://github.com/nix-community/home-manager[Home Manager] to deploy my user environment.
 The reason why I do not use Home Manager as a NixOS module is because I want to be able to use it even when I cannot choose NixOS as my operating system.
 
-As `home-manager` also supports a `--flake` option to install flake based user environments, this repository's flake provides:
-
-TODO: Add user environment to flake.
+As `home-manager` also supports a `--flake` option to install flake based user environments, this repository's flake provides a home environment for my main and only account (`del`).
