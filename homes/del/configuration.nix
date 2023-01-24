@@ -4,6 +4,10 @@
   ...
 }: let
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+  passageBootstrap = pkgs.writeShellApplication {
+    name = "passage-bootstrap";
+    text = builtins.readFile ./passage-bootstrap.bash;
+  };
 in {
   imports = [
     ./alacritty.nix
@@ -21,14 +25,24 @@ in {
   ];
 
   home = {
-    file.".gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
+    file = {
+      ".local/bin/pass".source = "${pkgs.passage}/bin/passage";
+      ".passage/identities".source = mkSymlink "/run/secrets/passage/identities";
+      "gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
+    };
     homeDirectory = "/home/del";
     packages = with pkgs; [
+      age # used as the main encryption tool
       libnotify # provides notify-send to test dunst
+      pass-git-helper # needed by git.nix
+      passage # will be used instead of pass as the password manager
+      passageBootstrap # ensure passage has access to the password store
       screen # configured by screen.nix
+      tree # needed by passage to list secrets
       xclip # needed by neovim to access X11 clipboard
       xsecurelock # needed by screen-locker.nix
     ];
+    sessionPath = ["$HOME/.local/bin"];
     stateVersion = "22.11";
     username = "del";
   };
