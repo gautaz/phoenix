@@ -26,9 +26,9 @@ in {
 
   home = {
     file = {
+      ".gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
       ".local/bin/pass".source = "${pkgs.passage}/bin/passage";
       ".passage/identities".source = mkSymlink "/run/secrets/passage/identities";
-      "gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
     };
     homeDirectory = "/home/del";
     packages = with pkgs; [
