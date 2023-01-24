@@ -21,5 +21,9 @@ _: {
       }
     '';
     historyControl = ["ignoredups"];
+    initExtra = ''
+      _completion_loader passage
+      complete -o filenames -F _pass pass
+    '';
   };
 }
