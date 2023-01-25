@@ -24,6 +24,8 @@ in {
     ./xsession.nix
   ];
 
+  fonts.fontconfig.enable = true;
+
   home = {
     file = {
       ".gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
@@ -32,6 +34,7 @@ in {
     };
     homeDirectory = "/home/del";
     packages = with pkgs; [
+      (nerdfonts.override {fonts = ["UbuntuMono"];}) # used by alacritty.nix
       age # used as the main encryption tool
       libnotify # provides notify-send to test dunst
       pass-git-helper # needed by git.nix
