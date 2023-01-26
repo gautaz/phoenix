@@ -8,6 +8,8 @@
     name = "passage-bootstrap";
     text = builtins.readFile ./passage-bootstrap.bash;
   };
+  # language servers used by neovim.nix
+  languageServers = with pkgs; [nil];
 in {
   imports = [
     ./alacritty.nix
@@ -33,18 +35,20 @@ in {
       ".passage/identities".source = mkSymlink "/run/secrets/passage/identities";
     };
     homeDirectory = "/home/del";
-    packages = with pkgs; [
-      (nerdfonts.override {fonts = ["UbuntuMono"];}) # used by alacritty.nix
-      age # used as the main encryption tool
-      libnotify # provides notify-send to test dunst
-      pass-git-helper # needed by git.nix
-      passage # will be used instead of pass as the password manager
-      passageBootstrap # ensure passage has access to the password store
-      screen # configured by screen.nix
-      tree # needed by passage to list secrets
-      xclip # needed by neovim to access X11 clipboard
-      xsecurelock # needed by screen-locker.nix
-    ];
+    packages = with pkgs;
+      [
+        (nerdfonts.override {fonts = ["UbuntuMono"];}) # used by alacritty.nix
+        age # used as the main encryption tool
+        libnotify # provides notify-send to test dunst
+        pass-git-helper # used by git.nix
+        passage # used instead of pass as the password manager
+        passageBootstrap # ensure passage has access to the password store
+        screen # configured by screen.nix
+        tree # used by passage to list secrets
+        xclip # used by neovim to access X11 clipboard
+        xsecurelock # used by screen-locker.nix
+      ]
+      ++ languageServers;
     sessionPath = ["$HOME/.local/bin"];
     stateVersion = "22.11";
     username = "del";
