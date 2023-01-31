@@ -8,6 +8,13 @@
     name = "passage-bootstrap";
     text = builtins.readFile ./passage-bootstrap.bash;
   };
+  pinentryRofi = pkgs.writeShellApplication {
+    name = "pinentry-rofi-with-env";
+    text = ''
+      PATH="$PATH:${pkgs.coreutils}/bin:${pkgs.rofi}/bin"
+      "${pkgs.pinentry-rofi}/bin/pinentry-rofi" "$@"
+    '';
+  };
   # language servers used by neovim.nix
   languageServers = with pkgs; [nil];
 in {
@@ -43,6 +50,8 @@ in {
         pass-git-helper # used by git.nix
         passage # used instead of pass as the password manager
         passageBootstrap # ensure passage has access to the password store
+        pinentry-rofi
+        pinentryRofi
         screen # configured by screen.nix
         tree # used by passage to list secrets
         xclip # used by neovim to access X11 clipboard
@@ -62,5 +71,13 @@ in {
 
   services = {
     dunst.enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    extraConfig = ''
+      pinentry-program ${pinentryRofi}/bin/pinentry-rofi-with-env
+    '';
+    pinentryFlavor = null;
   };
 }
