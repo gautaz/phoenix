@@ -27,8 +27,8 @@ in {
     ./readline.nix
     ./rofi.nix
     ./screen-locker.nix
-    ./screen.nix
     ./ssh.nix
+    ./tmux.nix
     ./xmobar.nix
     ./xsession.nix
   ];
@@ -52,7 +52,6 @@ in {
         passageBootstrap # ensure passage has access to the password store
         pinentry-rofi
         pinentryRofi
-        screen # configured by screen.nix
         tree # used by passage to list secrets
         xclip # used by neovim to access X11 clipboard
         xsecurelock # used by screen-locker.nix
