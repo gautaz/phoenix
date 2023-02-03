@@ -8,7 +8,7 @@ _: {
           family = "UbuntuMono Nerd Font";
           style = "Regular";
         };
-        size = 14.0;
+        size = 10.0;
       };
     };
   };
