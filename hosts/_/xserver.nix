@@ -10,5 +10,6 @@ _: {
       tapping = false;
     };
     windowManager.xmonad.enable = true;
+    xkbOptions = "compose:ralt";
   };
 }
