@@ -46,6 +46,7 @@ in {
       [
         (nerdfonts.override {fonts = ["UbuntuMono"];}) # used by alacritty.nix
         age # used as the main encryption tool
+        arandr # used to manually set the displays layout
         libnotify # provides notify-send to test dunst
         pass-git-helper # used by git.nix
         passage # used instead of pass as the password manager
