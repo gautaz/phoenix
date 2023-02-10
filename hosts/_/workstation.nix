@@ -1,5 +1,5 @@
 _: {
-  imports = [./flake-support.nix ./sops.nix ./storage.nix ./users.nix ./xserver.nix];
+  imports = [./docker.nix ./flake-support.nix ./sops.nix ./storage.nix ./users.nix ./xserver.nix];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
