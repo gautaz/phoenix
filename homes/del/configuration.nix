@@ -71,6 +71,7 @@ in {
 
   services = {
     dunst.enable = true;
+    udiskie.enable = true;
   };
 
   services.gpg-agent = {

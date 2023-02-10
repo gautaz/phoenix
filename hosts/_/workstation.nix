@@ -9,6 +9,7 @@ _: {
   services.clight.enable = true;
   services.fwupd.enable = true;
   services.sshd.enable = true;
+  services.udisks2.enable = true;
   time.timeZone = "Europe/Paris";
   system.stateVersion = "22.11";
 }
