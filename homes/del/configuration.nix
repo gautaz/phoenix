@@ -24,6 +24,7 @@ in {
     ./git.nix
     ./gpg.nix
     ./neovim.nix
+    ./qutebrowser.nix
     ./readline.nix
     ./rofi.nix
     ./screen-locker.nix
@@ -65,7 +66,6 @@ in {
 
   programs = {
     home-manager.enable = true;
-    qutebrowser.enable = true;
     starship.enable = true;
   };
 
