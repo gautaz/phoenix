@@ -5,7 +5,12 @@
 }: let
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
 in {
-  home.file.".config/pass-git-helper/git-pass-mapping.ini".source = mkSymlink "/run/secrets/git/passGitHelper";
+  home = {
+    file.".config/pass-git-helper/git-pass-mapping.ini".source = mkSymlink "/run/secrets/git/passGitHelper";
+    packages = with pkgs; [
+      pass-git-helper
+    ];
+  };
 
   programs.git = {
     aliases = {

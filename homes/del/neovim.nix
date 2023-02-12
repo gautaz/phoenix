@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  languageServers = with pkgs; [nil];
+in {
+  home.packages = with pkgs;
+    [
+      xclip # used by neovim to manage the clipboard
+    ]
+    ++ languageServers;
+
   programs.neovim = {
     defaultEditor = true;
     enable = true;

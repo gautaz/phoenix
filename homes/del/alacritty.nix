@@ -1,4 +1,10 @@
-_: {
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    (nerdfonts.override {fonts = ["UbuntuMono"];})
+  ];
+
+  fonts.fontconfig.enable = true;
+
   programs.alacritty = {
     enable = true;
     settings = {

@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    xsecurelock
+  ];
+
   services.screen-locker = {
     enable = true;
     inactiveInterval = 3;
