@@ -3,7 +3,7 @@ _: {
     enable = true;
 
     initExtra = ''
-      setxkbmap -option caps:escape
+      setxkbmap -option caps:super
     '';
 
     windowManager.xmonad = {
