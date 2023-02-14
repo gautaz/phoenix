@@ -29,4 +29,7 @@ myConfig =
   [ ( "M-p"
     , spawn "rofi -show combi -modes combi -combi-modes 'window,drun,run'")
   , ("M-<Escape>", spawn "xsecurelock")
+  , ("<XF86AudioLowerVolume>", spawn "outctl audio-down")
+  , ("<XF86AudioMute>", spawn "outctl audio-toggle")
+  , ("<XF86AudioRaiseVolume>", spawn "outctl audio-up")
   ]

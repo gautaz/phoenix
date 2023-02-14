@@ -5,6 +5,7 @@
     ./git.nix
     ./gpg.nix
     ./neovim.nix
+    ./outctl.nix
     ./passage.nix
     ./qutebrowser.nix
     ./readline.nix
