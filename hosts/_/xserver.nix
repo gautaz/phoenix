@@ -6,6 +6,7 @@ _: {
     };
     enable = true;
     libinput.touchpad = {
+      clickMethod = "clickfinger";
       naturalScrolling = true;
       tapping = false;
     };

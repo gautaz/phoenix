@@ -2,6 +2,9 @@ blocks=( "" "▏" "▍" "▋" )
 
 function progressBar() {
 	case "$1" in
+		BRIGHTNESS)
+			read -r percentage
+			;;
 		VOLUME)
 			read -r state percentage
 			if [[ "$state" = "off" ]]; then
@@ -32,6 +35,11 @@ function masterVolume() {
 	amixer sset Master "$@" | awk -F'[] %[]+' '/  Mono: /{print $7 " " $5}' | progressBar VOLUME | nc -NU ~/.outctl-osd.socket
 }
 
+function backlightBrightness() {
+	xbacklight "$@"
+	xbacklight -get | progressBar BRIGHTNESS | nc -NU ~/.outctl-osd.socket
+}
+
 case "$1" in
 	audio-up)
 		masterVolume "3%+" unmute
@@ -41,6 +49,12 @@ case "$1" in
 		;;
 	audio-toggle)
 		masterVolume toggle
+		;;
+	brightness-up)
+		backlightBrightness -inc 3
+		;;
+	brightness-down)
+		backlightBrightness -dec 3
 		;;
 	*)
 		echo "unknown command: $1" 1>&2

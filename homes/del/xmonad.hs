@@ -32,4 +32,6 @@ myConfig =
   , ("<XF86AudioLowerVolume>", spawn "outctl audio-down")
   , ("<XF86AudioMute>", spawn "outctl audio-toggle")
   , ("<XF86AudioRaiseVolume>", spawn "outctl audio-up")
+  , ("<XF86MonBrightnessDown>", spawn "outctl brightness-down")
+  , ("<XF86MonBrightnessUp>", spawn "outctl brightness-up")
   ]

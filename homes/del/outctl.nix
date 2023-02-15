@@ -23,6 +23,7 @@
   };
 in {
   home.packages = with pkgs; [
+    acpilight
     alsa-utils
     netcat
     outctl
@@ -32,7 +33,7 @@ in {
     Unit.Description = "On Screen Display service for output controls";
     Service = {
       ExecStart = "${outctlOSD}/bin/outctl-osd";
-      Restart = true;
+      Restart = "on-failure";
     };
   };
 }
