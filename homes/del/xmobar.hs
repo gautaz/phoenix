@@ -5,7 +5,46 @@ Config
   , fgColor = "#f8f8f2"
   , position = TopW L 100
   , commands =
-      [ Run Cpu ["-L", "3", "-H", "50", "--high", "red", "--normal", "green"] 10
+      [ Run
+          Battery
+          [ "--template"
+          , "Batt: <acstatus>"
+          , "--Low"
+          , "20"
+          , "--High"
+          , "80"
+          , "--low"
+          , "red"
+          , "--normal"
+          , "orange"
+          , "--high"
+          , "green"
+          , "--"
+          , "-o"
+          , "<left>% (<timeleft>)"
+          , "-O"
+          , "<fc=#dAA520>Charging</fc>"
+          , "-i"
+          , "<fc=#006000>Charged</fc>"
+          ]
+          50
+      , Run
+          DynNetwork
+          [ "--template"
+          , "<dev>: ↑ <tx> kB/s ↓ <rx> kB/s"
+          , "--Low"
+          , "102400"
+          , "--High"
+          , "1024000"
+          , "--low"
+          , "green"
+          , "--normal"
+          , "orange"
+          , "--high"
+          , "red"
+          ]
+          10
+      , Run Cpu ["-L", "3", "-H", "50", "--high", "red", "--normal", "green"] 10
       , Run Memory ["--template", "Mem: <usedratio>%"] 10
       , Run Swap [] 10
       , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
@@ -13,5 +52,6 @@ Config
       ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%XMonadLog% }{ %cpu% | %memory% * %swap% | %date% "
+  , template =
+      "%XMonadLog% }{ %battery% | %cpu% | %memory% ~ %swap% | %dynnetwork% | %date% "
   }
