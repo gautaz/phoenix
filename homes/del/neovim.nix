@@ -25,15 +25,16 @@ in {
         type = "lua";
       }
       {
-        config = "require('nvim-web-devicons').setup{}";
-        plugin = nvim-web-devicons;
-        type = "lua";
-      }
-      {
         config = "require('lspconfig').nil_ls.setup{}";
         plugin = nvim-lspconfig;
         type = "lua";
       }
+      {
+        config = "require('nvim-web-devicons').setup{}";
+        plugin = nvim-web-devicons;
+        type = "lua";
+      }
+      vim-fugitive
       vim-polyglot
     ];
     viAlias = true;
