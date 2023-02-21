@@ -1,5 +1,7 @@
 {pkgs, ...}: let
-  languageServers = with pkgs; [nil];
+  languageServers = with pkgs; [
+    nil # nix language server
+  ];
 in {
   home.packages = with pkgs;
     [
@@ -12,6 +14,7 @@ in {
     enable = true;
     plugins = with pkgs.vimPlugins; [
       {
+        # minimal status bar
         config = ''
           vim.opt.termguicolors = true
           require('feline').setup{}
@@ -20,22 +23,25 @@ in {
         type = "lua";
       }
       {
+        # git decorations
         config = "require('gitsigns').setup{}";
         plugin = gitsigns-nvim;
         type = "lua";
       }
       {
+        # configuration for language server protocol client
         config = "require('lspconfig').nil_ls.setup{}";
         plugin = nvim-lspconfig;
         type = "lua";
       }
       {
+        # icons for the feline status bar
         config = "require('nvim-web-devicons').setup{}";
         plugin = nvim-web-devicons;
         type = "lua";
       }
-      vim-fugitive
-      vim-polyglot
+      vim-fugitive # git integration
+      vim-polyglot # language packs collection
     ];
     viAlias = true;
     vimAlias = true;
