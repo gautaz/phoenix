@@ -46,6 +46,7 @@ in {
       }
       vim-fugitive # git integration
       vim-polyglot # language packs collection
+      vim-visual-star-search # use */# in visual mode
     ];
     viAlias = true;
     vimAlias = true;
