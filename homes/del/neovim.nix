@@ -13,6 +13,7 @@ in {
     defaultEditor = true;
     enable = true;
     extraLuaConfig = ''
+      vim.o.diffopt = "closeoff,filler,internal,vertical"
       vim.o.mouse = ""
     '';
     plugins = with pkgs.vimPlugins; [
