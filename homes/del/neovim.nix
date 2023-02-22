@@ -12,6 +12,9 @@ in {
   programs.neovim = {
     defaultEditor = true;
     enable = true;
+    extraLuaConfig = ''
+      vim.o.mouse = ""
+    '';
     plugins = with pkgs.vimPlugins; [
       {
         # minimal status bar
