@@ -33,6 +33,28 @@ in {
         type = "lua";
       }
       {
+        # easy motion
+        config = ''
+          local hop = require('hop')
+          local hopDirections = require('hop.hint').HintDirection
+          hop.setup{}
+          vim.keymap.set("", 'f', function()
+            hop.hint_char1({ direction = hopDirections.AFTER_CURSOR })
+          end, {remap=true})
+          vim.keymap.set("", 'F', function()
+            hop.hint_char1({ direction = hopDirections.BEFORE_CURSOR })
+          end, {remap=true})
+          vim.keymap.set("", 't', function()
+            hop.hint_char1({ direction = hopDirections.AFTER_CURSOR, hint_offset = -1 })
+          end, {remap=true})
+          vim.keymap.set("", 'T', function()
+            hop.hint_char1({ direction = hopDirections.BEFORE_CURSOR, hint_offset = 1 })
+          end, {remap=true})
+        '';
+        plugin = hop-nvim;
+        type = "lua";
+      }
+      {
         # configuration for language server protocol client
         config = "require('lspconfig').nil_ls.setup{}";
         plugin = nvim-lspconfig;
