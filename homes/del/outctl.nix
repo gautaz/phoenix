@@ -30,10 +30,14 @@ in {
     xosd
   ];
   systemd.user.services.outctl-osd = {
-    Unit.Description = "On Screen Display service for output controls";
+    Install.WantedBy = ["graphical-session.target"];
     Service = {
       ExecStart = "${outctlOSD}/bin/outctl-osd";
       Restart = "on-failure";
+    };
+    Unit = {
+      After = ["graphical-session-pre.target"];
+      Description = "On Screen Display service for output controls";
     };
   };
 }
