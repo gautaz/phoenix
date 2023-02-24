@@ -67,9 +67,13 @@ in {
         plugin = nvim-web-devicons;
         type = "lua";
       }
+      vim-abolish # enhanced substitute with :S instead of :s
       vim-better-whitespace # highlight trailing whitespace characters
+      vim-commentary # comment lines with gc
+      vim-eunuch # sugar for the UNIX shell commands (:Move for example)
       vim-fugitive # git integration
-      vim-polyglot # language packs collection
+      vim-polyglot # language packs collection (also provides vim-sleuth)
+      vim-unimpaired # pairs of bracket maps ([q, ]q, ...)
       vim-visual-star-search # use */# in visual mode
     ];
     viAlias = true;
