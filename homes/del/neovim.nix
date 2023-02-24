@@ -67,6 +67,7 @@ in {
         plugin = nvim-web-devicons;
         type = "lua";
       }
+      vim-better-whitespace # highlight trailing whitespace characters
       vim-fugitive # git integration
       vim-polyglot # language packs collection
       vim-visual-star-search # use */# in visual mode
