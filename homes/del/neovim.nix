@@ -13,6 +13,7 @@ in {
     defaultEditor = true;
     enable = true;
     extraLuaConfig = ''
+      vim.g.mapleader = " "
       vim.o.diffopt = "closeoff,filler,internal,vertical"
       vim.o.mouse = ""
     '';
@@ -38,16 +39,16 @@ in {
           local hop = require('hop')
           local hopDirections = require('hop.hint').HintDirection
           hop.setup{}
-          vim.keymap.set("", 'f', function()
+          vim.keymap.set("", '<leader>f', function()
             hop.hint_char1({ direction = hopDirections.AFTER_CURSOR })
           end, {remap=true})
-          vim.keymap.set("", 'F', function()
+          vim.keymap.set("", '<leader>F', function()
             hop.hint_char1({ direction = hopDirections.BEFORE_CURSOR })
           end, {remap=true})
-          vim.keymap.set("", 't', function()
+          vim.keymap.set("", '<leader>t', function()
             hop.hint_char1({ direction = hopDirections.AFTER_CURSOR, hint_offset = -1 })
           end, {remap=true})
-          vim.keymap.set("", 'T', function()
+          vim.keymap.set("", '<leader>T', function()
             hop.hint_char1({ direction = hopDirections.BEFORE_CURSOR, hint_offset = 1 })
           end, {remap=true})
         '';
