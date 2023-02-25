@@ -56,6 +56,12 @@ in {
         type = "lua";
       }
       {
+        # display indentation
+        config = "require('indent_blankline').setup{}";
+        plugin = indent-blankline-nvim;
+        type = "lua";
+      }
+      {
         # configuration for language server protocol client
         config = "require('lspconfig').nil_ls.setup{}";
         plugin = nvim-lspconfig;
