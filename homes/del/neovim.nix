@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
+    lua-language-server
     nil # nix language server
   ];
 in {
@@ -50,7 +51,7 @@ in {
       }
       {
         # configuration for language server protocol client
-        config = "require('lspconfig').nil_ls.setup{}";
+        config = builtins.readFile ./neovim-lspconfig.lua;
         plugin = nvim-lspconfig;
         type = "lua";
       }
