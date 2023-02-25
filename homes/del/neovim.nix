@@ -55,7 +55,12 @@ in {
       }
       {
         # display indentation
-        config = "require('indent_blankline').setup{}";
+        config = ''
+          require('indent_blankline').setup{
+            show_current_context = true,
+            show_current_context_start = true,
+          }
+        '';
         plugin = indent-blankline-nvim;
         type = "lua";
       }
@@ -63,6 +68,19 @@ in {
         # configuration for language server protocol client
         config = "require('lspconfig').nil_ls.setup{}";
         plugin = nvim-lspconfig;
+        type = "lua";
+      }
+      {
+        # better syntax highlighting than vim-polyglot when available
+        # also needed by indent-blankline-nvim to show current context
+        config = ''
+          require('nvim-treesitter.configs').setup{
+            highlight = {
+              enable = true,
+            },
+          }
+        '';
+        plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
       }
       {
