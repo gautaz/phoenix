@@ -14,7 +14,7 @@ in {
     enable = true;
     extraLuaConfig = ''
       vim.g.mapleader = " "
-      vim.opt.diffopt:append { "vertical" }
+      vim.opt.diffopt:append "vertical"
       vim.opt.mouse = ""
       vim.opt.termguicolors = true
     '';
