@@ -14,16 +14,14 @@ in {
     enable = true;
     extraLuaConfig = ''
       vim.g.mapleader = " "
-      vim.o.diffopt = "closeoff,filler,internal,vertical"
-      vim.o.mouse = ""
+      vim.opt.diffopt:append { "vertical" }
+      vim.opt.mouse = ""
+      vim.opt.termguicolors = true
     '';
     plugins = with pkgs.vimPlugins; [
       {
         # minimal status bar
-        config = ''
-          vim.opt.termguicolors = true
-          require('feline').setup{}
-        '';
+        config = "require('feline').setup{}";
         plugin = feline-nvim;
         type = "lua";
       }
