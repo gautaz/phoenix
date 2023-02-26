@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./alacritty.nix
+    ./apvlv.nix
     ./bash.nix
     ./git.nix
     ./gpg.nix
