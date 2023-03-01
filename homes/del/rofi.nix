@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{pkgs, ...}:
+with pkgs; {
+  home.packages = [
+    wmctrl # used by rofi to interact with the window manager
+  ];
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.alacritty}/bin/alacritty";
+    terminal = "${alacritty}/bin/alacritty";
   };
 }
