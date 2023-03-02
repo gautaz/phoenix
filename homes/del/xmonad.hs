@@ -28,6 +28,8 @@ myConfig =
     } `additionalKeysP`
   [ ( "M-p"
     , spawn "rofi -show combi -modes combi -combi-modes 'window,drun,run'")
+  , ( "M-o"
+    , spawn "rofi -modi file-browser-extended -show file-browser-extended")
   , ("M-<Escape>", spawn "xsecurelock")
   , ("<XF86AudioLowerVolume>", spawn "outctl audio-down")
   , ("<XF86AudioMute>", spawn "outctl audio-toggle")
