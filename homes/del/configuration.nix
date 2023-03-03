@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./alacritty.nix
-    ./apvlv.nix
     ./bash.nix
     ./git.nix
     ./gpg.nix
@@ -16,6 +15,7 @@
     ./tmux.nix
     ./xmobar.nix
     ./xsession.nix
+    ./zathura.nix
   ];
 
   home = {
