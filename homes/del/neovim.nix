@@ -18,6 +18,7 @@ in {
       vim.opt.diffopt:append "vertical"
       vim.opt.mouse = ""
       vim.opt.termguicolors = true
+      vim.opt.wildmode = "longest:full,full"
     '';
     plugins = with pkgs.vimPlugins; [
       {
