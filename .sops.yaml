@@ -1,4 +1,5 @@
 keys:
+  - &host_dante age1ynkyfhxyggam5g8695qjv6g4r9t9e6058s993xsgwhma7ud3qs0qt5kf5g
   - &host_hepao age1ya5kc3aq8xncszgunde8vsefnrw6v0q8u824a02vf7vptd75yg5swpnml0
   - &host_kusanagi age1pm634jg07scfdvqez9rx3zjzfzd4252grjd2005v52fm8jkrgu8qk7kczf
   - &user_del age1mlyjps56fpyd053xc2h2m4pu6946y6dtkrr4nkl6lg09tg37jp2sjtx2pj
@@ -7,6 +8,7 @@ creation_rules:
   - path: hosts/_/sops.yaml
     key_groups:
       - age:
+        - *host_dante
         - *host_hepao
         - *host_kusanagi
         - *user_del
