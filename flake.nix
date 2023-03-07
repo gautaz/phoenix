@@ -37,6 +37,19 @@
     };
 
     nixosConfigurations = {
+      dante = nixosSystem {
+        inherit system;
+        modules = [
+          hardware.common-cpu-intel
+          hardware.common-gpu-intel
+          hardware.common-gpu-nvidia
+          hardware.common-pc-laptop
+          hardware.common-pc-laptop-ssd
+          hosts.dante
+          sops-nix.nixosModules.sops
+        ];
+      };
+
       hepao = nixosSystem {
         inherit system;
         modules = [hardware.framework-12th-gen-intel hosts.hepao sops-nix.nixosModules.sops];
