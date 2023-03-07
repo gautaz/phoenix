@@ -4,6 +4,7 @@ _: {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
+  hardware.pulseaudio.enable = true;
   location.provider = "geoclue2";
   networking.networkmanager.enable = true;
   services.fwupd.enable = true;

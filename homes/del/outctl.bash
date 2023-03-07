@@ -32,7 +32,7 @@ function progressBar() {
 }
 
 function masterVolume() {
-	amixer sset Master "$@" | awk -F'[] %[]+' '/  Mono: /{print $7 " " $5}' | progressBar VOLUME | nc -NU ~/.outctl-osd.socket
+	amixer sset Master "$@" | awk -F'[] %[]+' '/  Front Left: /{print $7 " " $6}' | progressBar VOLUME | nc -NU ~/.outctl-osd.socket
 }
 
 function backlightBrightness() {

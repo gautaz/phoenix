@@ -25,6 +25,7 @@
       age # used as the main encryption tool
       arandr # used to manually set the displays layout
       libnotify # provides notify-send to test dunst
+      pavucontrol # used to set the audio mixer settings
     ];
     sessionPath = ["$HOME/.local/bin"];
     stateVersion = "22.11";
