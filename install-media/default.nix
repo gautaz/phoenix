@@ -4,4 +4,6 @@ with pkgs; {
   environment.systemPackages = [
     git # needed by nixos-install --flake
   ];
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = false;
 }

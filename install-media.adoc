@@ -67,6 +67,8 @@ Follow the same procedure as in <<New host install>> but with the following comm
 [,sh]
 ----
 sudo setup-storage <block device>
+# A network connection is needed for the next step, to setup Wi-Fi:
+# nmcli device wifi connect <SSID> password <password>
 sudo nixos-install --flake <flake URI>#<hostname>
 sudo reboot
 ----
