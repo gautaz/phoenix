@@ -29,7 +29,7 @@ NOTE: Unless stated otherwise, all relative paths (in particular starting with `
 == Building the image
 
 In order to build the installation media image, issue `phx-build` in the phoenix shell. +
-The resulting ISO image will be available in `./result/iso`.
+The resulting ISO image will be available in `./result.iso/iso`.
 
 NOTE: Use the https://nixos.org/manual/nixos/stable/#sec-obtaining[standard NixOS installation media creation procedures] to obtain a physical installation media.
 
