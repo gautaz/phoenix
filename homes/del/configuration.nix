@@ -5,6 +5,7 @@
     ./feh.nix
     ./git.nix
     ./gpg.nix
+    ./inputplug.nix
     ./neovim.nix
     ./outctl.nix
     ./passage.nix
