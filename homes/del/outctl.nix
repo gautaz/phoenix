@@ -1,43 +1,67 @@
-{pkgs, ...}: let
-  outctl = pkgs.writeShellApplication {
+{pkgs, ...}:
+with pkgs; let
+  outctl = writeShellApplication {
     name = "outctl";
-    text = builtins.readFile ./outctl.bash;
-  };
-  outctlOSD = pkgs.writeShellApplication {
-    name = "outctl-osd";
     text = ''
-      PATH="$PATH:${pkgs.coreutils}/bin:${pkgs.netcat}/bin:${pkgs.xosd}/bin"
-      rm -f ~/.outctl-osd.socket
-      (
-        umask 77
-        nc -klU ~/.outctl-osd.socket \
-        | osd_cat \
-          --align=center \
-          --delay=2 \
-          --font="-*-courier-bold-r-*-*-34-*-*-*-*-*-*-*" \
-          --lines=1 \
-          --offset=100 \
-          --pos=bottom
-      )
+      function notifyVolume() {
+        local volume
+        local icon
+        local label
+        volume="$1"
+        icon=muted
+        label=MUTED
+        [[ "$volume" -gt 0 ]] && icon=low && label="$volume%"
+        [[ "$volume" -gt 33 ]] && icon=medium
+        [[ "$volume" -gt 66 ]] && icon=high
+        "${dunst}/bin/dunstify" -t 2000 -a changeVolume -u low -i "audio-volume-$icon" -h string:x-dunst-stack-tag:master-volume -h int:value:"$volume" "Volume: $label"
+      }
+
+      function masterVolume() {
+        local volume
+        local state
+        local percentage
+        volume="$("${alsa-utils}/bin/amixer" sset Master "$@" | awk -F'[] %[]+' '/  Front Left: /{print $7 "\t" $6}')"
+        state="$("${coreutils}/bin/cut" -f 1 <<< "$volume")"
+        percentage="$("${coreutils}/bin/cut" -f 2 <<< "$volume")"
+        [[ "$state" == "off" ]] && percentage=0
+        notifyVolume "$percentage"
+      }
+
+      function backlightBrightness() {
+        xbacklight "$@"
+        local brightness
+        brightness="$("${acpilight}/bin/xbacklight" -get)"
+        "${dunst}/bin/dunstify" -t 2000 -a changeBrightness -u low -i weather-clear -h string:x-dunst-stack-tag:display-brightness -h int:value:"$brightness" "Volume: $brightness%"
+      }
+
+      case "$1" in
+        audio-up)
+          masterVolume "3%+" unmute
+          ;;
+        audio-down)
+          masterVolume "3%-" unmute
+          ;;
+        audio-toggle)
+          masterVolume toggle
+          ;;
+        brightness-up)
+          backlightBrightness -inc 3
+          ;;
+        brightness-down)
+          backlightBrightness -dec 3
+          ;;
+        *)
+          echo "unknown command: $1" 1>&2
+          exit 10
+          ;;
+      esac
     '';
   };
 in {
-  home.packages = with pkgs; [
+  home.packages = [
     acpilight
     alsa-utils
-    netcat
+    coreutils
     outctl
-    xosd
   ];
-  systemd.user.services.outctl-osd = {
-    Install.WantedBy = ["graphical-session.target"];
-    Service = {
-      ExecStart = "${outctlOSD}/bin/outctl-osd";
-      Restart = "on-failure";
-    };
-    Unit = {
-      After = ["graphical-session-pre.target"];
-      Description = "On Screen Display service for output controls";
-    };
-  };
 }

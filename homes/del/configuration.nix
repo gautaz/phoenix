@@ -2,6 +2,7 @@
   imports = [
     ./alacritty.nix
     ./bash.nix
+    ./dunst.nix
     ./feh.nix
     ./git.nix
     ./gpg.nix
@@ -39,7 +40,6 @@
   };
 
   services = {
-    dunst.enable = true;
     udiskie.enable = true;
   };
 }
