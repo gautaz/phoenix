@@ -8,7 +8,6 @@
     ./gpg.nix
     ./inputplug.nix
     ./neovim.nix
-    ./outctl.nix
     ./passage.nix
     ./qutebrowser.nix
     ./readline.nix
