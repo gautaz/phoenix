@@ -21,7 +21,7 @@ main :: IO ()
 main =
   xmonad . ewmhFullscreen . ewmh . withEasySB mySB defToggleStrutsKey $ myConfig
 
-mySB = statusBarProp "xmobar" (pure xmobarPP)
+mySB = statusBarProp "@xmobar@" (pure xmobarPP)
 
 modm = mod4Mask
 
@@ -30,14 +30,14 @@ myConfig =
     { borderWidth = 2
     , focusFollowsMouse = False
     , modMask = modm
-    , terminal = "alacritty"
+    , terminal = "@alacritty@"
     } `additionalKeysP`
   [ ( "M-p"
-    , spawn "rofi -show combi -modes combi -combi-modes 'window,drun,run'")
+    , spawn "@rofi@ -show combi -modes combi -combi-modes 'window,drun,run'")
   , ( "M-o"
-    , spawn "rofi -modi file-browser-extended -show file-browser-extended")
-  , ("M-S-<Escape>", spawn "systemctl suspend")
-  , ("M-<Escape>", spawn "xsecurelock")
+    , spawn "@rofi@ -modi file-browser-extended -show file-browser-extended")
+  , ("M-S-<Escape>", spawn "@systemctl@ suspend")
+  , ("M-<Escape>", spawn "@xlocker@")
   , ("<XF86AudioLowerVolume>", spawn "outctl audio-down")
   , ("<XF86AudioMute>", spawn "outctl audio-toggle")
   , ("<XF86AudioRaiseVolume>", spawn "outctl audio-up")

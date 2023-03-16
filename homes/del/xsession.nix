@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   xsession = {
     enable = true;
 
@@ -9,7 +9,15 @@ _: {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      config = ./xmonad.hs;
+      config = pkgs.substituteAll {
+        src = ./xmonad.hs;
+
+        alacritty = "${pkgs.alacritty}/bin/alacritty";
+        rofi = "${pkgs.rofi}/bin/rofi";
+        systemctl = "${pkgs.systemd}/bin/systemctl";
+        xlocker = "${pkgs.xsecurelock}/bin/xsecurelock";
+        xmobar = "${pkgs.xmobar}/bin/xmobar";
+      };
     };
   };
 }
