@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   outctl = import ./_/outctl.nix {inherit pkgs;};
+  xlocker = import ./_/xlocker.nix {inherit pkgs;};
 in {
   xsession = {
     enable = true;
@@ -18,7 +19,7 @@ in {
         outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";
         systemctl = "${pkgs.systemd}/bin/systemctl";
-        xlocker = "${pkgs.xsecurelock}/bin/xsecurelock";
+        xlocker = "${xlocker}/bin/xlocker";
         xmobar = "${pkgs.xmobar}/bin/xmobar";
       };
     };
