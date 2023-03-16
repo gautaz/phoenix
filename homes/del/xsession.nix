@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  outctl = import ./outctl-app.nix {inherit pkgs;};
+in {
   xsession = {
     enable = true;
 
@@ -13,6 +15,7 @@
         src = ./xmonad.hs;
 
         alacritty = "${pkgs.alacritty}/bin/alacritty";
+        outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";
         systemctl = "${pkgs.systemd}/bin/systemctl";
         xlocker = "${pkgs.xsecurelock}/bin/xsecurelock";

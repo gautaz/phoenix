@@ -1,15 +1,5 @@
-{pkgs, ...}:
-with pkgs; let
-  outctl = writeShellApplication {
-    name = "outctl";
-    runtimeInputs = [
-      acpilight
-      alsa-utils
-      coreutils
-      gawk
-    ];
-    text = builtins.readFile ./outctl.bash;
-  };
+{pkgs, ...}: let
+  outctl = import ./outctl-app.nix {inherit pkgs;};
 in {
   home.packages = [
     outctl

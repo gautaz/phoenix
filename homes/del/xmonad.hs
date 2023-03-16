@@ -38,11 +38,11 @@ myConfig =
     , spawn "@rofi@ -modi file-browser-extended -show file-browser-extended")
   , ("M-S-<Escape>", spawn "@systemctl@ suspend")
   , ("M-<Escape>", spawn "@xlocker@")
-  , ("<XF86AudioLowerVolume>", spawn "outctl audio-down")
-  , ("<XF86AudioMute>", spawn "outctl audio-toggle")
-  , ("<XF86AudioRaiseVolume>", spawn "outctl audio-up")
-  , ("<XF86MonBrightnessDown>", spawn "outctl brightness-down")
-  , ("<XF86MonBrightnessUp>", spawn "outctl brightness-up")
+  , ("<XF86AudioLowerVolume>", spawn "@outctl@ audio-down")
+  , ("<XF86AudioMute>", spawn "@outctl@ audio-toggle")
+  , ("<XF86AudioRaiseVolume>", spawn "@outctl@ audio-up")
+  , ("<XF86MonBrightnessDown>", spawn "@outctl@ brightness-down")
+  , ("<XF86MonBrightnessUp>", spawn "@outctl@ brightness-up")
   ] `additionalKeys`
   [ ((modm .|. mask, key), action screenId)
   | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
