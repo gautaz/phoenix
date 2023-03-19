@@ -6,6 +6,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
     self,
