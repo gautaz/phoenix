@@ -38,6 +38,7 @@ myConfig =
     , spawn "@rofi@ -modi file-browser-extended -show file-browser-extended")
   , ("M-S-<Escape>", spawn "@systemctl@ suspend")
   , ("M-<Escape>", spawn "@xlocker@")
+  , ("M-c", spawn "@flameshot@ gui")
   , ("<XF86AudioLowerVolume>", spawn "@outctl@ audio-down")
   , ("<XF86AudioMute>", spawn "@outctl@ audio-toggle")
   , ("<XF86AudioRaiseVolume>", spawn "@outctl@ audio-up")

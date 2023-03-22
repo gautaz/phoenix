@@ -16,6 +16,7 @@ in {
         src = ./xmonad.hs;
 
         alacritty = "${pkgs.alacritty}/bin/alacritty";
+        flameshot = "${pkgs.flameshot}/bin/flameshot";
         outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";
         systemctl = "${pkgs.systemd}/bin/systemctl";
