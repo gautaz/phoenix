@@ -34,8 +34,7 @@ myConfig =
     } `additionalKeysP`
   [ ( "M-p"
     , spawn "@rofi@ -show combi -modes combi -combi-modes 'window,drun,run'")
-  , ( "M-o"
-    , spawn "@rofi@ -modi file-browser-extended -show file-browser-extended")
+  , ("M-o", spawn "@rofi@ -modi filebrowser -show filebrowser")
   , ("M-S-<Escape>", spawn "@systemctl@ suspend")
   , ("M-<Escape>", spawn "@xlocker@")
   , ("M-c", spawn "@flameshot@ gui")
