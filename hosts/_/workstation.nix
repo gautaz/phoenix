@@ -1,5 +1,5 @@
 _: {
-  imports = [./docker.nix ./flake-support.nix ./sops.nix ./storage.nix ./users.nix ./xserver.nix];
+  imports = [./flake-support.nix ./networkmanager.nix ./sops.nix ./storage.nix ./users.nix ./xserver.nix];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -10,6 +10,7 @@ _: {
   services.fwupd.enable = true;
   services.sshd.enable = true;
   services.udisks2.enable = true;
-  time.timeZone = "Europe/Paris";
   system.stateVersion = "22.11";
+  time.timeZone = "Europe/Paris";
+  users.users.del.extraGroups = ["networkmanager"];
 }

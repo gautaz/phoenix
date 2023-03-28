@@ -19,4 +19,6 @@ in {
       "ssh/config/employer" = delSecret;
     };
   };
+
+  users.users.del.extraGroups = ["keys"];
 }
