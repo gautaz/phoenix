@@ -80,6 +80,7 @@ in {
       vim-commentary # comment lines with gc
       vim-eunuch # sugar for the UNIX shell commands (:Move for example)
       vim-fugitive # git integration
+      vim-markdown-composer # preview markdown files in browser
       vim-polyglot # language packs collection (also provides vim-sleuth)
       vim-unimpaired # pairs of bracket maps ([q, ]q, ...)
       vim-visual-star-search # use */# in visual mode
