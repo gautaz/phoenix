@@ -14,7 +14,6 @@
   hardware.nvidia.powerManagement.enable = true;
   hardware.nvidia.prime.intelBusId = "PCI:0:2:0";
   hardware.nvidia.prime.nvidiaBusId = "PCI:1:0:0";
-  hardware.video.hidpi.enable = lib.mkDefault true;
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
