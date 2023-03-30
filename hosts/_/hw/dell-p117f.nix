@@ -42,6 +42,7 @@
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "nvidia-persistenced"
       "nvidia-settings"
       "nvidia-x11"
     ];
