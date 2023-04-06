@@ -11,10 +11,16 @@ import XMonad
   , terminal
   , xmonad
   )
-import XMonad.Actions.PhysicalScreens (sendToScreen, viewScreen)
+import XMonad.Actions.PhysicalScreens
+  ( onNextNeighbour
+  , onPrevNeighbour
+  , sendToScreen
+  , viewScreen
+  )
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar (defToggleStrutsKey, statusBarProp, withEasySB)
 import XMonad.Hooks.StatusBar.PP (xmobarPP)
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP, removeKeys)
 
 main :: IO ()
@@ -43,6 +49,10 @@ myConfig =
   , ("<XF86AudioRaiseVolume>", spawn "@outctl@ audio-up")
   , ("<XF86MonBrightnessDown>", spawn "@outctl@ brightness-down")
   , ("<XF86MonBrightnessUp>", spawn "@outctl@ brightness-up")
+  , ("M-M1-j", onNextNeighbour def W.view)
+  , ("M-M1-k", onPrevNeighbour def W.view)
+  , ("M-M1-S-j", onNextNeighbour def W.shift)
+  , ("M-M1-S-k", onPrevNeighbour def W.shift)
   ] `additionalKeys`
   [ ((modm .|. mask, key), action screenId)
   | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
