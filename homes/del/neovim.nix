@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
     lua-language-server
-    nil # nix language server
+    nil # nix
   ];
 in {
   home.packages = with pkgs;
