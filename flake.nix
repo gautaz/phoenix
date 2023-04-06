@@ -19,7 +19,10 @@
     inherit (nixpkgs.lib) nixosSystem;
     hardware = nixos-hardware.nixosModules;
     hosts = import ./hosts;
-    pkgs = import nixpkgs {inherit system;};
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
     system = "x86_64-linux";
   in {
     homeConfigurations = {

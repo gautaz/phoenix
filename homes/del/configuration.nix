@@ -18,6 +18,7 @@
     ./tmux.nix
     ./xmobar.nix
     ./xsession.nix
+    ./vscode.nix
     ./zathura.nix
   ];
 
