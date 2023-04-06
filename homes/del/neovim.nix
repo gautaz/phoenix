@@ -2,10 +2,12 @@
   languageServers = with pkgs; [
     lua-language-server
     nil # nix
+    omnisharp-roslyn # dotnet
   ];
 in {
   home.packages = with pkgs;
     [
+      dotnet-sdk_7 # needed for omnisharp-roslyn
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
@@ -52,7 +54,12 @@ in {
       }
       {
         # configuration for language server protocol client
-        config = builtins.readFile ./neovim-lspconfig.lua;
+        config = builtins.readFile (pkgs.substituteAll {
+          src = ./neovim-lspconfig.lua;
+
+          dotnet = "${pkgs.dotnet-sdk_7}/bin/dotnet";
+          omnisharpdll = "${pkgs.omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll";
+        });
         plugin = nvim-lspconfig;
         type = "lua";
       }

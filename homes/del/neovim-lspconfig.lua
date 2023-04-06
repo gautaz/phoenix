@@ -25,3 +25,7 @@ require('lspconfig').lua_ls.setup {
 }
 
 require('lspconfig').nil_ls.setup {}
+
+require('lspconfig').omnisharp.setup {
+	cmd = { "@dotnet@", "@omnisharpdll@" },
+}
