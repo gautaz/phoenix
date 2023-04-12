@@ -7,7 +7,7 @@
 in {
   home.packages = with pkgs;
     [
-      dotnet-sdk_7 # needed for omnisharp-roslyn
+      dotnet-sdk # needed for omnisharp-roslyn
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
@@ -57,7 +57,7 @@ in {
         config = builtins.readFile (pkgs.substituteAll {
           src = ./neovim-lspconfig.lua;
 
-          dotnet = "${pkgs.dotnet-sdk_7}/bin/dotnet";
+          dotnet = "${pkgs.dotnet-sdk}/bin/dotnet";
           omnisharpdll = "${pkgs.omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll";
         });
         plugin = nvim-lspconfig;
