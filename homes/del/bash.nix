@@ -6,14 +6,17 @@ _: {
       ns() {
         local cwd='~'
         [ "$PWD" != "$HOME" ] && cwd="''${PWD/#$HOME\//\~\/}"
-        local sessionname="$(tac -s / <<< "$cwd" | tr -s '/\n' '@')"
-        tmux new-session -Ad -s "$sessionname"
-        echo "$sessionname"
-      }
+        local sessionname="$(tac -s / <<< "$cwd" | tr -s '/\n' '^' | tr '.' '_')"
 
-      na() {
-        local sessionname="$(ns)"
-        tmux new-session -A -s "$sessionname"
+        if [[ -z "$TMUX" ]]; then
+          tmux new-session -A -s "$sessionname"
+        else
+          if ! tmux has-session -t "$sessionname"; then
+            tmux new-session -d -s "$sessionname"
+            echo "new session created: $sessionname"
+          fi
+          tmux switch-client -t "$sessionname"
+        fi
       }
     '';
     historyControl = ["ignoredups"];
