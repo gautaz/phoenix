@@ -5,6 +5,7 @@
     ./dunst.nix
     ./feh.nix
     ./flameshot.nix
+    ./fzf.nix
     ./git.nix
     ./gpg.nix
     ./inputplug.nix
