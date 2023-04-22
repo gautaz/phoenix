@@ -21,4 +21,9 @@ in {
       tree # used by passage to list secrets
     ];
   };
+
+  programs.bash.initExtra = ''
+    _completion_loader passage
+    complete -o filenames -F _pass pass
+  '';
 }
