@@ -1,3 +1,5 @@
+# Ensure that the password store is available in ~/.passage/store
+
 PASSAGE_DIR="$HOME/.passage"
 
 if [ ! -e "$PASSAGE_DIR/store" ]; then
