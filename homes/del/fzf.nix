@@ -7,13 +7,6 @@ in {
   ];
 
   programs = {
-    fzf = {
-      enable = true;
-      enableBashIntegration = true;
-      tmux.enableShellIntegration = true;
-      defaultCommand = "${fzfCommand}";
-    };
-
     bash.initExtra = ''
       _fzf_compgen_path() {
         ${fzfCommand} . "$1"
@@ -25,5 +18,15 @@ in {
       }
       export _fzf_compgen_dir
     '';
+
+    fzf = {
+      defaultCommand = "${fzfCommand}";
+      defaultOptions = [
+        "--preview 'interview {}'"
+      ];
+      enable = true;
+      enableBashIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
   };
 }

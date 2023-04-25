@@ -9,6 +9,7 @@
     ./git.nix
     ./gpg.nix
     ./inputplug.nix
+    ./interview.nix
     ./neovim.nix
     ./passage.nix
     ./qutebrowser.nix
