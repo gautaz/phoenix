@@ -23,7 +23,7 @@ with pkgs; let
           chafa "$1"
           ;;
         inode/directory\;*)
-          tree -d "$1"
+          tree -C -d -L 2 "$1"
           ;;
         inode/symlink\;*)
           interview "$(readlink -f "$1")"
