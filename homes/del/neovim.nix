@@ -24,6 +24,12 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
       {
+        # comment lines with gc
+        config = "require('Comment').setup{}";
+        plugin = comment-nvim;
+        type = "lua";
+      }
+      {
         # minimal status bar
         config = "require('feline').setup{}";
         plugin = feline-nvim;
@@ -84,7 +90,6 @@ in {
       }
       vim-abolish # enhanced substitute with :S instead of :s
       vim-better-whitespace # highlight trailing whitespace characters
-      vim-commentary # comment lines with gc
       vim-eunuch # sugar for the UNIX shell commands (:Move for example)
       vim-fugitive # git integration
       vim-markdown-composer # preview markdown files in browser
