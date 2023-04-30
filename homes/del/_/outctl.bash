@@ -26,7 +26,7 @@ function backlightBrightness() {
 	xbacklight "$@"
 	local brightness
 	brightness="$(xbacklight -get)"
-	dunstify -t 2000 -a changeBrightness -u low -i weather-clear -h string:x-dunst-stack-tag:display-brightness -h int:value:"$brightness" "Volume: $brightness%"
+	dunstify -t 2000 -a changeBrightness -u low -i weather-clear -h string:x-dunst-stack-tag:display-brightness -h int:value:"$brightness" "Brightness: $brightness%"
 }
 
 case "$1" in
