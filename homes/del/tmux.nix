@@ -18,6 +18,10 @@ _: {
         # ensure truecolor
         # https://github.com/alacritty/alacritty/issues/109
         set-option -sa terminal-overrides ',alacritty:RGB'
+
+        set-option -g status-left ""
+        set-option -g status-justify left
+        set-option -g status-right " #S"
       '';
       # alacritty sends escape sequences in less than 10ms
       # https://unix.stackexchange.com/questions/608142/whats-the-effect-of-escape-time-in-tmux
