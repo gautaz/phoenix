@@ -18,11 +18,10 @@ _: {
         # ensure truecolor
         # https://github.com/alacritty/alacritty/issues/109
         set-option -sa terminal-overrides ',alacritty:RGB'
-
-        # alacritty sends escape sequences in less than 10ms
-        # https://unix.stackexchange.com/questions/608142/whats-the-effect-of-escape-time-in-tmux
-        set-option -sg escape-time 10
       '';
+      # alacritty sends escape sequences in less than 10ms
+      # https://unix.stackexchange.com/questions/608142/whats-the-effect-of-escape-time-in-tmux
+      escapeTime = 10;
       historyLimit = 10000;
       keyMode = "vi";
       prefix = "C-a";
