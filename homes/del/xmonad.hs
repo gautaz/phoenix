@@ -31,6 +31,8 @@ mySB = statusBarProp "@xmobar@" (pure xmobarPP)
 
 modm = mod4Mask
 
+shiftAndView target = W.view target . W.shift target
+
 myConfig =
   def
     { borderWidth = 2
@@ -51,8 +53,8 @@ myConfig =
   , ("<XF86MonBrightnessUp>", spawn "@outctl@ brightness-up")
   , ("M-M1-j", onNextNeighbour def W.view)
   , ("M-M1-k", onPrevNeighbour def W.view)
-  , ("M-M1-S-j", onNextNeighbour def W.shift)
-  , ("M-M1-S-k", onPrevNeighbour def W.shift)
+  , ("M-M1-S-j", onNextNeighbour def shiftAndView)
+  , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
   ] `additionalKeys`
   [ ((modm .|. mask, key), action screenId)
   | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
