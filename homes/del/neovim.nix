@@ -36,6 +36,12 @@ in {
         type = "lua";
       }
       {
+        # fuzzy finder integration
+        config = "require('fzf-lua').setup{}";
+        plugin = fzf-lua;
+        type = "lua";
+      }
+      {
         # git decorations
         config = "require('gitsigns').setup{}";
         plugin = gitsigns-nvim;
