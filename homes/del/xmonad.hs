@@ -39,11 +39,13 @@ myConfig =
     , focusFollowsMouse = False
     , modMask = modm
     , terminal = "@alacritty@"
-    } `additionalKeysP`
+    } `removeKeys`
+  [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]] `additionalKeysP`
   [ ( "M-p"
     , spawn
         "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
+  , ("M-r", spawn "@rorandr@")
   , ("M-S-<Escape>", spawn "@systemctl@ suspend")
   , ("M-<Escape>", spawn "@xlocker@")
   , ("M-c", spawn "@flameshot@ gui")
@@ -60,5 +62,4 @@ myConfig =
   [ ((modm .|. mask, key), action screenId)
   | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
   , (action, mask) <- [(viewScreen def, 0), (sendToScreen def, shiftMask)]
-  ] `removeKeys`
-  [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]]
+  ]
