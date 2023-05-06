@@ -38,7 +38,17 @@ in {
       }
       {
         # fuzzy finder integration
-        config = "require('fzf-lua').setup{}";
+        config = ''
+          require('fzf-lua').setup{}
+          vim.keymap.set({ "i" }, "<C-x><C-f>",
+            function()
+              require("fzf-lua").complete_file({
+                winopts = { preview = { hidden = "nohidden" } }
+              })
+            end,
+            { silent = true, desc = "Fuzzy complete file" }
+          )
+        '';
         plugin = fzf-lua;
         type = "lua";
       }
