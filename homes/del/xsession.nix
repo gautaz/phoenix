@@ -15,6 +15,7 @@
       '';
     };
 in {
+  home.packages = [pkgs.xrandr-invert-colors];
   xsession = {
     enable = true;
 
@@ -29,6 +30,7 @@ in {
         src = ./xmonad.hs;
 
         alacritty = "${pkgs.alacritty}/bin/alacritty";
+        colorswitch = "${pkgs.xrandr-invert-colors}/bin/xrandr-invert-colors";
         flameshot = "${pkgs.flameshot}/bin/flameshot";
         outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";

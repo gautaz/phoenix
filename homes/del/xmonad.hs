@@ -46,6 +46,7 @@ myConfig =
         "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
   , ("M-r", spawn "@rorandr@")
+  , ("M-i", spawn "@colorswitch@")
   , ("M-S-<Escape>", spawn "@systemctl@ suspend")
   , ("M-<Escape>", spawn "@xlocker@")
   , ("M-c", spawn "@flameshot@ gui")
