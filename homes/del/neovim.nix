@@ -40,6 +40,7 @@ in {
         # fuzzy finder integration
         config = ''
           require('fzf-lua').setup{}
+          vim.keymap.set({ "n" }, "<leader><leader>", ":FzfLua ", default_opts)
           vim.keymap.set({ "i" }, "<C-x><C-f>",
             function()
               require("fzf-lua").complete_file({
