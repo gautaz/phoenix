@@ -8,6 +8,7 @@ in {
   home.packages = with pkgs;
     [
       dotnet-sdk # needed for omnisharp-roslyn
+      gcc # needed by nvim-treesitter
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
