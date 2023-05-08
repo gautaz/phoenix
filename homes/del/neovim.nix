@@ -9,6 +9,8 @@ in {
     [
       dotnet-sdk # needed for omnisharp-roslyn
       gcc # needed by nvim-treesitter
+      jq # used by rest-nvim
+      html-tidy # used by rest-nvim
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
@@ -103,6 +105,18 @@ in {
         # icons for the feline status bar
         config = "require('nvim-web-devicons').setup{}";
         plugin = nvim-web-devicons;
+        type = "lua";
+      }
+      {
+        # call REST endpoints from an HTTP file (RFC 2616)
+        # HTTP filetype switch currently fails due to the following issue:
+        # https://github.com/NixOS/nixpkgs/issues/230649
+        config = ''
+          require('rest-nvim').setup{}
+          vim.keymap.set({ "n" }, "<leader>r", "<Plug>RestNvim", default_opts)
+          vim.filetype.add({ extension = { http = "http" } })
+        '';
+        plugin = rest-nvim;
         type = "lua";
       }
       vim-abolish # enhanced substitute with :S instead of :s
