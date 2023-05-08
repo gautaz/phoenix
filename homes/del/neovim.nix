@@ -93,9 +93,7 @@ in {
         # also needed by indent-blankline-nvim to show current context
         config = ''
           require('nvim-treesitter.configs').setup{
-            highlight = {
-              enable = true,
-            },
+            highlight = { enable = true },
           }
         '';
         plugin = nvim-treesitter.withAllGrammars;
