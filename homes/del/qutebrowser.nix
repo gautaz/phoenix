@@ -12,6 +12,9 @@ _: {
         preferred_color_scheme = "dark";
       };
       editor.command = ["alacritty" "-e" "vim" "-f" "{file}" "-c" "normal {line}G{column0}l"];
+      # The following is a work around to avoid new tabs cluttering the pinned tab "group":
+      # https://github.com/qutebrowser/qutebrowser/issues/2898#issuecomment-322009386
+      tabs.new_position.related = "last";
     };
   };
 }
