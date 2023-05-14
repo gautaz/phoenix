@@ -20,7 +20,6 @@ in {
     enable = true;
     extraLuaConfig = ''
       vim.g.mapleader = " "
-      vim.opt.autochdir = true
       vim.opt.background = "light";
       vim.opt.diffopt:append "vertical"
       vim.opt.mouse = ""
