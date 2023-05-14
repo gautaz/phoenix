@@ -81,6 +81,11 @@ in {
         type = "lua";
       }
       {
+        config = "require('nvim-highlight-colors').setup{}";
+        plugin = nvim-highlight-colors;
+        type = "lua";
+      }
+      {
         # configuration for language server protocol client
         config = builtins.readFile (pkgs.substituteAll {
           src = ./neovim-lspconfig.lua;
