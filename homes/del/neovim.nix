@@ -21,6 +21,7 @@ in {
     extraLuaConfig = ''
       vim.g.mapleader = " "
       vim.opt.autochdir = true
+      vim.opt.background = "light";
       vim.opt.diffopt:append "vertical"
       vim.opt.mouse = ""
       vim.opt.termguicolors = true
@@ -105,6 +106,12 @@ in {
         # icons for the feline status bar
         config = "require('nvim-web-devicons').setup{}";
         plugin = nvim-web-devicons;
+        type = "lua";
+      }
+      {
+        # color scheme
+        config = "vim.cmd.colorscheme('PaperColor')";
+        plugin = papercolor-theme;
         type = "lua";
       }
       {

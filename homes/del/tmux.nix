@@ -19,6 +19,12 @@ _: {
         # https://github.com/alacritty/alacritty/issues/109
         set-option -sa terminal-overrides ',alacritty:RGB'
 
+        set-option -g copy-mode-match-style bg=#848484,fg=#bebe24
+        set-option -g copy-mode-current-match-style bg=#000000,fg=#ffff42
+        set-option -g message-style bg=#550055,fg=#ffffff
+        set-option -g mode-style bg=#550055,fg=#ffffff
+        set-option -g status-style bg=#424242,fg=#bebebe
+
         set-option -g status-left ""
         set-option -g status-justify left
         set-option -g status-right " #S"
