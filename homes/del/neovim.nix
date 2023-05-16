@@ -22,13 +22,14 @@ in {
 
     extraLuaConfig = ''
       vim.g.mapleader = " "
-      vim.opt.background = "light";
+      vim.opt.cursorline = true
       vim.opt.diffopt:append "vertical"
       vim.opt.mouse = ""
       vim.opt.termguicolors = true
       vim.opt.wildmode = "longest:full,full"
     '';
 
+    # Search for plugins/schemes: https://neoland.dev
     plugins =
       (with plugins; [
         comment-nvim # comment lines with gc
@@ -37,11 +38,11 @@ in {
         gitsigns-nvim # git decorations
         hop-nvim # easy motion
         indent-blankline-nvim # display indentation
+        material-nvim # color scheme
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
         nvim-treesitter # better syntax highlighting than vim-polyglot when available, also needed by indent-blankline-nvim to show current context
         nvim-web-devicons # icons for the feline status bar
-        papercolor-theme # color scheme
         rest-nvim # call REST endpoints from an HTTP file (RFC 2616)
       ])
       ++ (with pkgs.vimPlugins; [
