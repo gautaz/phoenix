@@ -8,43 +8,40 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      # https://gitlab.com/protesilaos/tempus-themes
-      # https://gitlab.com/protesilaos/tempus-themes-alacritty/-/blob/199e8620e336c6159ab867e2093614b61d876944/tempus_fugit.yml
       colors = {
-        name = "Tempus Fugit";
-        author = "Protesilaos Stavrou (https://protesilaos.com)";
-        description = "Light, pleasant theme optimised for long writing/coding sessions (WCAG AA compliant)";
-        primary = {
-          foreground = "#4d595f";
-          background = "#fff5f3";
+        name = "One Half Light";
+        author = "https://github.com/mbadolato/iTerm2-Color-Schemes/blob/67f9d9472dc2a321cf0fb78079d85ed76e2e173e/alacritty/OneHalfLight.yml";
+        bright = {
+          black = "#4f525e";
+          blue = "#61afef";
+          cyan = "#56b6c2";
+          green = "#98c379";
+          magenta = "#c678dd";
+          red = "#e06c75";
+          white = "#ffffff";
+          yellow = "#e5c07b";
         };
         cursor = {
-          text = "#fff5f3";
-          cursor = "#4d595f";
-        };
-        selection = {
-          text = "#fff5f3";
-          background = "#4d595f";
+          cursor = "#bfceff";
+          text = "#383a42";
         };
         normal = {
-          black = "#4d595f";
-          red = "#c61a14";
-          green = "#357200";
-          yellow = "#825e00";
-          blue = "#1666b0";
-          magenta = "#a83884";
-          cyan = "#007072";
-          white = "#efe6e4";
+          black = "#383a42";
+          blue = "#0184bc";
+          cyan = "#0997b3";
+          green = "#50a14f";
+          magenta = "#a626a4";
+          red = "#e45649";
+          white = "#fafafa";
+          yellow = "#c18401";
         };
-        bright = {
-          black = "#796271";
-          red = "#b93f1a";
-          green = "#437520";
-          yellow = "#985900";
-          blue = "#485adf";
-          magenta = "#a234c0";
-          cyan = "#00756a";
-          white = "#fff5f3";
+        primary = {
+          background = "#fafafa";
+          foreground = "#383a42";
+          selection = {
+            background = "#bfceff";
+            text = "#383a42";
+          };
         };
       };
       cursor = {
