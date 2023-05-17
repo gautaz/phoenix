@@ -33,11 +33,11 @@ in {
     plugins =
       (with plugins; [
         comment-nvim # comment lines with gc
-        feline-nvim # minimal status bar
         fzf-lua # fuzzy finder integration
         gitsigns-nvim # git decorations
         hop-nvim # easy motion
         indent-blankline-nvim # display indentation
+        lualine-nvim # status bar
         material-nvim # color scheme
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
