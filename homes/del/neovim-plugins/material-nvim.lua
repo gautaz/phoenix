@@ -6,6 +6,10 @@ require('material').setup({
 		non_current_windows = true,
 	},
 
+	high_visibility = {
+		lighter = true,
+	},
+
 	plugins = {
 		"gitsigns",
 		"hop",
