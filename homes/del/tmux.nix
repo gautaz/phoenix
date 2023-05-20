@@ -15,6 +15,20 @@ _: {
         bind-key _ split-window -v
         bind-key | split-window -h
 
+        # use HJKL for pane navigation & co
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
+        bind H swap-pane -s '{left-of}'
+        bind J swap-pane -s '{down-of}'
+        bind K swap-pane -s '{up-of}'
+        bind L swap-pane -s '{right-of}'
+        bind C-h resize-pane -L 5
+        bind C-j resize-pane -D 5
+        bind C-k resize-pane -U 5
+        bind C-l resize-pane -R 5
+
         # ensure truecolor
         # https://github.com/alacritty/alacritty/issues/109
         set-option -sa terminal-overrides ',alacritty:RGB'
