@@ -2,7 +2,21 @@
   outctl = import ./_/outctl.nix {inherit pkgs;};
   xlocker = import ./_/xlocker.nix {inherit pkgs;};
 
-  refreshBackground = "feh --bg-fill https://i.pinimg.com/originals/9c/7c/d1/9c7cd145bb18704a1813dcdd5356b1cf.jpg";
+  wallpaper = builtins.path {
+    name = "wallpaper";
+    path = ./wallpapers/tree.jpg;
+  };
+
+  refreshBackground = with pkgs;
+    writeShellApplication {
+      name = "refreshBackground";
+      runtimeInputs = [
+        feh
+        wallpaper
+      ];
+      text = "${feh}/bin/feh --bg-fill --geometry +0+0 ${wallpaper}";
+    };
+
   rorandr = with pkgs;
     writeShellApplication {
       name = "rorandr";
@@ -11,7 +25,7 @@
         LAYOUTDIR="$HOME/.screenlayout"
         # shellcheck source=/dev/null
         . "$LAYOUTDIR/$(${findutils}/bin/find "$LAYOUTDIR" -type f -printf "%P\n" | ${rofi}/bin/rofi -monitor -1 -dmenu)"
-        ${refreshBackground}
+        ${refreshBackground}/bin/refreshBackground
       '';
     };
 in {
@@ -20,7 +34,7 @@ in {
     enable = true;
 
     initExtra = ''
-      ${refreshBackground}
+      ${refreshBackground}/bin/refreshBackground
     '';
 
     windowManager.xmonad = {
