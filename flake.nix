@@ -1,6 +1,8 @@
 {
   description = "Everything to restart from scratch: install media, OS, user environment";
   inputs = {
+    csharp-ls.url = "github:gautaz/csharp-ls-nix/main";
+    csharp-ls.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -8,20 +10,17 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixos-hardware,
-    home-manager,
-    sops-nix,
-  }: let
-    inherit (home-manager.lib) homeManagerConfiguration;
-    inherit (nixpkgs.lib) nixosSystem;
-    hardware = nixos-hardware.nixosModules;
+  outputs = {self, ...} @ inputs: let
+    inherit (inputs.home-manager.lib) homeManagerConfiguration;
+    inherit (inputs.nixpkgs.lib) nixosSystem;
+    hardware = inputs.nixos-hardware.nixosModules;
     hosts = import ./hosts;
-    pkgs = import nixpkgs {
+    pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [
+        (_: _: {csharp-ls = inputs.csharp-ls.packages.${system}.default;})
+      ];
     };
     system = "x86_64-linux";
   in {
@@ -36,7 +35,7 @@
       inherit system;
       modules = [
         {imports = [./install-media];}
-        "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+        "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       ];
     };
 
@@ -50,18 +49,18 @@
           hardware.common-pc-laptop
           hardware.common-pc-laptop-ssd
           hosts.dante
-          sops-nix.nixosModules.sops
+          inputs.sops-nix.nixosModules.sops
         ];
       };
 
       hepao = nixosSystem {
         inherit system;
-        modules = [hardware.framework-12th-gen-intel hosts.hepao sops-nix.nixosModules.sops];
+        modules = [hardware.framework-12th-gen-intel hosts.hepao inputs.sops-nix.nixosModules.sops];
       };
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [hosts.kusanagi sops-nix.nixosModules.sops];
+        modules = [hosts.kusanagi inputs.sops-nix.nixosModules.sops];
       };
 
       testbox = nixosSystem {

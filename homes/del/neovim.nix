@@ -1,8 +1,8 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
+    csharp-ls
     lua-language-server
     nil # nix
-    omnisharp-roslyn # dotnet
   ];
   plugins = import ./neovim-plugins {inherit pkgs;};
 in {
