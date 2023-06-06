@@ -26,7 +26,7 @@
       DEFAULT = "https://duckduckgo.com/?q={}";
       go = "https://www.google.com/search?hl=en&q={}";
       gh = "https://github.com/search?q={}";
-      nh = "https://mipmip.github.io/home-manager-option-search/?{}";
+      nh = "https://mipmip.github.io/home-manager-option-search/?query={}";
       no = "https://search.nixos.org/options?channel=unstable&query={}";
       np = "https://search.nixos.org/packages?channel=unstable&query={}";
     };
