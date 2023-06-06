@@ -24,14 +24,7 @@ in {
     defaultEditor = true;
     enable = true;
 
-    extraLuaConfig = ''
-      vim.g.mapleader = " "
-      vim.opt.cursorline = true
-      vim.opt.diffopt:append "vertical"
-      vim.opt.mouse = ""
-      vim.opt.termguicolors = true
-      vim.opt.wildmode = "longest:full,full"
-    '';
+    extraLuaConfig = builtins.readFile ./neovim-extra.lua;
 
     # Search for plugins/schemes: https://neoland.dev
     plugins =
