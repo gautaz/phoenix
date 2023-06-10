@@ -17,8 +17,8 @@
     package = pkgs.qutebrowser-qt6.overrideAttrs (_: {
       src = pkgs.fetchgit {
         url = "https://github.com/qutebrowser/qutebrowser.git";
-        rev = "04c64b7430bbb1cee64927541da8b8fae75c92e3";
-        sha256 = "sha256-xUjesizJ73JBqU151uJo3o5O2mMU/gyRlcreg7nXlmI=";
+        rev = "70e8dc63e87a57ecac2b626d496a0bc9517a632d";
+        sha256 = "sha256-RYBwtCCbolCyA4Xb5CSUvD+AolXSTDHstXMocuA94/g=";
       };
     });
 
