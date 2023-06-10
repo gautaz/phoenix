@@ -31,6 +31,7 @@ in {
       completionSourcePlugins
       ++ (with plugins; [
         comment-nvim # comment lines with gc
+        fidget # Language Server progress bar
         fzf-lua # fuzzy finder integration
         gitsigns-nvim # git decorations
         hop-nvim # easy motion
