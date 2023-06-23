@@ -7,6 +7,7 @@ _: {
   hardware.pulseaudio.enable = true;
   location.provider = "geoclue2";
   networking.networkmanager.enable = true;
+  services.avahi.enable = true;
   services.fwupd.enable = true;
   services.sshd.enable = true;
   services.udisks2.enable = true;
