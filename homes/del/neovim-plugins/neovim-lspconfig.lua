@@ -1,3 +1,12 @@
+local angularls_cmd = { "@ngls@", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+
+require('lspconfig').angularls.setup {
+	cmd = angularls_cmd,
+	on_new_config = function(new_config)
+    new_config.cmd = angularls_cmd
+  end,
+};
+
 require('lspconfig').lua_ls.setup {
 	settings = {
 		Lua = {

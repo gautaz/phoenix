@@ -44,6 +44,7 @@ in
       mount
       nix
       nixos-rebuild
+      node2nix
       phoenixBuild
       phoenixLintFmt
       phoenixMount
