@@ -54,7 +54,10 @@ in
       sops
       ssh-to-age
       statix
+      udisks
       umount
+      util-linux
+      zstd
     ];
     shellHook = ''
       alias sudo=/run/wrappers/bin/sudo

@@ -64,15 +64,6 @@
       };
     };
 
-    installMedia = nixosSystem {
-      inherit system;
-      modules = [
-        {imports = [./install-media];}
-        "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-        nixConfig
-      ];
-    };
-
     nixosConfigurations = {
       dante = nixosSystem {
         inherit system;
@@ -88,12 +79,30 @@
         ];
       };
 
+      echidna = nixosSystem {
+        modules = [
+          {imports = [./cross-build-aarch64.nix];}
+          "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          hosts.echidna
+          nixConfig
+        ];
+      };
+
       hepao = nixosSystem {
         inherit system;
         modules = [
           hardware.framework-12th-gen-intel
           hosts.hepao
           inputs.sops-nix.nixosModules.sops
+          nixConfig
+        ];
+      };
+
+      installMedia = nixosSystem {
+        inherit system;
+        modules = [
+          {imports = [./install-media];}
+          "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
           nixConfig
         ];
       };
