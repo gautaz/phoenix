@@ -47,7 +47,7 @@ myConfig =
   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
   , ("M-r", spawn "@rorandr@")
   , ("M-i", spawn "@colorswitch@")
-  , ("M-S-<Escape>", spawn "@systemctl@ suspend")
+  , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
   , ("M-<Escape>", spawn "@xlocker@")
   , ("M-c", spawn "@flameshot@ gui")
   , ("M--", spawn "@outctl@ audio-down")
