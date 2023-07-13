@@ -48,6 +48,7 @@ in {
       ++ (with pkgs.vimPlugins; [
         vim-abolish # enhanced substitute with :S instead of :s
         vim-better-whitespace # highlight trailing whitespace characters
+        vim-easy-align # handle character alignment
         vim-eunuch # sugar for the UNIX shell commands (:Move for example)
         vim-fugitive # git integration
         vim-markdown-composer # preview markdown files in browser
