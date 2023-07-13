@@ -1,8 +1,8 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
-    csharp-ls
     lua-language-server
     nil # nix
+    omnisharp-roslyn # dotnet
   ];
   completionSourcePlugins = with pkgs.vimPlugins; [
     cmp-nvim-lsp # use language server as a completion source

@@ -1,8 +1,6 @@
 {
   description = "Everything to restart from scratch: install media, OS, user environment";
   inputs = {
-    csharp-ls.url = "github:gautaz/csharp-ls-nix/main";
-    csharp-ls.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -18,9 +16,6 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = [
-        (_: _: {csharp-ls = inputs.csharp-ls.packages.${system}.default;})
-      ];
     };
     system = "x86_64-linux";
   in {

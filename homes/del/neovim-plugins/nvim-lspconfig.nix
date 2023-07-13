@@ -5,7 +5,9 @@
 }: {
   config = builtins.readFile (pkgs.substituteAll {
     src = ./neovim-lspconfig.lua;
-    csharpls = "${pkgs.csharp-ls}/bin/CSharpLanguageServer";
+
+    dotnet = "${pkgs.dotnet-sdk}/bin/dotnet";
+    omnisharpdll = "${pkgs.omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll";
   });
   plugin = plugins.nvim-lspconfig;
   type = "lua";

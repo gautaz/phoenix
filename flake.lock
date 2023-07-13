@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "csharp-ls": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1689258423,
-        "narHash": "sha256-+4Ai1gkClfLjdBeVUQ0GxHanOnBiE1IG5Vuv7Nbvio8=",
-        "owner": "gautaz",
-        "repo": "csharp-ls-nix",
-        "rev": "aa6a05b14af2140e975df9a9075ffa4d8b44d359",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gautaz",
-        "ref": "main",
-        "repo": "csharp-ls-nix",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -92,7 +71,6 @@
     },
     "root": {
       "inputs": {
-        "csharp-ls": "csharp-ls",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

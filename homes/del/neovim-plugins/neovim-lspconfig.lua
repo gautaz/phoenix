@@ -1,7 +1,3 @@
-require('lspconfig').csharp_ls.setup {
-	cmd = { "@csharpls@" },
-}
-
 require('lspconfig').lua_ls.setup {
 	settings = {
 		Lua = {
@@ -29,3 +25,7 @@ require('lspconfig').lua_ls.setup {
 }
 
 require('lspconfig').nil_ls.setup {}
+
+require('lspconfig').omnisharp.setup {
+	cmd = { "@dotnet@", "@omnisharpdll@" },
+}
