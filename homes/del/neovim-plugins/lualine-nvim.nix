@@ -1,9 +1,5 @@
 {plugins, ...}: {
-  config = ''
-    require('lualine').setup{
-      extensions = { "fugitive", "fzf", "quickfix" },
-    }
-  '';
+  config = builtins.readFile ./lualine-nvim.lua;
   plugin = plugins.lualine-nvim;
   type = "lua";
 }
