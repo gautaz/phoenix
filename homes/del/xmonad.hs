@@ -33,6 +33,16 @@ modm = mod4Mask
 
 shiftAndView target = W.view target . W.shift target
 
+tar2art :: ([key], action) -> [(key, action)]
+tar2art ([], _) = []
+tar2art (key:keys, action) = (key, action) : tar2art (keys, action)
+
+expandMultiKeybinding :: [([key], action)] -> [(key, action)]
+expandMultiKeybinding =
+  foldl
+    (\keyBindings multiKeybinding -> keyBindings ++ tar2art multiKeybinding)
+    []
+
 myConfig =
   def
     { borderWidth = 2
@@ -41,25 +51,27 @@ myConfig =
     , terminal = "@alacritty@"
     } `removeKeys`
   [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]] `additionalKeysP`
-  [ ( "M-p"
-    , spawn
-        "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
-  , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
-  , ("M-r", spawn "@rorandr@")
-  , ("M-i", spawn "@colorswitch@")
-  , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
-  , ("M-<Escape>", spawn "@xlocker@")
-  , ("M-c", spawn "@flameshot@ gui")
-  , ("M-,", spawn "@outctl@ audio-down")
-  , ("M-m", spawn "@outctl@ audio-toggle")
-  , ("M-.", spawn "@outctl@ audio-up")
-  , ("M-S-,", spawn "@outctl@ brightness-down")
-  , ("M-S-.", spawn "@outctl@ brightness-up")
-  , ("M-M1-j", onNextNeighbour def W.view)
-  , ("M-M1-k", onPrevNeighbour def W.view)
-  , ("M-M1-S-j", onNextNeighbour def shiftAndView)
-  , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
-  ] `additionalKeys`
+  ([ ( "M-p"
+     , spawn
+         "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
+   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
+   , ("M-r", spawn "@rorandr@")
+   , ("M-i", spawn "@colorswitch@")
+   , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
+   , ("M-<Escape>", spawn "@xlocker@")
+   , ("M-c", spawn "@flameshot@ gui")
+   , ("M-M1-j", onNextNeighbour def W.view)
+   , ("M-M1-k", onPrevNeighbour def W.view)
+   , ("M-M1-S-j", onNextNeighbour def shiftAndView)
+   , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
+   ] ++
+   expandMultiKeybinding
+     [ (["M-,", "<XF86AudioLowerVolume>"], spawn "@outctl@ audio-down")
+     , (["M-m", "<XF86AudioMute>"], spawn "@outctl@ audio-toggle")
+     , (["M-.", "<XF86AudioRaiseVolume>"], spawn "@outctl@ audio-up")
+     , (["M-S-,", "<XF86MonBrightnessDown>"], spawn "@outctl@ brightness-down")
+     , (["M-S-.", "<XF86MonBrightnessUp>"], spawn "@outctl@ brightness-up")
+     ]) `additionalKeys`
   [ ((modm .|. mask, key), action screenId)
   | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
   , (action, mask) <- [(viewScreen def, 0), (sendToScreen def, shiftMask)]
