@@ -33,7 +33,6 @@
       pavucontrol # used to set the audio mixer settings
     ];
     sessionPath = ["$HOME/.local/bin"];
-    stateVersion = "22.11";
     username = "del";
   };
 

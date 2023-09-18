@@ -18,11 +18,19 @@
       config.allowUnfree = true;
     };
     system = "x86_64-linux";
+    stateVersion = "23.11";
   in {
     homeConfigurations = {
       del = homeManagerConfiguration {
         inherit pkgs;
-        modules = [./homes/del/configuration.nix];
+        modules = [
+          ./homes/del/configuration.nix
+          {
+            home = {
+              inherit stateVersion;
+            };
+          }
+        ];
       };
     };
 
@@ -31,6 +39,11 @@
       modules = [
         {imports = [./install-media];}
         "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+        {
+          system = {
+            inherit stateVersion;
+          };
+        }
       ];
     };
 
@@ -45,22 +58,51 @@
           hardware.common-pc-laptop-ssd
           hosts.dante
           inputs.sops-nix.nixosModules.sops
+          {
+            system = {
+              inherit stateVersion;
+            };
+          }
         ];
       };
 
       hepao = nixosSystem {
         inherit system;
-        modules = [hardware.framework-12th-gen-intel hosts.hepao inputs.sops-nix.nixosModules.sops];
+        modules = [
+          hardware.framework-12th-gen-intel
+          hosts.hepao
+          inputs.sops-nix.nixosModules.sops
+          {
+            system = {
+              inherit stateVersion;
+            };
+          }
+        ];
       };
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [hosts.kusanagi inputs.sops-nix.nixosModules.sops];
+        modules = [
+          hosts.kusanagi
+          inputs.sops-nix.nixosModules.sops
+          {
+            system = {
+              inherit stateVersion;
+            };
+          }
+        ];
       };
 
       testbox = nixosSystem {
         inherit system;
-        modules = [hosts.testbox];
+        modules = [
+          hosts.testbox
+          {
+            system = {
+              inherit stateVersion;
+            };
+          }
+        ];
       };
     };
   };

@@ -11,7 +11,6 @@ _: {
   services.fwupd.enable = true;
   services.sshd.enable = true;
   services.udisks2.enable = true;
-  system.stateVersion = "22.11";
   time.timeZone = "Europe/Paris";
   users.users.del.extraGroups = ["networkmanager"];
 }
