@@ -11,8 +11,25 @@
   outputs = {self, ...} @ inputs: let
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
     inherit (inputs.nixpkgs.lib) nixosSystem;
+    # See https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
+    channels = {
+      path = "/etc/nixpkgs/channels";
+      nixpkgsPath = "${channels.path}/nixpkgs";
+    };
     hardware = inputs.nixos-hardware.nixosModules;
     hosts = import ./hosts;
+    nixConfig = {
+      nix.nixPath = [
+        "nixpkgs=${channels.nixpkgsPath}"
+        "/nix/var/nix/profiles/per-user/root/channels"
+      ];
+      system = {
+        inherit stateVersion;
+      };
+      systemd.tmpfiles.rules = [
+        "L+ ${channels.nixpkgsPath} - - - - ${pkgs.path}"
+      ];
+    };
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -39,11 +56,7 @@
       modules = [
         {imports = [./install-media];}
         "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-        {
-          system = {
-            inherit stateVersion;
-          };
-        }
+        nixConfig
       ];
     };
 
@@ -58,11 +71,7 @@
           hardware.common-pc-laptop-ssd
           hosts.dante
           inputs.sops-nix.nixosModules.sops
-          {
-            system = {
-              inherit stateVersion;
-            };
-          }
+          nixConfig
         ];
       };
 
@@ -72,11 +81,7 @@
           hardware.framework-12th-gen-intel
           hosts.hepao
           inputs.sops-nix.nixosModules.sops
-          {
-            system = {
-              inherit stateVersion;
-            };
-          }
+          nixConfig
         ];
       };
 
@@ -85,11 +90,7 @@
         modules = [
           hosts.kusanagi
           inputs.sops-nix.nixosModules.sops
-          {
-            system = {
-              inherit stateVersion;
-            };
-          }
+          nixConfig
         ];
       };
 
@@ -97,11 +98,7 @@
         inherit system;
         modules = [
           hosts.testbox
-          {
-            system = {
-              inherit stateVersion;
-            };
-          }
+          nixConfig
         ];
       };
     };
