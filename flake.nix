@@ -41,7 +41,7 @@
       del = homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./homes/del/configuration.nix
+          ./homes/del
           {
             home = {
               inherit stateVersion;
