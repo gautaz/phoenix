@@ -49,6 +49,19 @@
           }
         ];
       };
+
+      "del@dante" = homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./homes/del
+          ./homes/del/hosts/dante.nix
+          {
+            home = {
+              inherit stateVersion;
+            };
+          }
+        ];
+      };
     };
 
     installMedia = nixosSystem {
