@@ -29,6 +29,7 @@
     packages = with pkgs; [
       age # used as the main encryption tool
       arandr # used to manually set the displays layout
+      find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
       pavucontrol # used to set the audio mixer settings
     ];

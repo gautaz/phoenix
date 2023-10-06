@@ -45,6 +45,7 @@ in {
 
         alacritty = "${pkgs.alacritty}/bin/alacritty";
         colorswitch = "${pkgs.xrandr-invert-colors}/bin/xrandr-invert-colors";
+        findcursor = "${pkgs.find-cursor}/bin/find-cursor";
         flameshot = "${pkgs.flameshot}/bin/flameshot";
         outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";
