@@ -71,8 +71,4 @@ myConfig =
      , (["M-.", "<XF86AudioRaiseVolume>"], spawn "@outctl@ audio-up")
      , (["M-S-,", "<XF86MonBrightnessDown>"], spawn "@outctl@ brightness-down")
      , (["M-S-.", "<XF86MonBrightnessUp>"], spawn "@outctl@ brightness-up")
-     ]) `additionalKeys`
-  [ ((modm .|. mask, key), action screenId)
-  | (key, screenId) <- zip [xK_a, xK_s, xK_d] [0 ..]
-  , (action, mask) <- [(viewScreen def, 0), (sendToScreen def, shiftMask)]
-  ]
+     ])
