@@ -52,15 +52,15 @@ myConfig =
     } `removeKeys`
   [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]] `additionalKeysP`
   ([ ("M-a", spawn "@findcursor@")
+   , ("M-c", spawn "@flameshot@ gui")
+   , ("M-i", spawn "@colorswitch@")
+   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
    , ( "M-p"
      , spawn
          "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
-   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
    , ("M-r", spawn "@rorandr@")
-   , ("M-i", spawn "@colorswitch@")
-   , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
    , ("M-<Escape>", spawn "@xlocker@")
-   , ("M-c", spawn "@flameshot@ gui")
+   , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
    , ("M-M1-j", onNextNeighbour def W.view)
    , ("M-M1-k", onPrevNeighbour def W.view)
    , ("M-M1-S-j", onNextNeighbour def shiftAndView)
@@ -68,8 +68,8 @@ myConfig =
    ] ++
    expandMultiKeybinding
      [ (["M-,", "<XF86AudioLowerVolume>"], spawn "@outctl@ audio-down")
-     , (["M-m", "<XF86AudioMute>"], spawn "@outctl@ audio-toggle")
      , (["M-.", "<XF86AudioRaiseVolume>"], spawn "@outctl@ audio-up")
+     , (["M-m", "<XF86AudioMute>"], spawn "@outctl@ audio-toggle")
      , (["M-S-,", "<XF86MonBrightnessDown>"], spawn "@outctl@ brightness-down")
      , (["M-S-.", "<XF86MonBrightnessUp>"], spawn "@outctl@ brightness-up")
      ])
