@@ -1,8 +1,10 @@
 {plugins, ...}: {
   config = ''
     require('ibl').setup{
-      show_current_context = true,
-      show_current_context_start = true,
+      -- see https://github.com/lukas-reineke/indent-blankline.nvim/issues/648#issuecomment-1751038734
+      scope = {
+        highlight = { "SpecialKey", "SpecialKey", "SpecialKey" },
+      }
     }
   '';
   plugin = plugins.indent-blankline-nvim;
