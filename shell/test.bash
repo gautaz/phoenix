@@ -10,7 +10,7 @@ case "$TARGET" in
 			local index="$2"
 			fdisk -l -o device,start,sectors "$image" | awk "/^.*-aarch64-linux.img$index"'/{print $2 * 512 " " $3 * 512}' | (
 					read -r PSTART PSIZE
-					udisksctl loop-setup -f "$SDIMG" -r -o "$PSTART" -s "$PSIZE"
+					udisksctl loop-setup -f "$image" -r -o "$PSTART" -s "$PSIZE"
 				) | awk -F'([ ]*|.$)' '/Mapped file/{print $5}'
 		}
 
@@ -27,9 +27,9 @@ case "$TARGET" in
 		}
 
 		function clean() {
-			loopunmount "$SDLOOP_NIXOS"
-			loopunmount "$SDLOOP_FIRMWARE"
-			if [[ -d "$TMPDIR" ]]; then
+			loopunmount "${SDLOOP_NIXOS:-}"
+			loopunmount "${SDLOOP_FIRMWARE:-}"
+			if [[ -d "${TMPDIR:-}" ]]; then
 				rm -rf "$TMPDIR"
 			fi
 		}
