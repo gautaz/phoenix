@@ -51,7 +51,7 @@ myConfig =
     , terminal = "@alacritty@"
     } `removeKeys`
   [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]] `additionalKeysP`
-  ([ ("M-a", spawn "@findcursor@")
+  ([ ("M-a", spawn "@findcursor@ --color red")
    , ("M-s", spawn "@flameshot@ gui")
    , ("M-i", spawn "@colorswitch@")
    , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
