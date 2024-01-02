@@ -9,11 +9,36 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = ["dm-snapshot"];
   boot.kernelModules = ["kvm-intel"];
-  hardware.acpilight.enable = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.nvidia.powerManagement.enable = true;
-  hardware.nvidia.prime.intelBusId = "PCI:0:2:0";
-  hardware.nvidia.prime.nvidiaBusId = "PCI:1:0:0";
+  hardware = {
+    acpilight.enable = true;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    # https://nixos.wiki/wiki/Nvidia
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      powerManagement = {
+        enable = false;
+        finegrained = false;
+      };
+
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        offload.enable = false;
+        sync.enable = true;
+      };
+    };
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+  };
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
