@@ -9,8 +9,6 @@
     enable = true;
     settings = {
       colors = {
-        name = "One Half Light";
-        author = "https://github.com/mbadolato/iTerm2-Color-Schemes/blob/67f9d9472dc2a321cf0fb78079d85ed76e2e173e/alacritty/OneHalfLight.yml";
         bright = {
           black = "#4f525e";
           blue = "#61afef";
@@ -38,10 +36,10 @@
         primary = {
           background = "#fafafa";
           foreground = "#383a42";
-          selection = {
-            background = "#bfceff";
-            text = "#383a42";
-          };
+        };
+        selection = {
+          background = "#bfceff";
+          text = "#383a42";
         };
       };
       cursor = {
@@ -51,7 +49,6 @@
         blink_interval = 500;
         blink_timeout = 0;
       };
-      dynamic_title = true;
       font = {
         normal = {
           family = "UbuntuMono Nerd Font";
