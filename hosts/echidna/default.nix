@@ -1,5 +1,10 @@
 _: {
   networking.hostName = "echidna";
+  services.sshd.enable = true;
   time.timeZone = "Europe/Paris";
-  system.stateVersion = "23.11";
+  users.users.pi = {
+    extraGroups = ["wheel"];
+    initialPassword = "raspberry";
+    isNormalUser = true;
+  };
 }

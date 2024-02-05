@@ -61,12 +61,16 @@ case "$TARGET" in
 		DTB="$TMPDIR/$DTB_FILENAME"
 
 		qemu-system-aarch64 \
+			-echr 0x11 \
 			-machine raspi3b \
+			-cpu cortex-a72 \
 			-dtb "$DTB" \
 			-m 1G -smp 4 \
 			-nographic \
-			-kernel "$UBOOT" -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait" \
-			-device sd-card,drive=sdcard -drive id=sdcard,if=none,format=raw,file="$SDIMG"
+			-kernel "$UBOOT" -append "earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rw rootwait" \
+			-device sd-card,drive=sdcard -drive id=sdcard,if=none,format=raw,file="$SDIMG" \
+			-device usb-net,netdev=net0 \
+			-netdev user,id=net0,hostfwd=tcp::2222-:22
 		;;
 
 	*)
