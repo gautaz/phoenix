@@ -1,12 +1,6 @@
 # This module should comply with the storage layout set up by:
 # https://github.com/gautaz/nixos-install-media
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: {
+_: {
   boot.initrd.luks.devices.pv.device = "/dev/disk/by-label/pv";
 
   fileSystems."/" = {
