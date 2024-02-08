@@ -1,6 +1,6 @@
 _: {
-  # dell P117F
+  # dell P165G
   imports = [../_/development.nix ../_/hw/dell-laptop.nix ../_/workstation.nix];
-  networking.hostName = "dante";
+  networking.hostName = "abelard";
   virtualisation.multipass.enable = true;
 }

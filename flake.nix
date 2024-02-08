@@ -1,5 +1,6 @@
 {
   description = "Everything to restart from scratch: install media, OS, user environment";
+
   inputs = {
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -8,16 +9,62 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
+
   outputs = {self, ...} @ inputs: let
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
     inherit (inputs.nixpkgs.lib) nixosSystem;
+
     # See https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
     channels = {
       path = "/etc/nixpkgs/channels";
       nixpkgsPath = "${channels.path}/nixpkgs";
     };
+
     hardware = inputs.nixos-hardware.nixosModules;
+
+    homeConfigurations = {
+      homestation = homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./homes/del
+          {
+            home = {
+              inherit stateVersion;
+            };
+          }
+        ];
+      };
+
+      workstation = homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./homes/del
+          ./homes/del/work
+          {
+            home = {
+              inherit stateVersion;
+            };
+          }
+        ];
+      };
+    };
+
     hosts = import ./hosts;
+
+    modules = {
+      dellLaptopHardware = [
+        hardware.common-cpu-intel
+        hardware.common-gpu-intel
+        hardware.common-gpu-nvidia
+        hardware.common-pc-laptop
+        hardware.common-pc-laptop-ssd
+      ];
+      workstation = [
+        inputs.sops-nix.nixosModules.sops
+        nixConfig
+      ];
+    };
+
     nixConfig = {
       nix.nixPath = [
         "nixpkgs=${channels.nixpkgsPath}"
@@ -30,53 +77,40 @@
         "L+ ${channels.nixpkgsPath} - - - - ${pkgs.path}"
       ];
     };
+
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
+
     system = "x86_64-linux";
     stateVersion = "23.11";
   in {
     homeConfigurations = {
-      del = homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./homes/del
-          {
-            home = {
-              inherit stateVersion;
-            };
-          }
-        ];
-      };
-
-      "del@dante" = homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./homes/del
-          ./homes/del/hosts/dante.nix
-          {
-            home = {
-              inherit stateVersion;
-            };
-          }
-        ];
-      };
+      del = homeConfigurations.homestation;
+      "del@dante" = homeConfigurations.workstation;
+      "del@abelard" = homeConfigurations.workstation;
     };
 
     nixosConfigurations = {
+      abelard = nixosSystem {
+        inherit system;
+        modules =
+          [
+            hosts.abelard
+          ]
+          ++ modules.dellLaptopHardware
+          ++ modules.workstation;
+      };
+
       dante = nixosSystem {
         inherit system;
-        modules = [
-          hardware.common-cpu-intel
-          hardware.common-gpu-intel
-          hardware.common-gpu-nvidia
-          hardware.common-pc-laptop
-          hardware.common-pc-laptop-ssd
-          hosts.dante
-          inputs.sops-nix.nixosModules.sops
-          nixConfig
-        ];
+        modules =
+          [
+            hosts.dante
+          ]
+          ++ modules.dellLaptopHardware
+          ++ modules.workstation;
       };
 
       echidna = nixosSystem {
@@ -90,12 +124,12 @@
 
       hepao = nixosSystem {
         inherit system;
-        modules = [
-          hardware.framework-12th-gen-intel
-          hosts.hepao
-          inputs.sops-nix.nixosModules.sops
-          nixConfig
-        ];
+        modules =
+          [
+            hardware.framework-12th-gen-intel
+            hosts.hepao
+          ]
+          ++ modules.workstation;
       };
 
       installMedia = nixosSystem {
@@ -109,11 +143,11 @@
 
       kusanagi = nixosSystem {
         inherit system;
-        modules = [
-          hosts.kusanagi
-          inputs.sops-nix.nixosModules.sops
-          nixConfig
-        ];
+        modules =
+          [
+            hosts.kusanagi
+          ]
+          ++ modules.workstation;
       };
 
       testbox = nixosSystem {
