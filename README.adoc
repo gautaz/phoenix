@@ -11,21 +11,41 @@ This repository is organized over three main topics:
 * having all my hosts configurations under version control
 * having my user environment under version control
 
-== Install media
+== Installation media
 
 The installation media is designed to install NixOS on standard x86_64 laptops.
 
 The whole process has xref:install-media.adoc[its own specific documentation].
 
+== Install process
+
+Most of the install process is detailed in the installation media documentation.
+
+Nevertheless some additional tasks are needed:
+
+* the `del` user password is `password` by default and need to be changed on the first boot
+* the host ssh public key needs to be added to this repository:
+** on a platform allowed to modify the repository, retrieve the file `/etc/ssh/ssh_host_ed25519_key.pub` from the new host
+** compute the host https://github.com/FiloSottile/age[`age`] key from the ssh public key with https://github.com/Mic92/ssh-to-age[`ssh-to-age`]: `ssh-to-age -i <path/to/ssh_host_ed25519_key.pub>`
+** add the `age` key to the link:./.sops.yaml[repository SOPS keys]
+** update the keys of the link:./hosts/_/sops.yaml[SOPS managed secrets file]: `+sops updatekeys <repository root>/hosts/_/sops.yaml+`
+** commit and push these modifications
+* pass on the modifications to the new host and initialize the user environment:
+** `sudo nixos-rebuild switch --flake github:gautaz/phoenix`
+** `home-manager switch --flake github:gautaz/phoenix`
+** `passage-bootstrap`
+
 == Hosts configurations
 
-Hosts configurations are flake based and can be installed with both `nixos-install --flake` (install media) and `nixos-rebuild switch --flake`.
+Hosts configurations are flake based and can be installed with both `nixos-install --flake` (from the installation media environment) and `nixos-rebuild switch --flake`.
 
 The available hosts are:
 
-* `testbox`: mainly used to test the installation media
-* https://en.wikipedia.org/wiki/Motoko_Kusanagi[`kusanagi`]: to test my custom environment in a virtual machine
+* https://en.wikipedia.org/wiki/Peter_Abelard[`abelard`]: current work dell laptop
+* https://en.wikipedia.org/wiki/Dante_Alighieri[`dante`]: former work dell laptop
 * https://fr.wikipedia.org/wiki/Le_Moine_fou[`hepao`]: my https://frame.work/[framework] laptop
+* https://en.wikipedia.org/wiki/Motoko_Kusanagi[`kusanagi`]: to test my custom environment in a virtual machine
+* `testbox`: mainly used to test the installation media
 
 == User environment
 
