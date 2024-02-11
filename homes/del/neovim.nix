@@ -43,7 +43,6 @@ in {
         nvim-lspconfig # configuration for language server protocol client
         nvim-treesitter # better syntax highlighting than vim-polyglot when available, also needed by indent-blankline-nvim to show current context
         nvim-web-devicons # icons for the feline status bar
-        rest-nvim # call REST endpoints from an HTTP file (RFC 2616)
       ])
       ++ (with pkgs.vimPlugins; [
         vim-abolish # enhanced substitute with :S instead of :s
