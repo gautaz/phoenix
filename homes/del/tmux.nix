@@ -53,7 +53,20 @@ _: {
     };
 
     bash.initExtra = ''
-      ns() {
+      _ts_completion() {
+        mapfile -t COMPREPLY < <( tmux list-sessions -F "#{session_name}" -f "#{m:$2*,#{session_name}}" 2>/dev/null )
+      }
+
+      ts() {
+        if [[ -n "$1" ]]; then
+          if [[ -z "$TMUX" ]]; then
+            tmux attach-session -t "$1"
+          else
+            tmux switch-client -t "$1"
+          fi
+          return
+        fi
+
         local cwd='~'
         [ "$PWD" != "$HOME" ] && cwd="''${PWD/#$HOME\//\~\/}"
         local sessionname="$(tac -s / <<< "$cwd" | tr -s '/\n' '^' | tr '.' '_')"
@@ -68,6 +81,8 @@ _: {
           tmux switch-client -t "$sessionname"
         fi
       }
+
+      complete -F _ts_completion ts
     '';
   };
 }
