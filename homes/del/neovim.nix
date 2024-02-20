@@ -39,6 +39,7 @@ in {
         lualine-nvim # status bar
         material-nvim # color scheme
         nvim-cmp # completion engine
+        nvim-dap # Debugger Adapter Protocol support
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
         nvim-treesitter # better syntax highlighting than vim-polyglot when available, also needed by indent-blankline-nvim to show current context
