@@ -7,6 +7,4 @@
       mark
     ];
   };
-
-  programs.chromium.enable = true;
 }
