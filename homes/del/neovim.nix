@@ -41,7 +41,7 @@ in {
         nvim-cmp # completion engine
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
-        nvim-treesitter # better syntax highlighting than vim-polyglot when available, also needed by indent-blankline-nvim to show current context
+        nvim-treesitter # provides syntax highlighting, also needed by indent-blankline-nvim to show current context
         nvim-web-devicons # icons for the feline status bar
       ])
       ++ (with pkgs.vimPlugins; [
@@ -51,7 +51,7 @@ in {
         vim-easy-align # handle character alignment
         vim-eunuch # sugar for the UNIX shell commands (:Move for example)
         vim-fugitive # git integration
-        vim-polyglot # language packs collection (also provides vim-sleuth)
+        vim-sleuth # heuristically adjusts buffer options (indentation, ...)
         vim-unimpaired # pairs of bracket maps ([q, ]q, ...)
         vim-visual-star-search # use */# in visual mode
       ]);
