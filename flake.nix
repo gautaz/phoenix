@@ -10,7 +10,7 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {self, ...} @ inputs: let
+  outputs = inputs: let
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
     inherit (inputs.nixpkgs.lib) nixosSystem;
 
