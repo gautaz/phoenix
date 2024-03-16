@@ -36,8 +36,6 @@ in {
 
   services.gpg-agent = {
     enable = true;
-    extraConfig = ''
-      pinentry-program ${pinentryRofi}/bin/pinentry-rofi-with-env
-    '';
+    pinentryPackage = pinentryRofi;
   };
 }
