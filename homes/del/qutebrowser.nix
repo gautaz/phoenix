@@ -16,9 +16,9 @@ _: {
 
     searchEngines = {
       DEFAULT = "https://duckduckgo.com/?q={}";
-      go = "https://www.google.com/search?hl=en&q={}";
       gh = "https://github.com/search?q={}";
-      nh = "https://mipmip.github.io/home-manager-option-search/?query={}";
+      go = "https://www.google.com/search?hl=en&q={}";
+      hm = "https://home-manager-options.extranix.com/?query={}";
       no = "https://search.nixos.org/options?channel=unstable&query={}";
       np = "https://search.nixos.org/packages?channel=unstable&query={}";
     };
