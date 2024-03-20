@@ -49,27 +49,37 @@ myConfig =
     , focusFollowsMouse = False
     , modMask = modm
     , terminal = "@alacritty@"
-    } `removeKeys`
-  [(modm .|. mask, key) | mask <- [0, shiftMask], key <- [xK_w, xK_e, xK_r]] `additionalKeysP`
-  ([ ("M-a", spawn "@findcursor@ --color red")
-   , ("M-s", spawn "@flameshot@ gui")
-   , ("M-d", spawn "@rorandr@")
-   , ("M-i", spawn "@colorswitch@")
-   , ("M-o", spawn "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
-   , ( "M-p"
-     , spawn
-         "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
-   , ("M-<Escape>", spawn "@xlocker@")
-   , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
-   , ("M-M1-j", onNextNeighbour def W.view)
-   , ("M-M1-k", onPrevNeighbour def W.view)
-   , ("M-M1-S-j", onNextNeighbour def shiftAndView)
-   , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
-   ] ++
-   expandMultiKeybinding
-     [ (["M-,", "<XF86AudioLowerVolume>"], spawn "@outctl@ audio-down")
-     , (["M-.", "<XF86AudioRaiseVolume>"], spawn "@outctl@ audio-up")
-     , (["M-m", "<XF86AudioMute>"], spawn "@outctl@ audio-toggle")
-     , (["M-S-,", "<XF86MonBrightnessDown>"], spawn "@outctl@ brightness-down")
-     , (["M-S-.", "<XF86MonBrightnessUp>"], spawn "@outctl@ brightness-up")
-     ])
+    }
+    `removeKeys` [ (modm .|. mask, key)
+                 | mask <- [0, shiftMask]
+                 , key <- [xK_w, xK_e, xK_r]
+                 ]
+    `additionalKeysP` ([ ("M-a", spawn "@findcursor@ --color red")
+                       , ("M-s", spawn "@flameshot@ gui")
+                       , ("M-d", spawn "@rorandr@")
+                       , ("M-i", spawn "@colorswitch@")
+                       , ( "M-o"
+                         , spawn
+                             "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
+                       , ( "M-p"
+                         , spawn
+                             "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
+                       , ("M-<Escape>", spawn "@xlocker@")
+                       , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
+                       , ("M-M1-j", onNextNeighbour def W.view)
+                       , ("M-M1-k", onPrevNeighbour def W.view)
+                       , ("M-M1-S-j", onNextNeighbour def shiftAndView)
+                       , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
+                       ]
+                         ++ expandMultiKeybinding
+                              [ ( ["M-,", "<XF86AudioLowerVolume>"]
+                                , spawn "@outctl@ audio-down")
+                              , ( ["M-.", "<XF86AudioRaiseVolume>"]
+                                , spawn "@outctl@ audio-up")
+                              , ( ["M-m", "<XF86AudioMute>"]
+                                , spawn "@outctl@ audio-toggle")
+                              , ( ["M-S-,", "<XF86MonBrightnessDown>"]
+                                , spawn "@outctl@ brightness-down")
+                              , ( ["M-S-.", "<XF86MonBrightnessUp>"]
+                                , spawn "@outctl@ brightness-up")
+                              ])
