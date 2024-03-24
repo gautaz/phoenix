@@ -14,8 +14,6 @@ in {
     [
       dotnet-sdk # needed for omnisharp-roslyn
       gcc # needed by nvim-treesitter
-      jq # used by rest-nvim
-      html-tidy # used by rest-nvim
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
