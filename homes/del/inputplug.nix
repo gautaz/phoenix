@@ -13,7 +13,6 @@ with pkgs; let
     '';
   };
 in {
-  home.packages = [inputplug onInputplugEvent];
   systemd.user.services.inputplug = {
     Install.WantedBy = ["hm-graphical-session.target"];
     Service = {

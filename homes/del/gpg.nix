@@ -4,22 +4,22 @@
   ...
 }: let
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-  pinentryRofi = pkgs.writeShellApplication {
-    name = "pinentry-rofi-with-env";
-    text = ''
-      PATH="$PATH:${pkgs.coreutils}/bin:${pkgs.rofi}/bin"
-      "${pkgs.pinentry-rofi}/bin/pinentry-rofi" "$@"
-    '';
-  };
+  pinentryRofi = with pkgs;
+    writeShellApplication {
+      name = "pinentry-rofi-with-env";
+      runtimeInputs = [
+        pinentry-rofi
+      ];
+      text = ''
+        PATH="$PATH:${coreutils}/bin:${rofi}/bin"
+        "${pinentry-rofi}/bin/pinentry-rofi" "$@"
+      '';
+    };
 in {
   home = {
     file = {
       ".gnupg/private-keys-v1.d".source = mkSymlink "/run/secrets/gpg/keys";
     };
-    packages = with pkgs; [
-      pinentry-rofi
-      pinentryRofi
-    ];
   };
 
   programs.gpg = {

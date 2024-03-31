@@ -29,7 +29,6 @@
       '';
     };
 in {
-  home.packages = [pkgs.xrandr-invert-colors];
   xsession = {
     enable = true;
 

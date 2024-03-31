@@ -6,6 +6,9 @@
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
   passageBootstrap = pkgs.writeShellApplication {
     name = "passage-bootstrap";
+    runtimeInputs = [
+      pkgs.git
+    ];
     text = builtins.readFile ./passage-bootstrap.bash;
   };
 in {
