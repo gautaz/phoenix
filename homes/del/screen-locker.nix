@@ -7,7 +7,7 @@ with pkgs; let
     ];
     text = ''
       export XSECURELOCK_DIM_ALPHA=1
-      "${xsecurelock}/libexec/xsecurelock/dimmer" "$@"
+      exec "${xsecurelock}/libexec/xsecurelock/dimmer" "$@"
     '';
   };
   xlocker = import ./_/xlocker.nix {inherit pkgs;};
