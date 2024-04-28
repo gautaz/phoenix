@@ -34,7 +34,7 @@ case "$TARGET" in
 			fi
 		}
 		trap clean EXIT
-		TMPDIR="$(mktemp -d)"
+		TMPDIR="$(mktemp -p /tmp -d)"
 
 		COMPRESSED_SDIMG="$(find -L result.sd.echidna -type f -name "nixos-sd-image-*-aarch64-linux.img.zst" -print -quit)"
 		zstd -d --output-dir-flat "$TMPDIR" "$COMPRESSED_SDIMG"
