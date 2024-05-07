@@ -1,9 +1,13 @@
 _: {
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
+  virtualisation = {
+    containers = {
       enable = true;
-      setSocketVariable = true;
+    };
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 }
