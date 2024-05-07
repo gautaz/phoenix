@@ -54,7 +54,6 @@
     modules = {
       dellLaptopHardware = [
         hardware.common-cpu-intel
-        hardware.common-gpu-intel
         hardware.common-gpu-nvidia
         hardware.common-pc-laptop
         hardware.common-pc-laptop-ssd
