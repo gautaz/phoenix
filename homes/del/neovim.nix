@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
+    haskell-language-server
     lua-language-server
     nil # nix
     omnisharp-roslyn # dotnet
@@ -12,8 +13,9 @@
 in {
   home.packages = with pkgs;
     [
-      dotnet-sdk # needed for omnisharp-roslyn
+      dotnet-sdk # needed by omnisharp-roslyn
       gcc # needed by nvim-treesitter
+      ghc # needed by haskell-language-server
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;

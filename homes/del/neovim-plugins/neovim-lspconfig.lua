@@ -1,3 +1,5 @@
+require('lspconfig').hls.setup {}
+
 require('lspconfig').lua_ls.setup {
 	settings = {
 		Lua = {
