@@ -7,6 +7,7 @@
     ./flameshot.nix
     ./fzf.nix
     ./git.nix
+    ./gopass.nix
     ./gpg.nix
     ./inputplug.nix
     ./interview.nix
