@@ -9,6 +9,7 @@
     ./fzf.nix # multipurpose fuzzy finder
     ./fzf-git.nix # fuzzy finder / git integration
     ./git.nix # source control
+    ./gopass.nix
     ./gpg.nix # Gnu pretty good privacy
     ./imv.nix # image viewer
     ./inputplug.nix # XInput monitoring
