@@ -34,6 +34,10 @@
       pavucontrol # used to set the audio mixer settings
     ];
     sessionPath = ["$HOME/.local/bin"];
+    sessionVariables = {
+      # https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Problems_with_Java_applications.2C_Applet_java_console
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+    };
     username = "del";
   };
 
