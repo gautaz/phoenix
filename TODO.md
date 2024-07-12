@@ -5,3 +5,4 @@
 * [Replace passage w/ gopass](https://github.com/gopasspw/gopass) and [pass-git-helper w/ git-credential-gopass](https://github.com/gopasspw/git-credential-gopass)
 * [Use win+shift+s to open gpu-screen-recorder-gtk](https://git.dec05eba.com/gpu-screen-recorder-gtk/)
 * rofi + fzf + (go)pass(age)
+* switch laptop backlight on/off
