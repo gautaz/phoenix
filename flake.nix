@@ -87,6 +87,7 @@
   in {
     homeConfigurations = {
       del = homeConfigurations.homestation;
+      "del@hepao" = homeConfigurations.workstation;
       "del@dante" = homeConfigurations.workstation;
       "del@abelard" = homeConfigurations.workstation;
     };

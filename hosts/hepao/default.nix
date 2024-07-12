@@ -1,4 +1,4 @@
 _: {
-  imports = [../_/hw/framework.nix ../_/workstation.nix];
+  imports = [../_/development.nix ../_/hw/framework.nix ../_/workstation.nix];
   networking.hostName = "hepao";
 }
