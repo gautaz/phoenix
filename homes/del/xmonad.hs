@@ -57,6 +57,7 @@ myConfig =
     `additionalKeysP` ([ ("M-a", spawn "@findcursor@ --color red")
                        , ("M-s", spawn "@flameshot@ gui")
                        , ("M-d", spawn "@rorandr@")
+                       , ("M-z", spawn "@ropass@")
                        , ("M-i", spawn "@colorswitch@")
                        , ( "M-o"
                          , spawn

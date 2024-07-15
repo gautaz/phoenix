@@ -14,18 +14,36 @@
         feh
         wallpaper
       ];
-      text = "${feh}/bin/feh --bg-fill --geometry +0+0 ${wallpaper}";
+      text = "feh --bg-fill --geometry +0+0 ${wallpaper}";
+    };
+
+  ropass = with pkgs;
+    writeShellApplication {
+      name = "ropass";
+      runtimeInputs = [
+        findutils
+        gnused
+        passage
+      ];
+      text = ''
+        PASS_STORE="$HOME/.passage/store"
+        passage -c "$(find "$PASS_STORE" -type f -name '*.age' | sed -e "s#^$PASS_STORE/\(.*\)\.age\$#\1#" | rofi -dmenu)"
+      '';
     };
 
   rorandr = with pkgs;
     writeShellApplication {
       name = "rorandr";
-      runtimeInputs = [findutils];
+      runtimeInputs = [
+        findutils
+        refreshBackground
+        rofi
+      ];
       text = ''
         LAYOUTDIR="$HOME/.screenlayout"
         # shellcheck source=/dev/null
-        . "$LAYOUTDIR/$(${findutils}/bin/find "$LAYOUTDIR" -type f -printf "%P\n" | ${rofi}/bin/rofi -monitor -1 -dmenu)"
-        ${refreshBackground}/bin/refreshBackground
+        . "$LAYOUTDIR/$(find "$LAYOUTDIR" -type f -printf "%P\n" | rofi -monitor -1 -dmenu)"
+        refreshBackground
       '';
     };
 in {
@@ -48,6 +66,7 @@ in {
         flameshot = "${pkgs.flameshot}/bin/flameshot";
         outctl = "${outctl}/bin/outctl";
         rofi = "${pkgs.rofi}/bin/rofi";
+        ropass = "${ropass}/bin/ropass";
         rorandr = "${rorandr}/bin/rorandr";
         systemctl = "${pkgs.systemd}/bin/systemctl";
         xlocker = "${xlocker}/bin/xlocker";
