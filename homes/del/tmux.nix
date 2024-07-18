@@ -77,6 +77,7 @@ _: {
           if ! tmux has-session -t "$sessionname"; then
             tmux new-session -d -s "$sessionname"
             echo "new session created: $sessionname"
+            sleep 1 && tmux kill-window &
           fi
           tmux switch-client -t "$sessionname"
         fi
