@@ -1,4 +1,13 @@
 _: {
+  boot.kernelPatches = [
+    {
+      name = "kernel-debug";
+      patch = null;
+      extraConfig = ''
+        GDB_SCRIPTS y
+      '';
+    }
+  ];
   networking = {
     hostName = "echidna";
     networkmanager.enable = true;
