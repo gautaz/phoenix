@@ -8,6 +8,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs";
   };
 
   outputs = inputs: let
