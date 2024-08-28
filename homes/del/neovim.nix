@@ -4,6 +4,7 @@
     lua-language-server
     nil # nix
     omnisharp-roslyn # dotnet
+    yaml-language-server
   ];
   completionSourcePlugins = with pkgs.vimPlugins; [
     cmp-nvim-lsp # use language server as a completion source

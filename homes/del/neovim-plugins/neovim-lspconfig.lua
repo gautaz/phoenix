@@ -31,3 +31,15 @@ require('lspconfig').nil_ls.setup {}
 require('lspconfig').omnisharp.setup {
 	cmd = { "@dotnet@", "@omnisharpdll@" },
 }
+
+require('lspconfig').yamlls.setup {
+	settings = {
+		yaml = {
+			customTags = {
+				-- Custom tags used by AWS CloudFormation
+				[1] = "!Ref scalar",
+				[2] = "!GetAtt scalar",
+			},
+		},
+	},
+}
