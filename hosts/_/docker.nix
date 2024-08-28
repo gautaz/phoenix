@@ -1,6 +1,9 @@
 _: {
   virtualisation = {
     containers = {
+      containersConf.settings = {
+        engine.compose_warning_logs = false;
+      };
       enable = true;
     };
 
