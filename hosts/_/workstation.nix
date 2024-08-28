@@ -1,10 +1,13 @@
-_: {
+{lib, ...}: {
   imports = [./flake-support.nix ./networkmanager.nix ./sops.nix ./sound.nix ./storage.nix ./users.nix ./xserver.nix];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
   location.provider = "geoclue2";
+  networking = {
+    useDHCP = lib.mkDefault true;
+  };
   services = {
     avahi.enable = true;
 

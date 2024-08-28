@@ -38,7 +38,6 @@
       enable32Bit = true;
     };
   };
-  networking.useDHCP = lib.mkDefault true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "nvidia-settings"
