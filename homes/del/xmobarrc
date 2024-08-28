@@ -23,7 +23,7 @@ Config
           , "-o"
           , "<left>% (<timeleft>)"
           , "-O"
-          , "<fc=#dAA520>Charging</fc>"
+          , "<fc=#dAA520>Charging <left>%</fc>"
           , "-i"
           , "<fc=#006000>Charged</fc>"
           ]
