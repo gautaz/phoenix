@@ -39,6 +39,8 @@ require('lspconfig').yamlls.setup {
 				-- Custom tags used by AWS CloudFormation
 				[1] = "!Ref scalar",
 				[2] = "!GetAtt scalar",
+				[3] = "!Select sequence",
+				[4] = "!GetAZs mapping",
 			},
 		},
 	},
