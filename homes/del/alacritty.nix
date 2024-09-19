@@ -49,6 +49,9 @@
         blink_interval = 500;
         blink_timeout = 0;
       };
+      env = {
+        WINIT_X11_SCALE_FACTOR = "1.5";
+      };
       font = {
         normal = {
           family = "UbuntuMono Nerd Font";
