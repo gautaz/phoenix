@@ -71,6 +71,7 @@ myConfig =
                        , ("M-M1-k", onPrevNeighbour def W.view)
                        , ("M-M1-S-j", onNextNeighbour def shiftAndView)
                        , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
+                       , ("M-S-m", spawn "xrandr --output eDP-1 --off")
                        ]
                          ++ expandMultiKeybinding
                               [ ( ["M-,", "<XF86AudioLowerVolume>"]
