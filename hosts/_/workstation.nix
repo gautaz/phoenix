@@ -1,8 +1,8 @@
 {lib, ...}: {
-  imports = [./flake-support.nix ./networkmanager.nix ./sops.nix ./sound.nix ./storage.nix ./users.nix ./xserver.nix];
+  imports = [./flake-support.nix ./i2c.nix ./networkmanager.nix ./sops.nix ./sound.nix ./storage.nix ./users.nix ./xserver.nix];
   boot.loader = {
-    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    systemd-boot.enable = true;
   };
   location.provider = "geoclue2";
   networking = {

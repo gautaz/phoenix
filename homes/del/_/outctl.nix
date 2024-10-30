@@ -6,7 +6,10 @@ with pkgs;
       acpilight
       alsa-utils
       coreutils
+      ddcutil
       gawk
+      gnugrep
+      gnused
     ];
     text = builtins.readFile ./outctl.bash;
   }
