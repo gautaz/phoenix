@@ -29,8 +29,10 @@
     packages = with pkgs; [
       age # used as the main encryption tool
       arandr # used to manually set the displays layout
+      f3d # CAD files viewer
       find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
+      orca-slicer # 3D printer slicer
       pavucontrol # used to set the audio mixer settings
     ];
     sessionPath = ["$HOME/.local/bin"];
