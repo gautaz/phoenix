@@ -5,3 +5,4 @@
 * [Replace passage w/ gopass](https://github.com/gopasspw/gopass) and [pass-git-helper w/ git-credential-gopass](https://github.com/gopasspw/git-credential-gopass)
 * [Use win+shift+s to open gpu-screen-recorder-gtk](https://git.dec05eba.com/gpu-screen-recorder-gtk/)
 * [Test qutebrowser userscripts](https://github.com/qutebrowser/qutebrowser/blob/main/misc/userscripts/README.md)
+* [[Test podman install from home manager](https://nix-community.github.io/home-manager/options.xhtml#opt-services.podman.enable)
