@@ -3,6 +3,7 @@
     ./alacritty.nix
     ./bash.nix
     ./dunst.nix
+    ./f3d.nix
     ./feh.nix
     ./flameshot.nix
     ./fzf.nix
@@ -18,9 +19,9 @@
     ./screen-locker.nix
     ./ssh.nix
     ./tmux.nix
+    ./vscode.nix
     ./xmobar.nix
     ./xsession.nix
-    ./vscode.nix
     ./zathura.nix
   ];
 

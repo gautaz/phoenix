@@ -1,0 +1,9 @@
+{
+	".*": {
+		"ambient-occlusion": true,
+		"axis": true,
+		"grid": true,
+		"grid-absolute": true,
+		"up": "+Z"
+	}
+}
