@@ -5,10 +5,9 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs";
   };
 
   outputs = inputs: let
@@ -81,6 +80,13 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
+
+      # See https://github.com/nix-community/home-manager/issues/4664
+      config.permittedInsecurePackages = [
+        "dotnet-core-combined"
+        "dotnet-sdk-6.0.428"
+        "dotnet-sdk-wrapped-6.0.428"
+      ];
     };
 
     system = "x86_64-linux";

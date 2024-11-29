@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["UbuntuMono"];})
+    nerd-fonts.ubuntu-mono
   ];
 
   fonts.fontconfig.enable = true;
