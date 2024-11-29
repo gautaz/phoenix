@@ -17,6 +17,7 @@
 
   xdg.mimeApps = {
     defaultApplications = {
+      "model/3mf" = "f3d-plugin-assimp.desktop";
       "text/html" = "org.qutebrowser.qutebrowser.desktop";
       "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
       "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";

@@ -1,9 +1,11 @@
 {
-	".*": {
+	"global": {
 		"ambient-occlusion": true,
 		"axis": true,
+		"camera-direction": "1,1,-1",
 		"grid": true,
 		"grid-absolute": true,
-		"up": "+Z"
+		"up": "+Z",
+		"watch": true
 	}
 }
