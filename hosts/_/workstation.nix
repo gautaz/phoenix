@@ -10,6 +10,10 @@
   };
   services = {
     avahi.enable = true;
+    btrfs.autoScrub = {
+      enable = true;
+      interval = "weekly";
+    };
 
     # https://github.com/NixOS/nixpkgs/issues/298150#issuecomment-2016658808
     # https://nixpk.gs/pr-tracker.html?pr=298491
