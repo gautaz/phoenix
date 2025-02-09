@@ -46,7 +46,7 @@ in {
         nvim-web-devicons # icons for the feline status bar
       ])
       ++ (with pkgs.vimPlugins; [
-        markdown-preview-nvim # preview markdown files in browser
+        render-markdown-nvim # render markdown directly in neovim
         vim-abolish # enhanced substitute with :S instead of :s
         vim-better-whitespace # highlight trailing whitespace characters
         vim-easy-align # handle character alignment
