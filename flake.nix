@@ -60,11 +60,11 @@
       ];
       workstation = [
         inputs.sops-nix.nixosModules.sops
-        nixConfig
+        nixChannelsConfig
       ];
     };
 
-    nixConfig = {
+    nixChannelsConfig = {
       nix.nixPath = [
         "nixpkgs=${channels.nixpkgsPath}"
         "/nix/var/nix/profiles/per-user/root/channels"
@@ -125,7 +125,7 @@
           {imports = [./cross-build-aarch64.nix];}
           "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           hosts.echidna
-          nixConfig
+          nixChannelsConfig
         ];
       };
 
@@ -144,7 +144,7 @@
         modules = [
           {imports = [./install-media];}
           "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          nixConfig
+          nixChannelsConfig
         ];
       };
 
@@ -161,7 +161,7 @@
         inherit system;
         modules = [
           hosts.testbox
-          nixConfig
+          nixChannelsConfig
         ];
       };
     };
