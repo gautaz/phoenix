@@ -16,11 +16,12 @@ _: {
 
     searchEngines = {
       DEFAULT = "https://duckduckgo.com/?q={}";
-      gh = "https://github.com/search?q={}";
-      go = "https://www.google.com/search?hl=en&q={}";
-      hm = "https://home-manager-options.extranix.com/?query={}";
-      no = "https://search.nixos.org/options?channel=unstable&query={}";
-      np = "https://search.nixos.org/packages?channel=unstable&query={}";
+      gth = "https://github.com/search?q={}";
+      ggl = "https://www.google.com/search?hl=en&q={}";
+      hmo = "https://home-manager-options.extranix.com/?query={}";
+      map = "https://www.google.com/maps/search/?api=1&query={}";
+      nxo = "https://search.nixos.org/options?channel=unstable&query={}";
+      nxp = "https://search.nixos.org/packages?channel=unstable&query={}";
     };
 
     settings = {
