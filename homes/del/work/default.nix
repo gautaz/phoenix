@@ -6,7 +6,6 @@
       docker-compose
       firefox # needed by zap for manual explore
       jira-cli-go
-      mark
       zap
     ];
 
