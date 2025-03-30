@@ -7,3 +7,4 @@
 * [Test qutebrowser userscripts](https://github.com/qutebrowser/qutebrowser/blob/main/misc/userscripts/README.md)
 * [Test podman install from home manager](https://nix-community.github.io/home-manager/options.xhtml#opt-services.podman.enable)
 * [Try Monaspace font](https://monaspace.githubnext.com/)
+* Monitor [Nix 2.27.0](https://discourse.nixos.org/t/nix-2-27-0-released/62003) to see if it fixes the wallpaper LFS issue
