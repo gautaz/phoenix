@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home = {
     packages = with pkgs; [
-      aws-sam-cli
       awscli2
       docker-compose
       firefox # needed by zap for manual explore
