@@ -36,10 +36,11 @@ case "$TARGET" in
 		trap clean EXIT
 		TMPDIR="$(mktemp -p /tmp -d)"
 
-		COMPRESSED_SDIMG="$(find -L result.sd.echidna -type f -name "nixos-sd-image-*-aarch64-linux.img.zst" -print -quit)"
+		IMG_PREFIX="nixos-image-sd-card"
+		COMPRESSED_SDIMG="$(find -L result.sd.echidna -type f -name "$IMG_PREFIX-*-aarch64-linux.img.zst" -print -quit)"
 		zstd -d --output-dir-flat "$TMPDIR" "$COMPRESSED_SDIMG"
 
-		SDIMG="$(find -L "$TMPDIR" -type f -name "nixos-sd-image-*-aarch64-linux.img" -print -quit)"
+		SDIMG="$(find -L "$TMPDIR" -type f -name "$IMG_PREFIX-*-aarch64-linux.img" -print -quit)"
 		echo "SD card image located at $SDIMG"
 		chmod u+w "$SDIMG"
 		qemu-img resize -f raw "$SDIMG" 4G
