@@ -43,7 +43,7 @@ case "$TARGET" in
 		SDIMG="$(find -L "$TMPDIR" -type f -name "$IMG_PREFIX-*-aarch64-linux.img" -print -quit)"
 		echo "SD card image located at $SDIMG"
 		chmod u+w "$SDIMG"
-		qemu-img resize -f raw "$SDIMG" 4G
+		qemu-img resize -f raw "$SDIMG" 8G
 
 		UBOOT_FILENAME="u-boot-rpi3.bin"
 		DTB_FILENAME="bcm2837-rpi-3-b.dtb"
