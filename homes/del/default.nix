@@ -20,6 +20,7 @@
     ./ssh.nix
     ./tmux.nix
     ./vscode.nix
+    ./xdg.nix
     ./xmobar.nix
     ./xsession.nix
     ./zathura.nix
