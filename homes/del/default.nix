@@ -11,6 +11,7 @@
     ./gpg.nix
     ./inputplug.nix
     ./interview.nix
+    ./mpd.nix
     ./neovim.nix
     ./passage.nix
     ./qutebrowser.nix
