@@ -58,13 +58,14 @@ myConfig =
                        , ("M-s", spawn "@flameshot@ gui")
                        , ("M-d", spawn "@rorandr@")
                        , ("M-z", spawn "@ropass@")
+                       , ("M-y", spawn "rofi -modes 'royt:@royt@' -show royt")
                        , ("M-i", spawn "@colorswitch@")
                        , ( "M-o"
                          , spawn
-                             "@rofi@ -monitor -1 -modi filebrowser -show filebrowser")
+                             "@rofi@ -1 -modes filebrowser -monitor -show filebrowser")
                        , ( "M-p"
                          , spawn
-                             "@rofi@ -monitor -1 -show combi -modes combi -combi-modes 'window,drun,run'")
+                             "@rofi@ -1 -combi-modes 'window,drun,run' -modes combi -monitor -show combi")
                        , ("M-<Escape>", spawn "@xlocker@")
                        , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
                        , ("M-M1-j", onNextNeighbour def W.view)

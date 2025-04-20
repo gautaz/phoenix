@@ -24,6 +24,7 @@
         findutils
         gnused
         passage
+        rofi
       ];
       text = ''
         PASS_STORE="$HOME/.passage/store"
@@ -45,6 +46,17 @@
         . "$LAYOUTDIR/$(find "$LAYOUTDIR" -type f -printf "%P\n" | rofi -monitor -1 -dmenu)"
         refreshBackground
       '';
+    };
+
+  royt = with pkgs;
+    writeShellApplication {
+      name = "royt";
+      runtimeInputs = [
+        coreutils
+        mpc
+        yt-dlp
+      ];
+      text = builtins.readFile ./rofi-script-youtube.sh;
     };
 in {
   xsession = {
@@ -68,6 +80,7 @@ in {
         rofi = "${pkgs.rofi}/bin/rofi";
         ropass = "${ropass}/bin/ropass";
         rorandr = "${rorandr}/bin/rorandr";
+        royt = "${royt}/bin/royt";
         systemctl = "${pkgs.systemd}/bin/systemctl";
         xlocker = "${xlocker}/bin/xlocker";
         xmobar = "${pkgs.xmobar}/bin/xmobar";
