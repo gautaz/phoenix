@@ -21,7 +21,7 @@
 
     fwupd.enable = true;
     sshd.enable = true;
+    tzupdate.enable = true;
     udisks2.enable = true;
   };
-  time.timeZone = "Europe/Paris";
 }
