@@ -9,3 +9,4 @@
 * Try [Monaspace font](https://monaspace.githubnext.com/)
 * Monitor [Nix 2.27.0](https://discourse.nixos.org/t/nix-2-27-0-released/62003) to see if it fixes the wallpaper LFS issue
 * Replace `ts` with [sesh](https://github.com/joshmedeski/sesh) (available in home-manager)
+* Try [nyxt](https://github.com/atlas-engineer/nyxt) as a replacement for qutebrowser
