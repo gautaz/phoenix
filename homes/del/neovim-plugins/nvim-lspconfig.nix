@@ -3,9 +3,7 @@
   plugins,
   ...
 }: {
-  config = builtins.readFile (pkgs.substituteAll {
-    src = ./neovim-lspconfig.lua;
-
+  config = builtins.readFile (pkgs.replaceVars ./neovim-lspconfig.lua {
     dotnet = "${pkgs.dotnet-sdk}/bin/dotnet";
     omnisharpdll = "${pkgs.omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll";
   });

@@ -69,9 +69,7 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      config = pkgs.substituteAll {
-        src = ./xmonad.hs;
-
+      config = pkgs.replaceVars ./xmonad.hs {
         alacritty = "${pkgs.alacritty}/bin/alacritty";
         colorswitch = "${pkgs.xrandr-invert-colors}/bin/xrandr-invert-colors";
         findcursor = "${pkgs.find-cursor}/bin/find-cursor";
