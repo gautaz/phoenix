@@ -20,6 +20,7 @@ _: {
       ggl = "https://www.google.com/search?hl=en&q={}";
       hmo = "https://home-manager-options.extranix.com/?query={}";
       map = "https://www.google.com/maps/search/?api=1&query={}";
+      ngl = "https://noogle.dev/q?term={}";
       nxo = "https://search.nixos.org/options?channel=unstable&query={}";
       nxp = "https://search.nixos.org/packages?channel=unstable&query={}";
     };
