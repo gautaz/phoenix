@@ -35,8 +35,8 @@
       f3d # CAD files viewer
       find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
+      orca-slicer # 3D printer slicer
       pavucontrol # used to set the audio mixer settings
-      qidi-slicer-bin # 3D printer slicer
     ];
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
