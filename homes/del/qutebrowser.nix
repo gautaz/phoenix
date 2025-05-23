@@ -23,6 +23,7 @@ _: {
       ngl = "https://noogle.dev/q?term={}";
       nxo = "https://search.nixos.org/options?channel=unstable&query={}";
       nxp = "https://search.nixos.org/packages?channel=unstable&query={}";
+      wkp = "https://en.wikipedia.org/w/index.php?search={}";
     };
 
     settings = {
