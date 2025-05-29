@@ -21,7 +21,10 @@
 
     fwupd.enable = true;
     sshd.enable = true;
-    tzupdate.enable = true;
+    tzupdate = {
+      enable = true;
+      timer.interval = "*:0/5";
+    };
     udisks2.enable = true;
   };
 }
