@@ -1,9 +1,11 @@
 {pkgs, ...}: let
   languageServers = with pkgs; [
+    harper # english grammar checker
     haskell-language-server
     lua-language-server
     nil # nix
     omnisharp-roslyn # dotnet
+    ruff # python
     yaml-language-server
   ];
   completionSourcePlugins = with pkgs.vimPlugins; [

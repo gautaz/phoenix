@@ -1,3 +1,5 @@
+require('lspconfig').harper_ls.setup {}
+
 require('lspconfig').hls.setup {}
 
 require('lspconfig').lua_ls.setup {
@@ -31,6 +33,8 @@ require('lspconfig').nil_ls.setup {}
 require('lspconfig').omnisharp.setup {
 	cmd = { "@dotnet@", "@omnisharpdll@" },
 }
+
+require('lspconfig').ruff.setup {}
 
 require('lspconfig').yamlls.setup {
 	settings = {
