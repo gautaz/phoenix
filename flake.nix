@@ -80,13 +80,6 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
-
-      # See https://github.com/nix-community/home-manager/issues/4664
-      config.permittedInsecurePackages = [
-        "dotnet-core-combined"
-        "dotnet-sdk-6.0.428"
-        "dotnet-sdk-wrapped-6.0.428"
-      ];
     };
 
     system = "x86_64-linux";
