@@ -16,6 +16,7 @@
     ./mpd.nix # music player daemon
     ./mpv.nix # video player
     ./neovim.nix # more than a text editor
+    ./nyxt.nix
     ./ollama.nix # LLM server
     ./opencode.nix # AI coding agent
     ./passage.nix # password manager

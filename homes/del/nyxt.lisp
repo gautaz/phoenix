@@ -1,0 +1,33 @@
+(in-package #:nyxt-user)
+
+(define-configuration buffer
+  ((default-modes (append '(nyxt/mode/vi:vi-normal-mode) %slot-default%))
+   (override-map
+    (let ((map %slot-default%))
+      ;; Qutebrowser-like navigation
+      (define-key map "h" 'switch-buffer-previous)
+      (define-key map "l" 'switch-buffer-next)
+      (define-key map "H" 'history-backwards)
+      (define-key map "L" 'history-forwards)
+      (define-key map "j" 'scroll-page-down)
+      (define-key map "k" 'scroll-page-up)
+      (define-key map "gg" 'scroll-to-top)
+      (define-key map "G" 'scroll-to-bottom)
+      (define-key map "f" 'follow-hint)
+      (define-key map "F" 'follow-hint-new-buffer-focus)
+      (define-key map "yy" 'copy-url)
+      (define-key map "yt" 'copy-title)
+      (define-key map "/" 'search-buffer)
+      (define-key map "R" 'reload-current-buffer)
+      (define-key map "d" 'delete-current-buffer)
+      (define-key map "o" 'set-url)
+      (define-key map "O" 'set-url-new-buffer)
+      (define-key map "b" 'switch-buffer)
+      (define-key map "+" 'zoom-page)
+      (define-key map "-" 'unzoom-page)
+      (define-key map "u" 'undo-buffer-delete)
+      (define-key map "r" 'repeat-command)
+      ;; Your custom overrides
+      (define-key map "C-space" 'nothing)
+      (define-key map ":" 'execute-command)
+      map))))
