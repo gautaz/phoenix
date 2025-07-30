@@ -13,6 +13,7 @@
     ./interview.nix
     ./mpd.nix
     ./neovim.nix
+    ./nyxt.nix
     ./passage.nix
     ./qutebrowser.nix
     ./readline.nix
