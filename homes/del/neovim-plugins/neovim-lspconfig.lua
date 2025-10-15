@@ -1,8 +1,8 @@
-require('lspconfig').harper_ls.setup {}
+vim.lsp.enable('harper_ls')
 
-require('lspconfig').hls.setup {}
+vim.lsp.enable('hls')
 
-require('lspconfig').lua_ls.setup {
+vim.lsp.config('lua_ls', {
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -26,13 +26,14 @@ require('lspconfig').lua_ls.setup {
 			},
 		},
 	},
-}
+})
+vim.lsp.enable('lua_ls')
 
-require('lspconfig').nil_ls.setup {}
+vim.lsp.enable('nil_ls')
 
-require('lspconfig').ruff.setup {}
+vim.lsp.enable('ruff')
 
-require('lspconfig').yamlls.setup {
+vim.lsp.config('yamlls', {
 	settings = {
 		yaml = {
 			customTags = {
@@ -48,4 +49,5 @@ require('lspconfig').yamlls.setup {
 			},
 		},
 	},
-}
+})
+vim.lsp.enable('yamlls')
