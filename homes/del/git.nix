@@ -10,24 +10,24 @@ in {
   };
 
   programs.git = {
-    aliases = {
-      conflicts = "diff --name-only --diff-filter=U";
-      ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi";
-      tree = "log --all --decorate --oneline --graph";
-    };
     enable = true;
-    extraConfig = {
-      credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
-      init = {
-        defaultBranch = "main";
-      };
-      user.useConfigOnly = true;
-    };
     includes = [
       {
         path = mkSymlink "/run/secrets/git/profilesInclude";
       }
     ];
     lfs.enable = true;
+    settings = {
+      alias = {
+        conflicts = "diff --name-only --diff-filter=U";
+        ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi";
+        tree = "log --all --decorate --oneline --graph";
+      };
+      credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
+      init = {
+        defaultBranch = "main";
+      };
+      user.useConfigOnly = true;
+    };
   };
 }
