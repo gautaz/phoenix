@@ -7,6 +7,7 @@
     ./feh.nix
     ./flameshot.nix
     ./fzf.nix
+    ./fzf-git.nix
     ./git.nix
     ./gpg.nix
     ./inputplug.nix
