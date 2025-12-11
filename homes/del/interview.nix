@@ -7,7 +7,7 @@ with pkgs; let
       chafa
       coreutils
       file
-      poppler_utils
+      poppler-utils
       tree
     ];
     text = ''

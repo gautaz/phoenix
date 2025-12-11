@@ -17,4 +17,4 @@ alejandra -q .
 # https://github.com/ndmitchell/hlint#why-are-hints-not-applied-recursively
 hlint -q . || (echo "hlint failed" && exit 10)
 # Haskell auto format
-find . -name "*.hs" -exec hindent {} \;
+find . -name "*.hs" -exec ormolu --mode inplace {} \;

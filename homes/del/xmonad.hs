@@ -1,21 +1,21 @@
 import Graphics.X11.Types (xK_a, xK_d, xK_e, xK_r, xK_s, xK_w)
 import XMonad
-  ( (.|.)
-  , borderWidth
-  , def
-  , focusFollowsMouse
-  , mod4Mask
-  , modMask
-  , shiftMask
-  , spawn
-  , terminal
-  , xmonad
+  ( borderWidth,
+    def,
+    focusFollowsMouse,
+    mod4Mask,
+    modMask,
+    shiftMask,
+    spawn,
+    terminal,
+    xmonad,
+    (.|.),
   )
 import XMonad.Actions.PhysicalScreens
-  ( onNextNeighbour
-  , onPrevNeighbour
-  , sendToScreen
-  , viewScreen
+  ( onNextNeighbour,
+    onPrevNeighbour,
+    sendToScreen,
+    viewScreen,
   )
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar (defToggleStrutsKey, statusBarProp, withEasySB)
@@ -35,7 +35,7 @@ shiftAndView target = W.view target . W.shift target
 
 tar2art :: ([key], action) -> [(key, action)]
 tar2art ([], _) = []
-tar2art (key:keys, action) = (key, action) : tar2art (keys, action)
+tar2art (key : keys, action) = (key, action) : tar2art (keys, action)
 
 expandMultiKeybinding :: [([key], action)] -> [(key, action)]
 expandMultiKeybinding =
@@ -45,44 +45,52 @@ expandMultiKeybinding =
 
 myConfig =
   def
-    { borderWidth = 2
-    , focusFollowsMouse = False
-    , modMask = modm
-    , terminal = "@alacritty@"
+    { borderWidth = 2,
+      focusFollowsMouse = False,
+      modMask = modm,
+      terminal = "@alacritty@"
     }
     `removeKeys` [ (modm .|. mask, key)
-                 | mask <- [0, shiftMask]
-                 , key <- [xK_w, xK_e, xK_r]
+                 | mask <- [0, shiftMask],
+                   key <- [xK_w, xK_e, xK_r]
                  ]
-    `additionalKeysP` ([ ("M-a", spawn "@findcursor@ --color red")
-                       , ("M-s", spawn "@flameshot@ gui")
-                       , ("M-d", spawn "@rorandr@")
-                       , ("M-z", spawn "@ropass@")
-                       , ("M-y", spawn "rofi -modes 'royt:@royt@' -show royt")
-                       , ("M-i", spawn "@colorswitch@")
-                       , ( "M-o"
-                         , spawn
-                             "@rofi@ -1 -modes filebrowser -monitor -show filebrowser")
-                       , ( "M-p"
-                         , spawn
-                             "@rofi@ -1 -combi-modes 'window,drun,run' -modes combi -monitor -show combi")
-                       , ("M-<Escape>", spawn "@xlocker@")
-                       , ("M-S-<Escape>", spawn "@systemctl@ hibernate")
-                       , ("M-M1-j", onNextNeighbour def W.view)
-                       , ("M-M1-k", onPrevNeighbour def W.view)
-                       , ("M-M1-S-j", onNextNeighbour def shiftAndView)
-                       , ("M-M1-S-k", onPrevNeighbour def shiftAndView)
-                       , ("M-S-m", spawn "xrandr --output eDP-1 --off")
-                       ]
-                         ++ expandMultiKeybinding
-                              [ ( ["M-,", "<XF86AudioLowerVolume>"]
-                                , spawn "@outctl@ audio-down")
-                              , ( ["M-.", "<XF86AudioRaiseVolume>"]
-                                , spawn "@outctl@ audio-up")
-                              , ( ["M-m", "<XF86AudioMute>"]
-                                , spawn "@outctl@ audio-toggle")
-                              , ( ["M-S-,", "<XF86MonBrightnessDown>"]
-                                , spawn "@outctl@ brightness-down")
-                              , ( ["M-S-.", "<XF86MonBrightnessUp>"]
-                                , spawn "@outctl@ brightness-up")
-                              ])
+    `additionalKeysP` ( [ ("M-a", spawn "@findcursor@ --color red"),
+                          ("M-s", spawn "@flameshot@ gui"),
+                          ("M-d", spawn "@rorandr@"),
+                          ("M-z", spawn "@ropass@"),
+                          ("M-y", spawn "rofi -modes 'royt:@royt@' -show royt"),
+                          ("M-i", spawn "@colorswitch@"),
+                          ( "M-o",
+                            spawn
+                              "@rofi@ -1 -modes filebrowser -monitor -show filebrowser"
+                          ),
+                          ( "M-p",
+                            spawn
+                              "@rofi@ -1 -combi-modes 'window,drun,run' -modes combi -monitor -show combi"
+                          ),
+                          ("M-<Escape>", spawn "@xlocker@"),
+                          ("M-S-<Escape>", spawn "@systemctl@ hibernate"),
+                          ("M-M1-j", onNextNeighbour def W.view),
+                          ("M-M1-k", onPrevNeighbour def W.view),
+                          ("M-M1-S-j", onNextNeighbour def shiftAndView),
+                          ("M-M1-S-k", onPrevNeighbour def shiftAndView),
+                          ("M-S-m", spawn "xrandr --output eDP-1 --off")
+                        ]
+                          ++ expandMultiKeybinding
+                            [ ( ["M-,", "<XF86AudioLowerVolume>"],
+                                spawn "@outctl@ audio-down"
+                              ),
+                              ( ["M-.", "<XF86AudioRaiseVolume>"],
+                                spawn "@outctl@ audio-up"
+                              ),
+                              ( ["M-m", "<XF86AudioMute>"],
+                                spawn "@outctl@ audio-toggle"
+                              ),
+                              ( ["M-S-,", "<XF86MonBrightnessDown>"],
+                                spawn "@outctl@ brightness-down"
+                              ),
+                              ( ["M-S-.", "<XF86MonBrightnessUp>"],
+                                spawn "@outctl@ brightness-up"
+                              )
+                            ]
+                      )

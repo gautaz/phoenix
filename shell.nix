@@ -36,8 +36,8 @@ in
       cryptsetup
       git
       git-lfs
-      haskellPackages.hindent
       haskellPackages.hlint
+      haskellPackages.ormolu
       home-manager
       kmod
       less
