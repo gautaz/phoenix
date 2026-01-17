@@ -1,6 +1,6 @@
 Config
   { overrideRedirect = False
-  , font = "xft:iosevka-13"
+  , font = "Iosevka 13"
   , bgColor = "#000000"
   , fgColor = "#f8f8f2"
   , position = TopW L 100
