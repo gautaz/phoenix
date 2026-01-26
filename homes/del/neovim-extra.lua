@@ -19,3 +19,11 @@ vim.opt.diffopt:append "vertical"
 vim.opt.mouse = ""
 vim.opt.termguicolors = true
 vim.opt.wildmode = "longest:full,full"
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(args)
+		local bufopts = { buffer = args.buf, noremap = true, silent = true }
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+	end,
+})

@@ -1,3 +1,10 @@
+vim.lsp.config('harper_ls', {
+	settings = {
+		["harper-ls"] = {
+			workspaceDictPath = ".harper.dictionary",
+		},
+	},
+})
 vim.lsp.enable('harper_ls')
 
 vim.lsp.enable('hls')

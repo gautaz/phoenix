@@ -11,6 +11,9 @@ in {
 
   programs.git = {
     enable = true;
+    ignores = [
+      ".harper.dictionary"
+    ];
     includes = [
       {
         path = mkSymlink "/run/secrets/git/profilesInclude";
