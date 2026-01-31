@@ -1,6 +1,10 @@
 vim.lsp.config('harper_ls', {
 	settings = {
 		["harper-ls"] = {
+			linters = {
+				-- https://github.com/Automattic/harper/issues/2320
+				NeedToNoun = false,
+			},
 			workspaceDictPath = ".harper.dictionary",
 		},
 	},
