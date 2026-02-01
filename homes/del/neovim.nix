@@ -25,7 +25,7 @@ in {
     defaultEditor = true;
     enable = true;
 
-    extraLuaConfig = builtins.readFile ./neovim-extra.lua;
+    initLua = builtins.readFile ./neovim-extra.lua;
 
     # Search for plugins/schemes: https://neoland.dev
     plugins =
