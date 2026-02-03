@@ -11,7 +11,7 @@ require('lualine').setup{
 		theme = custom_theme,
 	},
 	sections = {
-		lualine_b = {'filename'},
-		lualine_c = {'branch', 'diff', 'diagnostics'},
+		lualine_b = {{'filename', path = 1}},
+		lualine_c = {'diff', 'diagnostics'},
 	},
 }
