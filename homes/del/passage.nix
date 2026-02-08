@@ -19,9 +19,7 @@ in {
       ".passage/identities".source = mkSymlink "/run/secrets/passage/identities";
     };
     packages = with pkgs; [
-      passage
       passageBootstrap # ensure passage has access to the password store
-      tree # used by passage to list secrets
     ];
   };
 

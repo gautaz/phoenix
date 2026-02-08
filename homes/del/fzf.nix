@@ -8,11 +8,6 @@ with pkgs; let
   fsPreviewOption = lib.strings.concatStringsSep " " fsPreviewOptionList;
   fsPreviewOptionList = ["--preview 'interview {}'"];
 in {
-  home.packages = [
-    dnsutils
-    fd
-  ];
-
   programs = {
     bash.initExtra = ''
       _fzf_compgen_path() {
