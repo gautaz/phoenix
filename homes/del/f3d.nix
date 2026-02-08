@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home = {
     file = {
       ".config/f3d/config.json".source = ./f3d.json;
