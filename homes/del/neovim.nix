@@ -4,7 +4,8 @@
     haskell-language-server
     lua-language-server
     nil # nix
-    ruff # python
+    pyrefly # python symbol completion and type checking
+    ruff # python linting
     yaml-language-server
   ];
   completionSourcePlugins = with pkgs.vimPlugins; [
@@ -32,14 +33,14 @@ in {
     plugins =
       completionSourcePlugins
       ++ (with plugins; [
+        catppuccin-nvim # color scheme
         comment-nvim # comment lines with gc
         fidget # Language Server progress bar
         fzf-lua # fuzzy finder integration
         gitsigns-nvim # git decorations
+        hlchunk-nvim # display indentation
         hop-nvim # easy motion
-        indent-blankline-nvim # display indentation
         lualine-nvim # status bar
-        material-nvim # color scheme
         nvim-cmp # completion engine
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
@@ -48,6 +49,9 @@ in {
         opencode-nvim # AI integration
       ])
       ++ (with pkgs.vimPlugins; [
+        cmp-nvim-lsp # integrate Neovim's built-in LSP client as a completion source for nvim-cmp
+        cmp-nvim-lsp-document-symbol
+        cmp-nvim-lsp-signature-help # nvim-cmp source for displaying function signatures with the current parameter emphasized
         render-markdown-nvim # render markdown directly in neovim
         vim-abolish # enhanced substitute with :S instead of :s
         vim-better-whitespace # highlight trailing whitespace characters

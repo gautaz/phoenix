@@ -25,6 +25,14 @@ cmp.setup({
 				fallback()
 			end
 		end, { 'i', 's' }),
+
+		['<C-l>'] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.confirm({ select = true })
+			else
+				cmp.complete()
+			end
+		end, { 'i', 's' }),
 	},
 
 	snippet = {
@@ -34,5 +42,14 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'nvim_lsp_signature_help' },
+	})
+})
+
+cmp.setup.cmdline({ '/', '?' }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp_document_symbol' }
+	}, {
+		{ name = 'buffer' }
 	})
 })

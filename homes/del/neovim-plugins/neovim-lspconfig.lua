@@ -1,3 +1,5 @@
+vim.lsp.config('*', { capabilities = require('cmp_nvim_lsp').default_capabilities() })
+
 vim.lsp.config('harper_ls', {
 	settings = {
 		["harper-ls"] = {
@@ -41,6 +43,8 @@ vim.lsp.config('lua_ls', {
 vim.lsp.enable('lua_ls')
 
 vim.lsp.enable('nil_ls')
+
+vim.lsp.enable('pyrefly')
 
 vim.lsp.enable('ruff')
 
