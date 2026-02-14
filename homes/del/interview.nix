@@ -7,35 +7,11 @@ with pkgs; let
       chafa
       coreutils
       file
+      mpv
       poppler-utils
       tree
     ];
-    text = ''
-      FILETYPE="$(file --brief --mime "$1")"
-      case "$FILETYPE" in
-        application/pdf\;*)
-          TMPDIR="$(mktemp -d)"
-          pdftoppm -singlefile "$1" "$TMPDIR/preview"
-          chafa "$TMPDIR/preview.ppm"
-          rm -rf "$TMPDIR"
-          ;;
-        image/*)
-          chafa "$1"
-          ;;
-        inode/directory\;*)
-          tree -C -d -L 2 "$1"
-          ;;
-        inode/symlink\;*)
-          interview "$(readlink -f "$1")"
-          ;;
-        text/*)
-          bat --color=always --style=numbers --line-range=:500 "$1"
-          ;;
-        *)
-        echo "No preview for $FILETYPE"
-          ;;
-      esac
-    '';
+    text = builtins.readFile ./interview.sh;
   };
 in {
   home.packages = [interview];
