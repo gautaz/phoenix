@@ -17,6 +17,7 @@ in {
     [
       gcc # needed by nvim-treesitter
       ghc # needed by haskell-language-server
+      lsof # used by the opencode plugin to retrieve the server
       xclip # used by neovim to manage the clipboard
     ]
     ++ languageServers;
@@ -44,6 +45,7 @@ in {
         nvim-lspconfig # configuration for language server protocol client
         nvim-treesitter # provides syntax highlighting, also needed by indent-blankline-nvim to show current context
         nvim-web-devicons # icons for the feline status bar
+        opencode-nvim # AI integration
       ])
       ++ (with pkgs.vimPlugins; [
         render-markdown-nvim # render markdown directly in neovim
