@@ -1,30 +1,30 @@
 {pkgs, ...}: {
   imports = [
-    ./alacritty.nix
-    ./bash.nix
-    ./dunst.nix
-    ./f3d.nix
-    ./feh.nix
-    ./flameshot.nix
-    ./fzf.nix
-    ./fzf-git.nix
-    ./git.nix
-    ./gpg.nix
-    ./inputplug.nix
-    ./interview.nix
-    ./mpd.nix
-    ./neovim.nix
-    ./passage.nix
-    ./qutebrowser.nix
-    ./readline.nix
-    ./rofi.nix
-    ./screen-locker.nix
-    ./ssh.nix
-    ./tmux.nix
-    ./xdg.nix
-    ./xmobar.nix
-    ./xsession.nix
-    ./zathura.nix
+    ./alacritty.nix # terminal emulator
+    ./bash.nix # POSIX shell
+    ./dunst.nix # desktop notifications
+    ./f3d.nix # 3D model viewer
+    ./feh.nix # image viewer
+    ./flameshot.nix # screen shots
+    ./fzf.nix # multipurpose fuzzy finder
+    ./fzf-git.nix # fuzzy finder / git integration
+    ./git.nix # source control
+    ./gpg.nix # Gnu pretty good privacy
+    ./inputplug.nix # XInput monitoring
+    ./interview.nix # custom file (pre)viewer
+    ./mpd.nix # music player daemon
+    ./neovim.nix # more than a text editor
+    ./passage.nix # password manager
+    ./qutebrowser.nix # internet browser
+    ./readline.nix # shell line editing configuration
+    ./rofi.nix # more than an application launcher
+    ./screen-locker.nix # graphical screen locker
+    ./ssh.nix # secure shell
+    ./tmux.nix # terminal multiplexer
+    ./xdg.nix # X Desktop Group configuration
+    ./xmobar.nix # status bar for xmonad
+    ./xsession.nix # Graphical session management
+    ./zathura.nix # document viewer
   ];
 
   home = {
