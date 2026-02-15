@@ -12,7 +12,7 @@ require("catppuccin").setup({
     default_integrations = false,
     auto_integrations = false,
     integrations = {
-        cmp = true,
+        blink_cmp = true,
         fidget = true,
         fzf = true,
         gitsigns = true,

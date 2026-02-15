@@ -8,10 +8,6 @@
     ruff # python linting
     yaml-language-server
   ];
-  completionSourcePlugins = with pkgs.vimPlugins; [
-    cmp-nvim-lsp # use language server as a completion source
-    cmp-nvim-lsp-signature-help # use language server to also provide function signature
-  ];
   plugins = import ./neovim-plugins {inherit pkgs;};
 in {
   home.packages = with pkgs;
@@ -31,8 +27,8 @@ in {
 
     # Search for plugins/schemes: https://neoland.dev
     plugins =
-      completionSourcePlugins
-      ++ (with plugins; [
+      (with plugins; [
+        blink-cmp # completion engine
         catppuccin-nvim # color scheme
         comment-nvim # comment lines with gc
         fidget # Language Server progress bar
@@ -41,7 +37,6 @@ in {
         hlchunk-nvim # display indentation
         hop-nvim # easy motion
         lualine-nvim # status bar
-        nvim-cmp # completion engine
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
         nvim-treesitter # provides syntax highlighting, also needed by indent-blankline-nvim to show current context
@@ -49,9 +44,6 @@ in {
         opencode-nvim # AI integration
       ])
       ++ (with pkgs.vimPlugins; [
-        cmp-nvim-lsp # integrate Neovim's built-in LSP client as a completion source for nvim-cmp
-        cmp-nvim-lsp-document-symbol
-        cmp-nvim-lsp-signature-help # nvim-cmp source for displaying function signatures with the current parameter emphasized
         render-markdown-nvim # render markdown directly in neovim
         vim-abolish # enhanced substitute with :S instead of :s
         vim-better-whitespace # highlight trailing whitespace characters
