@@ -13,6 +13,7 @@
     ./inputplug.nix # XInput monitoring
     ./interview.nix # custom file (pre)viewer
     ./mpd.nix # music player daemon
+    ./mpv.nix # video player
     ./neovim.nix # more than a text editor
     ./passage.nix # password manager
     ./qutebrowser.nix # internet browser
