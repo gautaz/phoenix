@@ -19,6 +19,7 @@ in {
       ".passage/identities".source = mkSymlink "/run/secrets/passage/identities";
     };
     packages = with pkgs; [
+      passage # this is needed so the completion function (_pass) is available
       passageBootstrap # ensure passage has access to the password store
     ];
   };
