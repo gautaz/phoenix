@@ -1,5 +1,15 @@
 {lib, ...}: {
-  imports = [./flake-support.nix ./i2c.nix ./networkmanager.nix ./sops.nix ./sound.nix ./storage.nix ./users.nix ./xserver.nix];
+  imports = [
+    ./bluetooth.nix
+    ./flake-support.nix
+    ./i2c.nix
+    ./networkmanager.nix
+    ./sops.nix
+    ./sound.nix
+    ./storage.nix
+    ./users.nix
+    ./xserver.nix
+  ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
