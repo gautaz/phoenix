@@ -9,6 +9,7 @@ case "$ROFI_RETV" in
 		FILE="$(
 			yt-dlp \
 				--audio-format mp3 \
+				--cookies "$HOME/.local/share/yt-dlp-cookies.txt" \
 				--embed-metadata \
 				--exec basename \
 				--extract-audio \
