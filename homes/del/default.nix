@@ -21,6 +21,7 @@
     ./rofi.nix # more than an application launcher
     ./screen-locker.nix # graphical screen locker
     ./ssh.nix # secure shell
+    ./tidy-track-filename.nix # used to rename audio tracks
     ./tmux.nix # terminal multiplexer
     ./xdg.nix # X Desktop Group configuration
     ./xmobar.nix # status bar for xmonad
