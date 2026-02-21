@@ -18,6 +18,7 @@
     ./passage.nix # password manager
     ./qutebrowser.nix # internet browser
     ./readline.nix # shell line editing configuration
+    ./regen-yt-dlp-cookies.nix # get yt-dlp cookies from qutebrowser
     ./rofi.nix # more than an application launcher
     ./screen-locker.nix # graphical screen locker
     ./ssh.nix # secure shell
