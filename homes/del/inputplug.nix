@@ -3,12 +3,12 @@ with pkgs; let
   onInputplugEvent = writeShellApplication {
     name = "on-inputplug-event";
     runtimeInputs = [
-      xorg.setxkbmap
+      setxkbmap
     ];
     text = ''
       shopt -sq nocasematch
       if [[ "$1" == "XIDeviceEnabled" ]] && [[ "$3" == "XISlaveKeyboard" ]] && [[ "$4" == *keyboard* ]]; then
-        "${xorg.setxkbmap}/bin/setxkbmap" -option caps:super
+        "${setxkbmap}/bin/setxkbmap" -option caps:super
       fi
     '';
   };
