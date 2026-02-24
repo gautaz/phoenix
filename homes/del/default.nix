@@ -38,7 +38,7 @@
       find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
       orca-slicer # 3D printer slicer
-      pavucontrol # used to set the audio mixer settings
+      pwvucontrol # used to set the audio mixer settings
       tageditor # view/edit tags in MP3, Vorbis, ...
     ];
     sessionPath = ["$HOME/.local/bin"];

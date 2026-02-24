@@ -1,7 +1,7 @@
 function notifyVolume() {
-	local volume; volume="$1"
-	local icon; icon=muted
-	local label; label=MUTED
+	local volume="$1"
+	local icon=muted
+	local label=MUTED
 	[[ "$volume" -gt 0 ]] && icon=low && label="$volume%"
 	[[ "$volume" -gt 33 ]] && icon=medium
 	[[ "$volume" -gt 66 ]] && icon=high
@@ -16,18 +16,28 @@ function notifyVolume() {
 }
 
 function setMasterVolume() {
-	local volume; volume="$(
-		amixer sset Master "$@" \
-			| awk -F'[] %[]+' '/  Front Left: /{print $7 "\t" $6}'
-	)"
-	local state; state="$(cut -f 1 <<< "$volume")"
-	local percentage; percentage="$(cut -f 2 <<< "$volume")"
-	[[ "$state" == "off" ]] && percentage=0
+	local cmd="$1"
+	local current
+	local muted=0
+
+	if [[ "$cmd" == "toggle" ]]; then
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+	else
+		wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ "$cmd"
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+	fi
+
+	# Get updated volume & mute status
+	current="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+	percentage="$(awk '{print int($2*100)}' <<< "$current")"
+	grep -q MUTED <<< "$current" && muted=1
+
+	[[ $muted -eq 1 ]] && percentage=0
 	notifyVolume "$percentage"
 }
 
 function updateDdcBusFile() {
-	local ddcBusFile; ddcBusFile="$1"
+	local ddcBusFile="$1"
 	ddcutil -t detect \
 		| tr '\n' '|' \
 		| sed -e 's/||/\n/g' \
@@ -40,16 +50,16 @@ function updateDdcBusFile() {
 }
 
 function unsafeSetDisplaysBrightness() {
-	local ddcBusFile; ddcBusFile="$1"
-	local brightness; brightness="$2"
+	local ddcBusFile="$1"
+	local brightness="$2"
 	for bus in $(<"$ddcBusFile"); do
 		ddcutil -b "$bus" setvcp 10 "$brightness"
 	done
 }
 
 function setDisplaysBrightness() {
-	local brightness; brightness="$1"
-	local ddcBusFile; ddcBusFile="$XDG_RUNTIME_DIR/outctl-ddcbus.list"
+	local brightness="$1"
+	local ddcBusFile="$XDG_RUNTIME_DIR/outctl-ddcbus.list"
 	if [[ -r "$ddcBusFile" ]]; then
 		local monitorCount; monitorCount="$(
 			cat /sys/class/drm/card*-DP-*/status \
@@ -70,8 +80,7 @@ function setDisplaysBrightness() {
 
 function setBrightness() {
 	xbacklight "$@"
-	local brightness
-	brightness="$(xbacklight -get)"
+	local brightness; brightness="$(xbacklight -get)"
 	setDisplaysBrightness "$brightness"
 	dunstify \
 		-t 2000 \
@@ -85,13 +94,13 @@ function setBrightness() {
 
 case "$1" in
 	audio-up)
-		setMasterVolume "3%+" unmute
+		setMasterVolume "3%+"
 		;;
 	audio-down)
-		setMasterVolume "3%-" unmute
+		setMasterVolume "3%-"
 		;;
 	audio-toggle)
-		setMasterVolume toggle
+		setMasterVolume "toggle"
 		;;
 	brightness-up)
 		setBrightness -inc 3
