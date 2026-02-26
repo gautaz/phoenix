@@ -12,7 +12,6 @@
 in {
   home.packages = with pkgs;
     [
-      gcc # needed by nvim-treesitter
       ghc # needed by haskell-language-server
       lsof # used by the opencode plugin to retrieve the server
       xclip # used by neovim to manage the clipboard
