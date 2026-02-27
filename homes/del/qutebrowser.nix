@@ -3,6 +3,8 @@ _: {
     enable = true;
 
     extraConfig = ''
+      config.unbind('<Ctrl-w>', mode='command')
+      config.unbind('<Ctrl-w>', mode='normal')
       config.unbind('d', mode='normal')
     '';
 
