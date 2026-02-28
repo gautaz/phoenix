@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.iosevka
+    pkgs.google-fonts
   ];
   programs.xmobar = {
     enable = true;

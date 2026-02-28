@@ -30,6 +30,8 @@
     ./zathura.nix # document viewer
   ];
 
+  fonts.fontconfig.enable = true;
+
   home = {
     homeDirectory = "/home/del";
     packages = with pkgs; [

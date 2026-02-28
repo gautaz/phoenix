@@ -1,6 +1,8 @@
 Config
   { overrideRedirect = False
-  , font = "Iosevka 13"
+  , font = "League Gothic Regular 13"
+  -- , font = "Yanone Kaffeesatz Regular 13"
+  -- , font = "Noto Sans Display ExtraCondensed 13"
   , bgColor = "#000000"
   , fgColor = "#f8f8f2"
   , position = TopW L 100
