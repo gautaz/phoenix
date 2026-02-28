@@ -19,7 +19,7 @@ import XMonad.Actions.PhysicalScreens
   )
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar (defToggleStrutsKey, statusBarProp, withEasySB)
-import XMonad.Hooks.StatusBar.PP (xmobarPP)
+import XMonad.Hooks.StatusBar.PP (PP, ppTitle, xmobarColor, xmobarPP)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP, removeKeys)
 
@@ -27,7 +27,13 @@ main :: IO ()
 main =
   xmonad . ewmhFullscreen . ewmh . withEasySB mySB defToggleStrutsKey $ myConfig
 
-mySB = statusBarProp "@xmobar@" (pure xmobarPP)
+mySB = statusBarProp "@xmobar@" (pure myPP)
+
+myPP :: PP
+myPP =
+  xmobarPP
+    { ppTitle = xmobarColor "#00FF00" ""
+    }
 
 modm = mod4Mask
 

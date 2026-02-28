@@ -23,9 +23,9 @@ Config
           , "-o"
           , "<left>% (<timeleft>)"
           , "-O"
-          , "<fc=#dAA520>Charging <left>%</fc>"
+          , "<fc=#EEA500>Charging <left>%</fc>"
           , "-i"
-          , "<fc=#006000>Charged</fc>"
+          , "<fc=#00D000>Charged</fc>"
           ]
           50
       , Run
@@ -37,17 +37,17 @@ Config
           , "--High"
           , "1024000"
           , "--low"
-          , "green"
+          , "#00D000"
           , "--normal"
-          , "orange"
+          , "#EEA500"
           , "--high"
-          , "red"
+          , "#E00000"
           ]
           10
       , Run Cpu ["-L", "3", "-H", "50", "--high", "red", "--normal", "green"] 10
       , Run Memory ["--template", "Mem: <usedratio>%"] 10
       , Run Swap [] 10
-      , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+      , Run Date "%a %Y-%m-%d <fc=#8BE9FD>%H:%M</fc>" "date" 10
       , Run XMonadLog
       ]
   , sepChar = "%"
