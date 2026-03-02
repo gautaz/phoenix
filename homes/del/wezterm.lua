@@ -23,6 +23,17 @@ return {
     },
   }),
   font_size = 12.0,
+  keys = {
+    { key='0', mods='CTRL', action=w.action.ResetFontSize },
+    { key='-', mods='CTRL', action=w.action.DecreaseFontSize },
+    { key='=', mods='CTRL', action=w.action.IncreaseFontSize },
+    { key='C', mods='CTRL|SHIFT', action=w.action.CopyTo 'Clipboard' },
+    { key='V', mods='CTRL|SHIFT', action=w.action.PasteFrom 'Clipboard' },
+    { key='R', mods='CTRL|SHIFT', action=w.action.ReloadConfiguration },
+    { key='L', mods='CTRL|SHIFT', action=w.action.ShowDebugOverlay },
+    { key='B', mods='CTRL|SHIFT', action=w.action.ScrollByPage(-1) },
+    { key='F', mods='CTRL|SHIFT', action=w.action.ScrollByPage(1) },
+  },
   mouse_bindings = {
     table.unpack(w.permute_any_or_no_mods({
       event = { Down = { streak = 1, button = { WheelUp = 1 } } },
