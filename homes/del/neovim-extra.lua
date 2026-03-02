@@ -33,3 +33,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 	end,
 })
+
+vim.api.nvim_create_autocmd("TermRequest", {
+  callback = function(ev)
+    local seq = ev.data.sequence
+    if seq:match("\027%]1337;") then
+      return
+    end
+  end
+})

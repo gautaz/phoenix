@@ -108,7 +108,6 @@ in {
     };
 
     enable = true;
-    enableBashIntegration = true;
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 }
