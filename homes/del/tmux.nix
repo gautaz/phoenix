@@ -29,6 +29,10 @@ _: {
         bind C-k resize-pane -U 5
         bind C-l resize-pane -R 5
 
+        # Ensure that the cursor keeps blinking
+        set -g terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[2 q'
+        set -g cursor-style blinking-block
+
         set-option -g copy-mode-match-style bg=#848484,fg=#bebe24
         set-option -g copy-mode-current-match-style bg=#000000,fg=#ffff42
         set-option -g message-style bg=#550055,fg=#ffffff
@@ -42,7 +46,7 @@ _: {
       historyLimit = 10000;
       keyMode = "vi";
       prefix = "C-a";
-      terminal = "wezterm";
+      terminal = "tmux-256color";
     };
 
     bash.initExtra = ''

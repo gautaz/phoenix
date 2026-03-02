@@ -10,6 +10,12 @@ vim.g.mapleader = " "
 
 vim.opt.cursorline = true
 vim.opt.diffopt:append "vertical"
+-- Ensure that the cursor keeps blinking
+vim.opt.guicursor =
+  "n-v-c-sm:block-blinkon500-blinkoff500," ..
+  "i-ci-ve:ver25-blinkon500-blinkoff500," ..
+  "r-cr-o:hor20-blinkon500-blinkoff500," ..
+  "t:block-blinkon500-blinkoff500"
 vim.opt.mouse = ""
 vim.opt.termguicolors = true
 vim.opt.wildmode = "longest:full,full"
