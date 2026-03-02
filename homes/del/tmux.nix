@@ -29,10 +29,6 @@ _: {
         bind C-k resize-pane -U 5
         bind C-l resize-pane -R 5
 
-        # ensure truecolor
-        # https://github.com/alacritty/alacritty/issues/109
-        set-option -sa terminal-overrides ',alacritty:RGB'
-
         set-option -g copy-mode-match-style bg=#848484,fg=#bebe24
         set-option -g copy-mode-current-match-style bg=#000000,fg=#ffff42
         set-option -g message-style bg=#550055,fg=#ffffff
@@ -43,13 +39,10 @@ _: {
         set-option -g status-justify left
         set-option -g status-right " #S"
       '';
-      # alacritty sends escape sequences in less than 10ms
-      # https://unix.stackexchange.com/questions/608142/whats-the-effect-of-escape-time-in-tmux
-      escapeTime = 10;
       historyLimit = 10000;
       keyMode = "vi";
       prefix = "C-a";
-      terminal = "tmux-256color";
+      terminal = "wezterm";
     };
 
     bash.initExtra = ''

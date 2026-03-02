@@ -54,7 +54,7 @@ myConfig =
     { borderWidth = 2,
       focusFollowsMouse = False,
       modMask = modm,
-      terminal = "@alacritty@"
+      terminal = "@wezterm@"
     }
     `removeKeys` [ (modm .|. mask, key)
                  | mask <- [0, shiftMask],

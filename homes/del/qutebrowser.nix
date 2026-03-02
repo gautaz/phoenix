@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   programs.qutebrowser = {
     enable = true;
 
@@ -33,7 +33,7 @@ _: {
       colors.webpage = {
         preferred_color_scheme = "light";
       };
-      editor.command = ["alacritty" "-e" "vim" "-f" "{file}" "-c" "normal {line}G{column0}l"];
+      editor.command = ["${pkgs.wezterm}/bin/wezterm" "-e" "vim" "-f" "{file}" "-c" "normal {line}G{column0}l"];
       tabs = {
         background = false;
         mousewheel_switching = false;

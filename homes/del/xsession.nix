@@ -70,7 +70,6 @@ in {
       enable = true;
       enableContribAndExtras = true;
       config = pkgs.replaceVars ./xmonad.hs {
-        alacritty = "${pkgs.alacritty}/bin/alacritty";
         colorswitch = "${pkgs.xrandr-invert-colors}/bin/xrandr-invert-colors";
         findcursor = "${pkgs.find-cursor}/bin/find-cursor";
         flameshot = "${pkgs.flameshot}/bin/flameshot";
@@ -80,6 +79,7 @@ in {
         rorandr = "${rorandr}/bin/rorandr";
         royt = "${royt}/bin/royt";
         systemctl = "${pkgs.systemd}/bin/systemctl";
+        wezterm = "${pkgs.wezterm}/bin/wezterm";
         xlocker = "${xlocker}/bin/xlocker";
         xmobar = "${pkgs.xmobar}/bin/xmobar";
       };

@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./alacritty.nix # terminal emulator
     ./bash.nix # POSIX shell
     ./dunst.nix # desktop notifications
     ./f3d.nix # CAD files viewer
@@ -24,13 +23,12 @@
     ./ssh.nix # secure shell
     ./tidy-track-filename.nix # used to rename audio tracks
     ./tmux.nix # terminal multiplexer
+    ./wezterm.nix # terminal emulator
     ./xdg.nix # X Desktop Group configuration
     ./xmobar.nix # status bar for xmonad
     ./xsession.nix # Graphical session management
     ./zathura.nix # document viewer
   ];
-
-  fonts.fontconfig.enable = true;
 
   home = {
     homeDirectory = "/home/del";
