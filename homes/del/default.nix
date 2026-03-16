@@ -20,6 +20,7 @@
     ./regen-yt-dlp-cookies.nix # get yt-dlp cookies from qutebrowser
     ./rofi.nix # more than an application launcher
     ./screen-locker.nix # graphical screen locker
+    ./sdr-tools.nix # Software Defined Radio
     ./ssh.nix # secure shell
     ./tidy-track-filename.nix # used to rename audio tracks
     ./tmux.nix # terminal multiplexer

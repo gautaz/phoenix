@@ -1,5 +1,6 @@
 {lib, ...}: {
   imports = [
+    ./bladerf.nix
     ./bluetooth.nix
     ./flake-support.nix
     ./i2c.nix
