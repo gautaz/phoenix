@@ -47,5 +47,11 @@ return {
   visual_bell = {
     fade_in_duration_ms = 75,
     fade_out_duration_ms = 75,
-  }
+  },
+  window_padding = {
+    left = "0.5cell",
+    right = "0.5cell",
+    top = "0.25cell",
+    bottom = "0.25cell",
+  },
 }
