@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./bash.nix # POSIX shell
+    ./containers.nix # containers handling
     ./dunst.nix # desktop notifications
     ./f3d.nix # CAD files viewer
     ./feh.nix # image viewer
