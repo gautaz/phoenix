@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: let
+  delta = "${pkgs.delta}/bin/delta";
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
 in {
   home = {
@@ -26,10 +27,17 @@ in {
         ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi";
         tree = "log --all --decorate --oneline --graph";
       };
+      core.pager = delta;
       credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
+      delta = {
+        navigate = true;
+        light = true;
+      };
       init = {
         defaultBranch = "main";
       };
+      interactive.diffFilter = "${delta} --color-only";
+      merge.conflictStyle = "zdiff3";
       user.useConfigOnly = true;
     };
   };
