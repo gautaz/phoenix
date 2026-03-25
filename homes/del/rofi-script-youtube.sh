@@ -18,12 +18,13 @@ case "$ROFI_RETV" in
 				"$ROFI_INFO"
 		)"
 		(
-			mpc update
 			mpc stop
 			mpc clear
+			mpc update
+			sleep 1
 			mpc add "$FILE"
 			mpc play
-		) > /dev/null
+		) >& /dev/null
 		exit 0
 		;;
 	2)
