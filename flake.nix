@@ -83,7 +83,7 @@
     };
 
     system = "x86_64-linux";
-    stateVersion = "23.11";
+    stateVersion = "25.11";
   in {
     homeConfigurations = {
       del = homeConfigurations.homestation;

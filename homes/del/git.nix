@@ -40,5 +40,6 @@ in {
       merge.conflictStyle = "zdiff3";
       user.useConfigOnly = true;
     };
+    signing.format = "openpgp";
   };
 }
