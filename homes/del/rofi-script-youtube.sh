@@ -13,7 +13,7 @@ case "$ROFI_RETV" in
 				--embed-metadata \
 				--exec basename \
 				--extract-audio \
-				--output "$XDG_MUSIC_DIR/%(title)s.%(ext)s" \
+				--output "$(xdg-user-dir MUSIC)/%(title)s.%(ext)s" \
 				--quiet \
 				"$ROFI_INFO"
 		)"

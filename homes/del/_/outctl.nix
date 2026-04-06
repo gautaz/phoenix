@@ -10,6 +10,7 @@ with pkgs;
       gawk
       gnugrep
       gnused
+      xdg-user-dirs
     ];
     text = builtins.readFile ./outctl.bash;
   }

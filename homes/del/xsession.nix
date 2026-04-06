@@ -54,6 +54,7 @@
       runtimeInputs = [
         coreutils
         mpc
+        xdg-user-dirs
         yt-dlp
       ];
       text = builtins.readFile ./rofi-script-youtube.sh;

@@ -59,7 +59,7 @@ function unsafeSetDisplaysBrightness() {
 
 function setDisplaysBrightness() {
 	local brightness="$1"
-	local ddcBusFile="$XDG_RUNTIME_DIR/outctl-ddcbus.list"
+	local ddcBusFile; ddcBusFile="$(xdg-user-dir RUNTIME)/outctl-ddcbus.list"
 	if [[ -r "$ddcBusFile" ]]; then
 		local monitorCount; monitorCount="$(
 			cat /sys/class/drm/card*-DP-*/status \

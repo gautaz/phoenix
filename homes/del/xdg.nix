@@ -3,11 +3,8 @@ _: {
     enable = true;
     userDirs = {
       enable = true;
-      # The following is currently necessary because of:
-      # - homes/del/_/outctl.bash
-      # - homes/del/rofi-script-youtube.sh
-      # These scripts should use `xdg-user-dir` or `$XDG_CONFIG_HOME/user-dirs.dirs` instead.
-      setSessionVariables = true;
+      # The following will be the default with stateVersion 26.05.
+      setSessionVariables = false;
     };
   };
 }
