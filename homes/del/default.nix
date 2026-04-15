@@ -40,7 +40,7 @@
       find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
       orca-slicer # 3D printer slicer
-      pwvucontrol # used to set the audio mixer settings
+      wiremix # used to set the audio mixer settings
       sacad # Smart Automatic Cover Art Downloader
       tageditor # view/edit tags in MP3, Vorbis, ...
     ];
