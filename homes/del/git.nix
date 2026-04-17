@@ -23,8 +23,14 @@ in {
     lfs.enable = true;
     settings = {
       alias = {
+        # Audit aliases come from https://piechowski.io/post/git-commands-before-reading-code/
+        audit-bugs = "!git log -i -E --grep='fix|bug|broken' --name-only --format='' | sort | uniq -c | sort -nr | head -20";
+        audit-changes = "!git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20";
+        audit-hotfix = "!git log --oneline --since='1 year ago' | grep -iE 'revert|hotfix|emergency|rollback'";
+        audit-velocity = "!git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c";
+        audit-who = "shortlog -sn --no-merges";
         conflicts = "diff --name-only --diff-filter=U";
-        ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi";
+        ignore = "!gi() { curl -L -s \"https://www.gitignore.io/api/$(IFS=,; echo \"$*\")\" ;}; gi";
         tree = "log --all --decorate --oneline --graph";
       };
       core.pager = delta;
