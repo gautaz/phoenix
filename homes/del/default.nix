@@ -4,6 +4,7 @@
     ./containers.nix # containers handling
     ./dunst.nix # desktop notifications
     ./f3d.nix # CAD files viewer
+    ./fd.nix # find with better git integration
     ./feh.nix # image viewer
     ./flameshot.nix # screen shots
     ./fzf.nix # multipurpose fuzzy finder
