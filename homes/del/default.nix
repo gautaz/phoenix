@@ -15,6 +15,7 @@
     ./mpd.nix # music player daemon
     ./mpv.nix # video player
     ./neovim.nix # more than a text editor
+    ./opencode.nix # AI coding agent
     ./passage.nix # password manager
     ./qutebrowser.nix # internet browser
     ./readline.nix # shell line editing configuration
