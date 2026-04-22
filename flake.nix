@@ -23,23 +23,10 @@
     hardware = inputs.nixos-hardware.nixosModules;
 
     homeConfigurations = {
-      homestation = homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./homes/del
-          {
-            home = {
-              inherit stateVersion;
-            };
-          }
-        ];
-      };
-
       workstation = homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./homes/del
-          ./homes/del/work
           {
             home = {
               inherit stateVersion;
@@ -86,10 +73,7 @@
     stateVersion = "25.11";
   in {
     homeConfigurations = {
-      del = homeConfigurations.homestation;
-      "del@hepao" = homeConfigurations.workstation;
-      "del@dante" = homeConfigurations.workstation;
-      "del@abelard" = homeConfigurations.workstation;
+      del = homeConfigurations.workstation;
     };
 
     nixosConfigurations = {
