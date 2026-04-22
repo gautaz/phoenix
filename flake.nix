@@ -39,12 +39,6 @@
     hosts = import ./hosts;
 
     modules = {
-      dellLaptopHardware = [
-        hardware.common-cpu-intel
-        hardware.common-gpu-nvidia
-        hardware.common-pc-laptop
-        hardware.common-pc-laptop-ssd
-      ];
       workstation = [
         inputs.sops-nix.nixosModules.sops
         nixChannelsConfig
@@ -77,26 +71,6 @@
     };
 
     nixosConfigurations = {
-      abelard = nixosSystem {
-        inherit system;
-        modules =
-          [
-            hosts.abelard
-          ]
-          ++ modules.dellLaptopHardware
-          ++ modules.workstation;
-      };
-
-      dante = nixosSystem {
-        inherit system;
-        modules =
-          [
-            hosts.dante
-          ]
-          ++ modules.dellLaptopHardware
-          ++ modules.workstation;
-      };
-
       echidna = nixosSystem {
         modules = [
           {imports = [./cross-build-aarch64.nix];}

@@ -41,8 +41,6 @@ Hosts configurations are flake based and can be installed with both `nixos-insta
 
 The available hosts are:
 
-* https://en.wikipedia.org/wiki/Peter_Abelard[`abelard`]: current work dell laptop
-* https://en.wikipedia.org/wiki/Dante_Alighieri[`dante`]: former work dell laptop
 * https://fr.wikipedia.org/wiki/Le_Moine_fou[`hepao`]: my https://frame.work/[framework] laptop
 * https://en.wikipedia.org/wiki/Motoko_Kusanagi[`kusanagi`]: to test my custom environment in a virtual machine
 * `testbox`: mainly used to test the installation media
