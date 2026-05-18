@@ -6,7 +6,10 @@ _: {
   fileSystems."/" = {
     device = "/dev/mapper/vg-system";
     fsType = "btrfs";
-    options = ["subvol=root"];
+    options = [
+      "subvol=root"
+      "x-systemd.device-timeout=infinity"
+    ];
   };
 
   fileSystems."/boot" = {
