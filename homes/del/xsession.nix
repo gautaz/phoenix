@@ -11,10 +11,10 @@
     writeShellApplication {
       name = "refreshBackground";
       runtimeInputs = [
-        feh
+        hsetroot
         wallpaper
       ];
-      text = "feh --bg-fill --geometry +0+0 ${wallpaper}";
+      text = "hsetroot -cover \"${wallpaper}\"";
     };
 
   ropass = with pkgs;

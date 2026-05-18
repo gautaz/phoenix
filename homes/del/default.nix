@@ -5,12 +5,12 @@
     ./dunst.nix # desktop notifications
     ./f3d.nix # CAD files viewer
     ./fd.nix # find with better git integration
-    ./feh.nix # image viewer
     ./flameshot.nix # screen shots
     ./fzf.nix # multipurpose fuzzy finder
     ./fzf-git.nix # fuzzy finder / git integration
     ./git.nix # source control
     ./gpg.nix # Gnu pretty good privacy
+    ./imv.nix # image viewer
     ./inputplug.nix # XInput monitoring
     ./interview.nix # custom file (pre)viewer
     ./mpd.nix # music player daemon
