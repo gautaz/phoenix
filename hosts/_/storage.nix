@@ -1,7 +1,10 @@
 # This module should comply with the storage layout set up by:
 # https://github.com/gautaz/nixos-install-media
 _: {
-  boot.initrd.luks.devices.pv.device = "/dev/disk/by-label/pv";
+  boot.initrd.luks.devices.pv = {
+    device = "/dev/disk/by-label/pv";
+    crypttabExtraOpts = ["tries=5"];
+  };
 
   fileSystems."/" = {
     device = "/dev/mapper/vg-system";
