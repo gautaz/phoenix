@@ -5,7 +5,6 @@ _: {
       General = {
         disabledTrayIcon = true;
         showStartupLaunchMessage = false;
-        useX11LegacyScreenshot = true;
       };
     };
   };
