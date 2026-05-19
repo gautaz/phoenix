@@ -53,11 +53,33 @@
         "type": "github"
       }
     },
+    "opencode-vim": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779359985,
+        "narHash": "sha256-WVgj9tz4MHrRojp52HSJCDSkdrJDABXspj+3AO9Cd1c=",
+        "owner": "leohenon",
+        "repo": "opencode-vim",
+        "rev": "e7f7b20fe3f88cac8bdc243b2c09989171e9842c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leohenon",
+        "ref": "ocv",
+        "repo": "opencode-vim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "opencode-vim": "opencode-vim",
         "sops-nix": "sops-nix"
       }
     },

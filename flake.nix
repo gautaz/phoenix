@@ -8,6 +8,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    opencode-vim = {
+      url = "github:leohenon/opencode-vim/ocv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
@@ -25,6 +29,7 @@
     homeConfigurations = {
       workstation = homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
         modules = [
           ./homes/del
           {
