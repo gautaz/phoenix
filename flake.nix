@@ -18,6 +18,28 @@
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
     inherit (inputs.nixpkgs.lib) nixosSystem;
 
+    system = "x86_64-linux";
+    stateVersion = "25.11";
+
+    pkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        inputs.opencode-vim.overlays.default
+        (final: prev: {
+          opencode = prev.opencode.overrideAttrs (old: {
+            postPatch =
+              (old.postPatch or "")
+              + ''
+                substituteInPlace packages/script/src/index.ts \
+                  --replace-fail 'throw new Error(`This script requires bun@''${expectedBunVersionRange}' \
+                                 'console.warn(`Warning: This script requires bun@''${expectedBunVersionRange}'
+              '';
+          });
+        })
+      ];
+    };
+
     # See https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
     channels = {
       path = "/etc/nixpkgs/channels";
@@ -29,7 +51,6 @@
     homeConfigurations = {
       workstation = homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = {inherit inputs;};
         modules = [
           ./homes/del
           {
@@ -62,14 +83,6 @@
         "L+ ${channels.nixpkgsPath} - - - - ${pkgs.path}"
       ];
     };
-
-    pkgs = import inputs.nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-
-    system = "x86_64-linux";
-    stateVersion = "25.11";
   in {
     homeConfigurations = {
       del = homeConfigurations.workstation;

@@ -1,9 +1,14 @@
+local ocv_cmd = "@bash@ -c 'exec -a opencode @ocv@ --port'"
+
 vim.g.opencode_opts = {
-  backend = "ollama",
-  model = "deepseek-coder-v2",
-  -- Minimal opts to avoid snacks warnings
-  input = {},
-  picker = {},
+  server = {
+    start = function()
+      require("opencode.terminal").open(ocv_cmd)
+    end,
+    toggle = function()
+      require("opencode.terminal").toggle(ocv_cmd)
+    end,
+  },
 }
 
 local default_opts = { noremap = true, silent = true }
