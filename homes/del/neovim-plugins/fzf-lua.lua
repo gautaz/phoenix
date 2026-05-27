@@ -1,9 +1,9 @@
 require('fzf-lua').setup{}
 
-vim.keymap.set({ "n" }, "<leader><leader><leader>", ":FzfLua ", default_opts)
-vim.keymap.set({ "n" }, "<leader><leader>b", ":FzfLua buffers\n", default_opts)
-vim.keymap.set({ "n" }, "<leader><leader>f", ":FzfLua files\n", default_opts)
-vim.keymap.set({ "n" }, "<leader><leader>g", ":FzfLua git_files\n", default_opts)
+vim.keymap.set({ "n" }, "<leader><leader><leader>", ":FzfLua ", { silent = true })
+vim.keymap.set({ "n" }, "<leader><leader>b", ":FzfLua buffers\n", { silent = true })
+vim.keymap.set({ "n" }, "<leader><leader>f", ":FzfLua files\n", { silent = true })
+vim.keymap.set({ "n" }, "<leader><leader>g", ":FzfLua git_files\n", { silent = true })
 
 vim.keymap.set(
     { "n" },
@@ -14,8 +14,7 @@ vim.keymap.set(
                 and "git grep --line-number --column --color=always"
                 or "grep --binary-files=without-match --line-number --recursive --color=always --perl-regexp -e"
         })
-    end,
-    default_opts
+    end
 )
 
 vim.keymap.set(
@@ -26,5 +25,5 @@ vim.keymap.set(
             winopts = { preview = { hidden = "nohidden" } }
         })
     end,
-    { silent = true, desc = "Fuzzy complete file" }
+    { desc = "Fuzzy complete file" }
 )
