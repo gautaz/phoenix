@@ -47,6 +47,7 @@ Config
           ]
           10
       , Run Cpu ["-L", "3", "-H", "50", "--high", "red", "--normal", "green"] 10
+      , Run Com "@gpuMeter@" [] "gpu" 10
       , Run Memory ["--template", "Mem: <usedratio>%"] 10
       , Run Swap [] 10
       , Run Date "%a %Y-%m-%d <fc=#8BE9FD>%H:%M</fc>" "date" 10
@@ -55,5 +56,5 @@ Config
   , sepChar = "%"
   , alignSep = "}{"
   , template =
-      "%XMonadLog% }{ %battery% | %cpu% | %memory% ~ %swap% | %dynnetwork% | %date% "
+      "%XMonadLog% }{ %battery% | %cpu% | %gpu% | %memory% ~ %swap% | %dynnetwork% | %date% "
   }
