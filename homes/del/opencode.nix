@@ -10,7 +10,8 @@
         name = "Ollama (local)";
         options.baseURL = "http://localhost:11434/v1";
         models = {
-          "qwen2.5-coder:1.5b".name = "Qwen 2.5 Coder 1.5B (local)";
+          "qwen2.5-coder:3b".name = "Qwen 2.5 Coder 3B (local)";
+          "qwen3:4b".name = "Qwen 3 4B (local)";
         };
       };
       agent.build = {
@@ -18,12 +19,13 @@
           edit = "deny";
           external_directory = "deny";
         };
-        prompt = "{inline: You are a senior software engineer. When source files need to be modified, delegate to the edit subagent via the Task tool. When searching external directories (outside the project tree), delegate to the explore subagent.}";
+        prompt = "{file:${./opencode-build-prompt.md}}";
       };
       agent.edit = {
-        description = "Edits source files when asked to modify code";
-        model = "ollama/qwen2.5-coder:1.5b";
+        description = "Edit source files when asked to modify code";
+        model = "ollama/qwen2.5-coder:3b";
         mode = "subagent";
+        prompt = "{file:${./opencode-edit-prompt.md}}";
         permission = {
           bash = "deny";
           edit = "allow";
@@ -41,8 +43,10 @@
         };
       };
       agent.explore = {
-        model = "ollama/qwen2.5-coder:1.5b";
+        description = "Find files, search code, and answer questions about the codebase and local files";
+        model = "ollama/qwen3:4b";
         mode = "subagent";
+        prompt = "{file:${./opencode-explore-prompt.md}}";
         permission.external_directory = {
           "*" = "ask";
           "/nix/store/**" = "allow";
