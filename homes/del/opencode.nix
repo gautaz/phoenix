@@ -23,7 +23,7 @@
       };
       agent.edit = {
         description = "Edit source files when asked to modify code";
-        model = "ollama/qwen2.5-coder:3b";
+        # model = "ollama/qwen2.5-coder:3b";
         mode = "subagent";
         prompt = "{file:${./opencode-edit-prompt.md}}";
         permission = {
@@ -44,7 +44,7 @@
       };
       agent.explore = {
         description = "Find files, search code, and answer questions about the codebase and local files";
-        model = "ollama/qwen3:4b";
+        # model = "ollama/qwen3:4b";
         mode = "subagent";
         prompt = "{file:${./opencode-explore-prompt.md}}";
         permission.external_directory = {
