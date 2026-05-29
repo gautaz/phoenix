@@ -102,6 +102,7 @@
     };
 
     nixosConfigurations = {
+      # inherit system omitted intentionally: echidna is aarch64, handled by cross-build-aarch64.nix
       echidna = nixosSystem {
         modules = [
           {imports = [./cross-build-aarch64.nix];}
