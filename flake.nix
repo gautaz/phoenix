@@ -12,6 +12,10 @@
       url = "github:leohenon/opencode-vim/ocv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    opencode-nvim = {
+      url = "github:sudo-tee/opencode.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs: let
@@ -36,6 +40,14 @@
                                  'console.warn(`Warning: This script requires bun@''${expectedBunVersionRange}'
               '';
           });
+          vimPlugins =
+            prev.vimPlugins
+            // {
+              opencode-nvim = prev.vimPlugins.opencode-nvim.overrideAttrs (_: {
+                src = inputs.opencode-nvim;
+                doCheck = false;
+              });
+            };
         })
       ];
     };

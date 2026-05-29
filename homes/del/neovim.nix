@@ -43,6 +43,7 @@ in {
         opencode-nvim # AI integration
       ])
       ++ (with pkgs.vimPlugins; [
+        plenary-nvim # dependency for opencode-nvim
         render-markdown-nvim # render markdown directly in neovim
         vim-abolish # enhanced substitute with :S instead of :s
         vim-better-whitespace # highlight trailing whitespace characters

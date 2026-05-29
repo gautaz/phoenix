@@ -1,19 +1,5 @@
-{
-  pkgs,
-  plugins,
-  ...
-}: let
-  template = builtins.readFile ./opencode-nvim.lua;
-in {
-  config =
-    builtins.replaceStrings [
-      "@bash@"
-      "@ocv@"
-    ] [
-      "${pkgs.bash}/bin/bash"
-      "${pkgs.opencode}/bin/opencode"
-    ]
-    template;
+{plugins, ...}: {
+  config = builtins.readFile ./opencode-nvim.lua;
   plugin = plugins.opencode-nvim;
   type = "lua";
 }

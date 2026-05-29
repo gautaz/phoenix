@@ -53,6 +53,22 @@
         "type": "github"
       }
     },
+    "opencode-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1779711781,
+        "narHash": "sha256-5ydT+QoDmZrHbdX3l3KNflS+LqB2/c2xoZBEWPmEj6s=",
+        "owner": "sudo-tee",
+        "repo": "opencode.nvim",
+        "rev": "3798e7f594c04112fb4ea6f9754520b959c5ed2e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sudo-tee",
+        "repo": "opencode.nvim",
+        "type": "github"
+      }
+    },
     "opencode-vim": {
       "inputs": {
         "nixpkgs": [
@@ -79,6 +95,7 @@
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "opencode-nvim": "opencode-nvim",
         "opencode-vim": "opencode-vim",
         "sops-nix": "sops-nix"
       }
