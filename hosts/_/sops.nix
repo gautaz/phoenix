@@ -20,5 +20,5 @@ in {
     };
   };
 
-  users.users.del.extraGroups = ["keys"];
+  users.groups.keys.members = ["del"];
 }
