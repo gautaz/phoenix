@@ -38,7 +38,7 @@ in {
         lualine-nvim # status bar
         nvim-highlight-colors # display colors (#affafa)
         nvim-lspconfig # configuration for language server protocol client
-        nvim-treesitter # provides syntax highlighting, also needed by indent-blankline-nvim to show current context
+        nvim-treesitter # provides syntax highlighting
         nvim-web-devicons # icons for the feline status bar
         opencode-nvim # AI integration
       ])
