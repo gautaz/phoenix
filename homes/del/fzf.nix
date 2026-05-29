@@ -5,8 +5,8 @@
 }:
 with pkgs; let
   findCommand = "${fd}/bin/fd --follow --exclude \".git\"";
-  fsPreviewOption = lib.strings.concatStringsSep " " fsPreviewOptionList;
   fsPreviewOptionList = ["--preview 'interview {}'"];
+  fsPreviewOption = lib.strings.concatStringsSep " " fsPreviewOptionList;
 in {
   programs = {
     bash.initExtra = ''
