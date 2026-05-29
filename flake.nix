@@ -43,10 +43,11 @@
           vimPlugins =
             prev.vimPlugins
             // {
-              opencode-nvim = prev.vimPlugins.opencode-nvim.overrideAttrs (_: {
+              opencode-nvim = prev.vimUtils.buildVimPlugin {
+                name = "opencode-nvim";
                 src = inputs.opencode-nvim;
                 doCheck = false;
-              });
+              };
             };
         })
       ];
