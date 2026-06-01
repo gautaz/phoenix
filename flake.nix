@@ -2,19 +2,26 @@
   description = "Everything to restart from scratch: install media, OS, user environment";
 
   inputs = {
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/master";
-    sops-nix.url = "github:Mic92/sops-nix/master";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    opencode-nvim = {
+      url = "github:sudo-tee/opencode.nvim";
+      flake = false;
+    };
     opencode-vim = {
       url = "github:leohenon/opencode-vim/ocv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    opencode-nvim = {
-      url = "github:sudo-tee/opencode.nvim";
-      flake = false;
+    sops-nix = {
+      url = "github:Mic92/sops-nix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -30,16 +37,23 @@
       config.allowUnfree = true;
       overlays = [
         inputs.opencode-vim.overlays.default
-        (final: prev: {
-          opencode = prev.opencode.overrideAttrs (old: {
-            postPatch =
-              (old.postPatch or "")
-              + ''
-                substituteInPlace packages/script/src/index.ts \
-                  --replace-fail 'throw new Error(`This script requires bun@''${expectedBunVersionRange}' \
-                                 'console.warn(`Warning: This script requires bun@''${expectedBunVersionRange}'
-              '';
-          });
+        (final: prev: let
+          opencode-node_modules = final.callPackage "${inputs.opencode-vim}/nix/node_modules.nix" {
+            hash = "sha256-N2ht7kBy99AICdyc83Cc+kDO9pkZ8gRv5b/IIGLdZek=";
+          };
+        in {
+          opencode =
+            (prev.opencode.override {
+              node_modules = opencode-node_modules;
+            }).overrideAttrs (old: {
+              postPatch =
+                (old.postPatch or "")
+                + ''
+                  substituteInPlace packages/script/src/index.ts \
+                    --replace-fail 'throw new Error(`This script requires bun@''${expectedBunVersionRange}' \
+                                   'console.warn(`Warning: This script requires bun@''${expectedBunVersionRange}'
+                '';
+            });
           vimPlugins =
             prev.vimPlugins
             // {
