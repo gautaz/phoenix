@@ -44,9 +44,10 @@
       find-cursor # way to find the mouse pointer
       libnotify # provides notify-send to test dunst
       orca-slicer # 3D printer slicer
-      wiremix # used to set the audio mixer settings
+      parallel-disk-usage # analyze disk usage
       sacad # Smart Automatic Cover Art Downloader
       tageditor # view/edit tags in MP3, Vorbis, ...
+      wiremix # used to set the audio mixer settings
     ];
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
