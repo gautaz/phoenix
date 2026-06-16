@@ -34,10 +34,13 @@ in {
         tree = "log --all --decorate --oneline --graph";
       };
       core.pager = delta;
-      credential.helper = "${pkgs.writeShellScript "pass-git-helper-wrapper" ''
-        export PASS_GIT_HELPER_SKIP_FS_CHECKS=1
-        exec ${pkgs.pass-git-helper}/bin/pass-git-helper "$@"
-      ''}";
+      credential = {
+        helper = "${pkgs.writeShellScript "pass-git-helper-wrapper" ''
+          export PASS_GIT_HELPER_SKIP_FS_CHECKS=1
+          exec ${pkgs.pass-git-helper}/bin/pass-git-helper "$@"
+        ''}";
+        useHttpPath = true;
+      };
       delta = {
         navigate = true;
         light = true;
