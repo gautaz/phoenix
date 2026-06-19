@@ -2,7 +2,7 @@ SECRET_FILES=()
 while IFS= read -r file; do
   SECRET_FILES+=("$file")
 done < <(
-  gitleaks dir --no-banner --redact -f json -r - "$PWD" 2>/dev/null |
+  betterleaks dir --no-banner --redact -f json -r - "$PWD" 2>/dev/null |
     jq -r '.[].File | select(. != null)' |
     sort -u
 )

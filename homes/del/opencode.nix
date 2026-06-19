@@ -4,8 +4,8 @@
     package = pkgs.writeShellApplication {
       name = "opencode";
       runtimeInputs = with pkgs; [
+        betterleaks
         bubblewrap
-        gitleaks
         jq
         opencode
       ];
