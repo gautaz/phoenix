@@ -54,4 +54,6 @@ for secret in "${SECRET_FILES[@]}"; do
   BWRAP_ARGS+=(--bind /dev/null "$secret")
 done
 
-exec bwrap "${BWRAP_ARGS[@]}" opencode "$@"
+exec bwrap \
+  --setenv OLLAMA_API_KEY "$(pass www/ollama.com/api-key/opencode)" \
+  "${BWRAP_ARGS[@]}" opencode "$@"
