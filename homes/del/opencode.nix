@@ -6,7 +6,8 @@
       runtimeInputs = with pkgs; [
         betterleaks
         bubblewrap
-        jq
+        coreutils
+        gawk
         opencode
       ];
       text = builtins.readFile ./opencode-bwrap.bash;

@@ -2,8 +2,17 @@ SECRET_FILES=()
 while IFS= read -r file; do
   SECRET_FILES+=("$file")
 done < <(
-  betterleaks dir --no-banner --redact -f json -r - "$PWD" 2>/dev/null |
-    jq -r '.[].File | select(. != null)' |
+  betterleaks dir \
+      --no-banner \
+      --no-color \
+      --max-target-megabytes 1 \
+      --redact \
+      -l fatal \
+      -f template \
+      --report-template <(printf '%s\n' '{{ range . }}{{ .File }}{{ "\n" }}{{ end }}') \
+      -r - \
+      "$PWD" |
+    awk 'NF' |
     sort -u
 )
 
