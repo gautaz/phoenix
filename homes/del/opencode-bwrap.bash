@@ -35,6 +35,10 @@ BIND_PATHS=(
   "$PWD"
 )
 
+declare -A BIND_MAP_PATHS=(
+  ["$HOME/.cache"]="$HOME/.cache/opencode-bwrap"
+)
+
 BWRAP_ARGS=(
   --proc /proc
   --dev /dev
@@ -48,6 +52,12 @@ done
 
 for path in "${BIND_PATHS[@]}"; do
   BWRAP_ARGS+=(--bind "$path" "$path")
+done
+
+for target in "${!BIND_MAP_PATHS[@]}"; do
+  source="${BIND_MAP_PATHS[$target]}"
+  mkdir -p "$source"
+  BWRAP_ARGS+=(--bind "$source" "$target")
 done
 
 for secret in "${SECRET_FILES[@]}"; do
