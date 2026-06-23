@@ -23,6 +23,8 @@ RO_BIND_PATHS=(
   /nix/store
   /run/current-system/sw
   /run/wrappers
+  /usr/bin
+  /bin
   /etc/profiles/per-user/"$(basename "$HOME")"
   "$HOME/.local/bin"
   "$HOME/.nix-profile"
