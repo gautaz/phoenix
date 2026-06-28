@@ -15,8 +15,9 @@
     settings = {
       autoupdate = false;
       enabled_providers = [
-        "opencode"
+        "nvidia_build"
         "ollama_cloud"
+        "opencode"
       ];
       permission = {
         "*" = "allow";
@@ -25,6 +26,17 @@
         };
       };
       provider = {
+        nvidia_build = {
+          models = {
+            "minimaxai/minimax-m3".name = "minimax-m3";
+            "minimaxai/minimax-m2.7".name = "minimax-m2.7";
+          };
+          name = "NVIDIA Build";
+          options = {
+            apiKey = "{env:NVIDIA_API_KEY}";
+            baseURL = "https://integrate.api.nvidia.com/v1";
+          };
+        };
         ollama_cloud = {
           models = {
             "devstral-small-2:24b-cloud".name = "Devstral Small 2";

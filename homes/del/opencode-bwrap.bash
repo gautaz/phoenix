@@ -67,5 +67,6 @@ for secret in "${SECRET_FILES[@]}"; do
 done
 
 exec bwrap \
+  --setenv NVIDIA_API_KEY "$(pass moovency/www/build.nvidia.com/api-key/opencode)" \
   --setenv OLLAMA_API_KEY "$(pass www/ollama.com/api-key/opencode)" \
   "${BWRAP_ARGS[@]}" opencode "$@"
