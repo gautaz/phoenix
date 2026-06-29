@@ -39,7 +39,7 @@
         inputs.opencode-vim.overlays.default
         (final: prev: let
           opencode-node_modules = final.callPackage "${inputs.opencode-vim}/nix/node_modules.nix" {
-            hash = "sha256-SM30m9rSSuR1dvF/9lBCIMoJoUPkq9wpHcbhECErJfI=";
+            hash = "sha256-Yh6lxJkJPH7c5WYGTW9lI4nfVx2+ZxVmH7ni0CVqbxw=";
           };
         in {
           opencode =
@@ -50,8 +50,8 @@
                 (old.postPatch or "")
                 + ''
                   substituteInPlace packages/script/src/index.ts \
-                    --replace-fail 'throw new Error(`This script requires bun@''${expectedBunVersionRange}' \
-                                   'console.warn(`Warning: This script requires bun@''${expectedBunVersionRange}'
+                    --replace 'throw new Error(`This script requires bun@' \
+                              'console.warn(`Warning: This script requires bun@'
                 '';
             });
           vimPlugins =
