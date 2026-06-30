@@ -25,6 +25,10 @@ in {
       extraPackages = [nvidia_x11.out];
       extraPackages32 = [nvidia_x11.lib32];
     };
+    nvidia-container-toolkit = {
+      enable = true;
+      suppressNvidiaDriverAssertion = true;
+    };
     openrazer.enable = true;
   };
 
@@ -37,6 +41,13 @@ in {
       KERNEL=="nvidia_uvm", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia-uvm c $$(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0'"
       KERNEL=="nvidia_uvm", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia-uvm-tools c $$(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 1'"
     '';
+  };
+
+  virtualisation.containers = {
+    enable = true;
+    containersConf.settings = {
+      engine.cdi_spec_dirs = ["/run/cdi/" "/etc/cdi/"];
+    };
   };
 
   users.users.del.extraGroups = ["openrazer"];
