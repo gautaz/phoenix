@@ -66,7 +66,10 @@ for secret in "${SECRET_FILES[@]}"; do
   BWRAP_ARGS+=(--bind /dev/null "$secret")
 done
 
+IFS=' ' read -ra DEBUG_CMD <<< "${OPENCODE_DEBUG_CMD:-opencode}"
+CMD=("${DEBUG_CMD[@]}" "$@")
+
 exec bwrap \
   --setenv NVIDIA_API_KEY "$(pass moovency/www/build.nvidia.com/api-key/opencode)" \
   --setenv OLLAMA_API_KEY "$(pass www/ollama.com/api-key/opencode)" \
-  "${BWRAP_ARGS[@]}" opencode "$@"
+  "${BWRAP_ARGS[@]}" "${CMD[@]}"
