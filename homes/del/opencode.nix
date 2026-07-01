@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  opencode-bwrap-podman-proxy = pkgs.buildGoModule {
+    name = "opencode-bwrap-podman-proxy";
+    src = ./opencode-bwrap-podman-proxy;
+    vendorHash = null;
+  };
+in {
   programs.opencode = {
     enable = true;
     package = pkgs.writeShellApplication {
@@ -9,6 +15,7 @@
         coreutils
         gawk
         opencode
+        opencode-bwrap-podman-proxy
       ];
       text = builtins.readFile ./opencode-bwrap.bash;
     };
