@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io"
 	"net"
@@ -27,63 +26,6 @@ type hostConfig struct {
 
 type createConfig struct {
 	HostConfig *hostConfig `json:"HostConfig"`
-}
-
-func main() {
-	listenPath := flag.String("listen", "", "proxy Unix socket path")
-	realPath := flag.String("real", "", "real podman Unix socket path")
-	secretsPath := flag.String("secrets", "", "file with secret paths, one per line")
-	flag.Parse()
-
-	if *listenPath == "" || *realPath == "" || *secretsPath == "" {
-		fmt.Fprintf(os.Stderr, "Usage: opencode-bwrap-podman-proxy --listen <socket> --real <socket> --secrets <file>\n")
-		os.Exit(1)
-	}
-
-	secrets := readSecrets(*secretsPath)
-
-	dir := filepath.Dir(*listenPath)
-	if err := os.MkdirAll(dir, 0700); err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to create directory %s: %v\n", dir, err)
-		os.Exit(1)
-	}
-
-	listener, err := net.Listen("unix", *listenPath)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to listen on %s: %v\n", *listenPath, err)
-		os.Exit(1)
-	}
-	defer listener.Close()
-
-	if err := os.Chmod(*listenPath, 0700); err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to chmod socket: %v\n", err)
-		os.Exit(1)
-	}
-
-	for {
-		conn, err := listener.Accept()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Accept error: %v\n", err)
-			continue
-		}
-		go handle(conn, *realPath, secrets)
-	}
-}
-
-func readSecrets(path string) []string {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to read secrets file: %v\n", err)
-		os.Exit(1)
-	}
-	var secrets []string
-	for _, line := range strings.Split(string(data), "\n") {
-		line = strings.TrimSpace(line)
-		if line != "" {
-			secrets = append(secrets, line)
-		}
-	}
-	return secrets
 }
 
 func containsSecret(mountSource string, secrets []string) bool {
@@ -141,8 +83,12 @@ func isCreateOp(method, path string) bool {
 	return base == "containers/create" || strings.HasSuffix(base, "/containers/create")
 }
 
-func handle(clientConn net.Conn, realPath string, secrets []string) {
-	defer clientConn.Close()
+func proxyHandle(clientConn net.Conn, realPath string, secrets []string) {
+	defer func() {
+		if err := clientConn.Close(); err != nil {
+			logger.Warn("failed to close client connection", "err", err)
+		}
+	}()
 
 	req, err := http.ReadRequest(bufio.NewReader(clientConn))
 	if err != nil {
@@ -150,7 +96,9 @@ func handle(clientConn net.Conn, realPath string, secrets []string) {
 	}
 
 	body, err := io.ReadAll(req.Body)
-	req.Body.Close()
+	if err := req.Body.Close(); err != nil {
+		logger.Warn("failed to close request body", "err", err)
+	}
 	if err != nil {
 		return
 	}
@@ -174,7 +122,11 @@ func handle(clientConn net.Conn, realPath string, secrets []string) {
 		writeError(clientConn, fmt.Sprintf("Cannot connect to podman: %v", err))
 		return
 	}
-	defer realConn.Close()
+	defer func() {
+		if err := realConn.Close(); err != nil {
+			logger.Warn("failed to close real connection", "err", err)
+		}
+	}()
 
 	req.Body = io.NopCloser(bytes.NewReader(body))
 	req.ContentLength = int64(len(body))
@@ -187,39 +139,73 @@ func handle(clientConn net.Conn, realPath string, secrets []string) {
 	if err != nil {
 		return
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			logger.Warn("failed to close response body", "err", err)
+		}
+	}()
+	if err := resp.Write(clientConn); err != nil {
+		logger.Error("failed to write response", "err", err)
+	}
+}
 
-	resp.Write(clientConn)
+func writeResponse(conn net.Conn, status int, msg string) {
+	body := fmt.Sprintf(`{"message":"%s"}`, msg)
+	resp := &http.Response{
+		StatusCode: status,
+		ProtoMajor: 1,
+		ProtoMinor: 1,
+		Header: http.Header{
+			"Content-Type":   []string{"application/json"},
+			"Content-Length": []string{fmt.Sprintf("%d", len(body))},
+		},
+		Body:          io.NopCloser(strings.NewReader(body)),
+		ContentLength: int64(len(body)),
+	}
+	if err := resp.Write(conn); err != nil {
+		logger.Error("failed to write error response", "status", status, "err", err)
+	}
 }
 
 func writeForbidden(conn net.Conn, msg string) {
-	body := fmt.Sprintf(`{"message":"%s"}`, msg)
-	resp := &http.Response{
-		StatusCode: http.StatusForbidden,
-		ProtoMajor: 1,
-		ProtoMinor: 1,
-		Header: http.Header{
-			"Content-Type":   []string{"application/json"},
-			"Content-Length": []string{fmt.Sprintf("%d", len(body))},
-		},
-		Body:          io.NopCloser(strings.NewReader(body)),
-		ContentLength: int64(len(body)),
-	}
-	resp.Write(conn)
+	writeResponse(conn, http.StatusForbidden, msg)
 }
 
 func writeError(conn net.Conn, msg string) {
-	body := fmt.Sprintf(`{"message":"%s"}`, msg)
-	resp := &http.Response{
-		StatusCode: http.StatusBadGateway,
-		ProtoMajor: 1,
-		ProtoMinor: 1,
-		Header: http.Header{
-			"Content-Type":   []string{"application/json"},
-			"Content-Length": []string{fmt.Sprintf("%d", len(body))},
-		},
-		Body:          io.NopCloser(strings.NewReader(body)),
-		ContentLength: int64(len(body)),
+	writeResponse(conn, http.StatusBadGateway, msg)
+}
+
+func startProxy(listenPath, realPath string, secrets []string) (func(), error) {
+	dir := filepath.Dir(listenPath)
+	if err := os.MkdirAll(dir, 0o700); err != nil {
+		return nil, fmt.Errorf("create proxy dir: %w", err)
 	}
-	resp.Write(conn)
+
+	listener, err := net.Listen("unix", listenPath)
+	if err != nil {
+		return nil, fmt.Errorf("listen on %s: %w", listenPath, err)
+	}
+
+	if err := os.Chmod(listenPath, 0o700); err != nil {
+		if err := listener.Close(); err != nil {
+			logger.Warn("failed to close listener after chmod error", "err", err)
+		}
+		return nil, fmt.Errorf("chmod socket: %w", err)
+	}
+
+	go func() {
+		for {
+			conn, err := listener.Accept()
+			if err != nil {
+				return
+			}
+			go proxyHandle(conn, realPath, secrets)
+		}
+	}()
+
+	return func() {
+		if err := listener.Close(); err != nil {
+			logger.Warn("failed to close listener", "err", err)
+		}
+	}, nil
 }

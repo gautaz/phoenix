@@ -7,6 +7,7 @@ if [ "${1:-x}" = "install" ]; then
 		phx-lint-fmt
 	EOS
 	chmod u+x .git/hooks/pre-commit
+	exit 0
 fi
 
 # Nix auto lint and format
@@ -18,3 +19,8 @@ alejandra -q .
 hlint -q . || (echo "hlint failed" && exit 10)
 # Haskell auto format
 find . -name "*.hs" -exec ormolu --mode inplace {} \;
+
+# Go auto format
+find . -name "go.mod" -execdir golangci-lint fmt --config "$PWD/.golangci.yml" \;
+# Go lint
+find . -name "go.mod" -execdir golangci-lint run --config "$PWD/.golangci.yml" ./... \;

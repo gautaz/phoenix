@@ -36,6 +36,8 @@ in
       cryptsetup
       git
       git-lfs
+      go
+      golangci-lint
       haskellPackages.hlint
       haskellPackages.ormolu
       home-manager

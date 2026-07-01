@@ -1,24 +1,22 @@
 {pkgs, ...}: let
-  opencode-bwrap-podman-proxy = pkgs.buildGoModule {
-    name = "opencode-bwrap-podman-proxy";
-    src = ./opencode-bwrap-podman-proxy;
+  opencode-bwrap = pkgs.buildGoModule {
+    name = "opencode";
+    src = ./opencode-bwrap;
     vendorHash = null;
+    ldflags = [
+      "-X main.bwrapPath=${pkgs.bubblewrap}/bin/bwrap"
+      "-X main.betterleaksPath=${pkgs.betterleaks}/bin/betterleaks"
+      "-X main.passPath=${pkgs.passage}/bin/passage"
+      "-X main.opencodePath=${pkgs.opencode}/bin/opencode"
+    ];
+    postInstall = ''
+      mv $out/bin/opencode-bwrap $out/bin/opencode
+    '';
   };
 in {
   programs.opencode = {
     enable = true;
-    package = pkgs.writeShellApplication {
-      name = "opencode";
-      runtimeInputs = with pkgs; [
-        betterleaks
-        bubblewrap
-        coreutils
-        gawk
-        opencode
-        opencode-bwrap-podman-proxy
-      ];
-      text = builtins.readFile ./opencode-bwrap.bash;
-    };
+    package = opencode-bwrap;
     settings = {
       autoupdate = false;
       enabled_providers = [
