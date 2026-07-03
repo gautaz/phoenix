@@ -6,21 +6,15 @@
   nvidia_x11 = config.boot.kernelPackages.nvidia_x11;
 in {
   boot = {
-    blacklistedKernelModules = ["nouveau" "nvidiafb"];
-    extraModulePackages = [nvidia_x11.open];
-    kernelModules = ["nvidia" "nvidia_modeset" "nvidia_drm" "nvidia-uvm"];
-    kernelParams = [
-      "nvidia-drm.modeset=1"
-      "nvidia-drm.fbdev=1"
-      "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
-    ];
+    blacklistedKernelModules = ["nouveau" "nova_core" "nvidiafb"];
+    extraModulePackages = [nvidia_x11.mod];
+    kernelModules = ["nvidia"];
     extraModprobeConfig = ''
       softdep nvidia post: nvidia-uvm
     '';
   };
 
   hardware = {
-    firmware = [nvidia_x11.firmware];
     graphics = {
       extraPackages = [nvidia_x11.out];
       extraPackages32 = [nvidia_x11.lib32];
