@@ -94,6 +94,7 @@
     modules = {
       workstation = [
         inputs.sops-nix.nixosModules.sops
+        {nixpkgs.pkgs = pkgs;}
         nixChannelsConfig
       ];
     };
