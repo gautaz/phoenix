@@ -33,9 +33,9 @@ in {
     '';
 
     fzf = {
-      changeDirWidgetOptions = fsPreviewOptionList;
+      changeDirWidget.options = fsPreviewOptionList;
       defaultCommand = "${findCommand}";
-      fileWidgetOptions = fsPreviewOptionList;
+      fileWidget.options = fsPreviewOptionList;
       enable = true;
       enableBashIntegration = true;
       tmux.enableShellIntegration = true;
