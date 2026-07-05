@@ -23,6 +23,10 @@
       url = "github:Mic92/sops-nix/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pass-otp = {
+      url = "github:tadfisher/pass-otp/develop";
+      flake = false;
+    };
   };
 
   outputs = inputs: let
@@ -86,6 +90,9 @@
             };
           }
         ];
+        extraSpecialArgs = {
+          pass-otp-src = inputs.pass-otp;
+        };
       };
     };
 

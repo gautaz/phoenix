@@ -28,7 +28,19 @@
       ];
       text = ''
         PASS_STORE="$HOME/.passage/store"
-        passage -c "$(find "$PASS_STORE" -type f -name '*.age' | sed -e "s#^$PASS_STORE/\(.*\)\.age\$#\1#" | rofi -dmenu)"
+
+        if [[ "''${1:-}" == "--otp" ]]; then
+          entry=$(find "$PASS_STORE/otp" -type f -name '*.age' \
+            | sed -e "s#^$PASS_STORE/\(.*\)\.age\$#\1#" \
+            | rofi -dmenu)
+          export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+          [[ -n "$entry" ]] && passage otp --clip "$entry"
+        else
+          entry=$(find "$PASS_STORE" -type f -name '*.age' \
+            | sed -e "s#^$PASS_STORE/\(.*\)\.age\$#\1#" \
+            | rofi -dmenu)
+          [[ -n "$entry" ]] && passage --clip "$entry"
+        fi
       '';
     };
 

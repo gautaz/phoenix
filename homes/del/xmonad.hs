@@ -64,6 +64,7 @@ myConfig =
                           ("M-s", spawn "@flameshot@ gui"),
                           ("M-d", spawn "@rorandr@"),
                           ("M-z", spawn "@ropass@"),
+                          ("M-S-z", spawn "@ropass@ --otp"),
                           ("M-y", spawn "rofi -modes 'royt:@royt@' -show royt"),
                           ("M-i", spawn "@colorswitch@"),
                           ( "M-o",
