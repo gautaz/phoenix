@@ -56,7 +56,9 @@ func buildBwrapArgs(cfg bwrapConfig) []string {
 
 	bindPaths := []string{
 		filepath.Join(home, ".config/opencode"),
+		filepath.Join(home, ".config/rtk"),
 		filepath.Join(home, ".local/share/opencode"),
+		filepath.Join(home, ".local/share/rtk"),
 		filepath.Join(home, ".local/state/opencode"),
 		pwd,
 	}
@@ -94,6 +96,7 @@ func buildBwrapArgs(cfg bwrapConfig) []string {
 		"--setenv", "XDG_RUNTIME_DIR", cfg.xdgRuntime,
 		"--setenv", "CONTAINER_HOST", cfg.containerHost,
 		"--setenv", "OPENCODE_BWRAP_LOGS", cfg.logPath,
+		"--setenv", "PATH", "/run/wrappers/bin:/run/current-system/sw/bin:/usr/bin:/bin",
 	)
 
 	return args

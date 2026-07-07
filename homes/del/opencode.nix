@@ -13,7 +13,26 @@
       mv $out/bin/opencode-bwrap $out/bin/opencode
     '';
   };
+
+  rtkPlugin =
+    pkgs.runCommand "rtk-opencode-plugin" {
+      rtkPath = "${pkgs.rtk}/bin/rtk";
+      src = pkgs.fetchFromGitHub {
+        owner = "rtk-ai";
+        repo = "rtk";
+        rev = "v${pkgs.lib.getVersion pkgs.rtk}";
+        hash = "sha256-n5bkPPsrdM4fE5ltocTjlq+JwRgp39yib6S79fci4m4=";
+      };
+    } ''
+      mkdir -p "$out"
+      cp "$src/hooks/opencode/rtk.ts" "$out/rtk.ts"
+      chmod +w "$out/rtk.ts"
+      patch "$out/rtk.ts" "${./opencode-rtk-plugin.patch}"
+      substituteAll "$out/rtk.ts" "$out/rtk.ts"
+    '';
 in {
+  xdg.configFile."opencode/plugins/rtk.ts".source = "${rtkPlugin}/rtk.ts";
+
   programs.opencode = {
     enable = true;
     package = opencode-bwrap;
