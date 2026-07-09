@@ -16,7 +16,6 @@
 
   rtkPlugin =
     pkgs.runCommand "rtk-opencode-plugin" {
-      rtkPath = "${pkgs.rtk}/bin/rtk";
       src = pkgs.fetchFromGitHub {
         owner = "rtk-ai";
         repo = "rtk";
@@ -26,11 +25,9 @@
     } ''
       mkdir -p "$out"
       cp "$src/hooks/opencode/rtk.ts" "$out/rtk.ts"
-      chmod +w "$out/rtk.ts"
-      patch "$out/rtk.ts" "${./opencode-rtk-plugin.patch}"
-      substituteAll "$out/rtk.ts" "$out/rtk.ts"
     '';
 in {
+  home.packages = [pkgs.rtk];
   xdg.configFile."opencode/plugins/rtk.ts".source = "${rtkPlugin}/rtk.ts";
 
   programs.opencode = {
