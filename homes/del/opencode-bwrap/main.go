@@ -22,15 +22,39 @@ var (
 	opencodePath    = "opencode"
 )
 
+func runCmdBare(args []string) int {
+	inner := append([]string{opencodePath}, args...)
+	bwrapArgs := buildMinimalBwrapArgs()
+	bwrapArgs = append(bwrapArgs, inner...)
+	cmd := exec.Command(bwrapPath, bwrapArgs...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			if status, ok := exitErr.Sys().(syscall.WaitStatus); ok {
+				return status.ExitStatus()
+			}
+		}
+		return 1
+	}
+	return 0
+}
+
 func main() {
 	debugCmdStr := os.Getenv("OPENCODE_DEBUG_CMD")
+	args := os.Args[1:]
 	var innerCmd []string
 	if debugCmdStr != "" {
 		innerCmd = strings.Fields(debugCmdStr)
 	} else {
 		innerCmd = []string{opencodePath}
 	}
-	innerCmd = append(innerCmd, os.Args[1:]...)
+	innerCmd = append(innerCmd, args...)
+
+	if isLightweightOp(args) {
+		os.Exit(runCmdBare(args))
+	}
 
 	xdg := xdgRuntimeDir()
 	pwd, err := os.Getwd()

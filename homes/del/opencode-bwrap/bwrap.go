@@ -101,3 +101,22 @@ func buildBwrapArgs(cfg bwrapConfig) []string {
 
 	return args
 }
+
+func buildMinimalBwrapArgs() []string {
+	return []string{
+		"--proc", "/proc",
+		"--dev", "/dev",
+		"--tmpfs", "/tmp",
+		"--ro-bind", "/nix/store", "/nix/store",
+	}
+}
+
+func isLightweightOp(args []string) bool {
+	for _, a := range args {
+		switch a {
+		case "--help", "-h", "--version", "-v":
+			return true
+		}
+	}
+	return false
+}
