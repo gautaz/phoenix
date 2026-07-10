@@ -42,7 +42,6 @@
       age # used as the main encryption tool
       arandr # used to manually set the displays layout
       awscli2 # used to manage AWS resources
-      find-cursor # way to find the mouse pointer
       orca-slicer # 3D printer slicer
       parallel-disk-usage # analyze disk usage
       sacad # Smart Automatic Cover Art Downloader
