@@ -39,7 +39,6 @@
   home = {
     homeDirectory = "/home/del";
     packages = with pkgs; [
-      age # used as the main encryption tool
       arandr # used to manually set the displays layout
       awscli2 # used to manage AWS resources
       orca-slicer # 3D printer slicer
