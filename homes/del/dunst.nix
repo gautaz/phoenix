@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    libnotify # provides notify-send to test dunst
+  ];
+
   services.dunst = {
     enable = true;
     iconTheme = {
