@@ -1,0 +1,15 @@
+agent: opencode
+chdir: "{cwd}"
+mounts:
+  - path: "{cwd}"
+    mode: rw
+  - path: "{home}/.local/share/rtk"
+    mode: rw
+  - path: "{log_path}"
+env:
+  NVIDIA_API_KEY:
+    command: "passage show moovency/www/build.nvidia.com/api-key/opencode"
+  OLLAMA_API_KEY:
+    command: "passage show www/ollama.com/api-key/opencode"
+  AGENT_ISLE_LOGS: "{log_path}"
+path_secrets_policy: show

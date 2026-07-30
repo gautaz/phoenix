@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "agent-isle": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785352082,
+        "narHash": "sha256-WZvykdhCNkKiVMRUO+QFrEDzLYSe3tnN9tbWE/NOT0A=",
+        "owner": "agent-isle",
+        "repo": "agent-isle",
+        "rev": "37a6489a34e45bc29f3d4ce7dab6399bf7622608",
+        "type": "github"
+      },
+      "original": {
+        "owner": "agent-isle",
+        "repo": "agent-isle",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -114,6 +134,7 @@
     },
     "root": {
       "inputs": {
+        "agent-isle": "agent-isle",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

@@ -19,6 +19,10 @@
       url = "github:leohenon/opencode-vim/ocv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-isle = {
+      url = "github:agent-isle/agent-isle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -91,6 +95,7 @@
           }
         ];
         extraSpecialArgs = {
+          inherit (inputs) agent-isle;
           pass-otp-src = inputs.pass-otp;
         };
       };

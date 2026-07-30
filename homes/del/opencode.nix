@@ -1,17 +1,13 @@
-{pkgs, ...}: let
-  opencode-bwrap = pkgs.buildGoModule {
-    name = "opencode";
-    src = ./opencode-bwrap;
-    vendorHash = null;
-    ldflags = [
-      "-X main.bwrapPath=${pkgs.bubblewrap}/bin/bwrap"
-      "-X main.betterleaksPath=${pkgs.betterleaks}/bin/betterleaks"
-      "-X main.passPath=${pkgs.passage}/bin/passage"
-      "-X main.opencodePath=${pkgs.opencode}/bin/opencode"
-    ];
-    postInstall = ''
-      mv $out/bin/opencode-bwrap $out/bin/opencode
-    '';
+{
+  pkgs,
+  agent-isle,
+  ...
+}: let
+  agentIslePkg = agent-isle.packages.${pkgs.system}.mkAgentIsle {
+    agents = {
+      inherit (pkgs) opencode;
+    };
+    maskedAgents = ["opencode"];
   };
 
   rtkPlugin =
@@ -27,12 +23,16 @@
       cp "$src/hooks/opencode/rtk.ts" "$out/rtk.ts"
     '';
 in {
-  home.packages = [pkgs.rtk];
-  xdg.configFile."opencode/plugins/rtk.ts".source = "${rtkPlugin}/rtk.ts";
+  home.packages = [agentIslePkg pkgs.rtk];
+
+  xdg.configFile = {
+    "agent-isle/config.yml".source = ./agent-isle.yaml;
+    "opencode/plugins/rtk.ts".source = "${rtkPlugin}/rtk.ts";
+  };
 
   programs.opencode = {
     enable = true;
-    package = opencode-bwrap;
+    package = agentIslePkg;
     settings = {
       autoupdate = false;
       enabled_providers = [
