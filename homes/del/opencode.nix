@@ -3,7 +3,7 @@
   agent-isle,
   ...
 }: let
-  agentIslePkg = agent-isle.packages.${pkgs.system}.mkAgentIsle {
+  agentIslePkg = agent-isle.packages.${pkgs.stdenv.hostPlatform.system}.mkAgentIsle {
     agents = {
       inherit (pkgs) opencode;
     };
