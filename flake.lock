@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785791745,
-        "narHash": "sha256-BjMrjmZEKZbTSBCc/dgaXRWlPmUKsDBSheL+EHCYmhA=",
+        "lastModified": 1785913385,
+        "narHash": "sha256-ApG3GHkhYKgkc0uZjFzovHCPQUd4y9/JY1ZjxgRTaTM=",
         "owner": "agent-isle",
         "repo": "agent-isle",
-        "rev": "035b2298419bc32163d81f10e990fa91f3fcfed5",
+        "rev": "68fce0abbd906ac590cf4e7054a0c11716cc3fee",
         "type": "github"
       },
       "original": {
