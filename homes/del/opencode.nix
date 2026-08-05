@@ -49,8 +49,8 @@ in {
       provider = {
         nvidia_build = {
           models = {
+            "z-ai/glm-5.2".name = "glm-5.2";
             "minimaxai/minimax-m3".name = "minimax-m3";
-            "minimaxai/minimax-m2.7".name = "minimax-m2.7";
           };
           name = "NVIDIA Build";
           options = {
@@ -61,6 +61,7 @@ in {
         ollama_cloud = {
           models = {
             "devstral-small-2:24b-cloud".name = "Devstral Small 2";
+            "gpt-oss:20b-cloud".name = "GPT OSS";
             "nemotron-3-nano:30b-cloud".name = "Nemotron 3 Nano";
           };
           name = "Ollama Cloud";
