@@ -9,3 +9,4 @@
 * Try [nyxt](https://github.com/atlas-engineer/nyxt) as a replacement for qutebrowser
 * Try [Tix](https://github.com/JRMurr/tix)
 * Try [t-rec](https://github.com/sassman/t-rec-rs)
+* Include [anydoc](https://github.com/firecrawl/anydoc) in interview.
