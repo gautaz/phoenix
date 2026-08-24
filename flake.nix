@@ -47,7 +47,7 @@
         inputs.opencode-vim.overlays.default
         (final: prev: let
           opencode-node_modules = final.callPackage "${inputs.opencode-vim}/nix/node_modules.nix" {
-            hash = "sha256-GRjnvvyj37H36RqiCB7dz5ALAEwvw16izwuk1wsHEpU=";
+            hash = "sha256-uduwrM143NDSc+tXsi4lVVfoMll2a3BDHRUjuO7GB68=";
           };
         in {
           opencode =

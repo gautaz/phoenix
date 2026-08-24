@@ -23,6 +23,12 @@ return {
     },
   }),
   font_size = 12.0,
+  -- Using the WebGpu frontend is a workaround for:
+  -- https://github.com/wezterm/wezterm/issues/8042
+  -- INTEL_SIMD_DEBUG=fs16 also works the issue around.
+  -- Upstream Mesa issue:
+  -- https://gitlab.freedesktop.org/mesa/mesa/-/work_items/16066
+  front_end = "WebGpu",
   keys = {
     { key='0', mods='CTRL', action=w.action.ResetFontSize },
     { key='-', mods='CTRL', action=w.action.DecreaseFontSize },
