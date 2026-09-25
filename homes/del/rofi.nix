@@ -2,6 +2,6 @@
 with pkgs; {
   programs.rofi = {
     enable = true;
-    terminal = "${wezterm}/bin/wezterm";
+    settings.terminal = "${wezterm}/bin/wezterm";
   };
 }
