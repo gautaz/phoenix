@@ -27,6 +27,7 @@
     ./screen-locker.nix # graphical screen locker
     ./sdr-tools.nix # Software Defined Radio
     ./ssh.nix # secure shell
+    ./starship.nix # prompt management
     ./tidy-track-filename.nix # used to rename audio tracks
     ./tmux.nix # terminal multiplexer
     ./wezterm.nix # terminal emulator
@@ -57,7 +58,6 @@
 
   programs = {
     home-manager.enable = true;
-    starship.enable = true;
   };
 
   services = {
